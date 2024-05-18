@@ -25,12 +25,25 @@ Per avviarla:
 ```
 sudo docker-compose up
 ```
-DOcker si basa su molte dinamiche di caching per creare l'immagine.
+Docker si basa su molte dinamiche di caching per creare l'immagine.
 Può essere necessario rimuoverla e ricrearla.
 Per rimuovere tutti le possibili immagini cachate:
 ```
 sudo docker system prune
 ```
+
+Alcuni comandi utili:
+```
+docker-compose up --build
+```
+ricostruisce e avvia i container.
+
+```
+docker-compose down -v
+docker volume prune
+```
+il primo comando ferma ed elimina tutti i volumi e container.
+il secondo comando rimuove tutti i volumi rimasti non utilizzati.
 
 ## Pipeline di pubblicazione 
 Come primo passo contollare in quale branch ci si trova con 
