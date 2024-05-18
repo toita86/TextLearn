@@ -1,0 +1,17 @@
+version: "3"
+services:
+  app:
+    image: text-learn-app
+    build: .
+    ports:
+      - "8080:8080"  # Map port 80 of the host to port 3000 of the container
+    depends_on: # Wait for the database to be ready before starting the app
+      - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: text-learn
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass123
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port internally
