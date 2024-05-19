@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="hleft"><a href="/">Home</a></div>
+      <div id="hcenter">TextLearn</div>
+      <div id="hright"><a href="#">Market Place</a></div>
+    </header>
+
+    <div class="container">
+      <aside>
+        <div id="user">
+          <img src="/images/user.png" id="usr-image" alt="User Image" />
+          <div id="username">Username</div>
+          <h1>BIO</h1>
+          <div id="bio">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+            hendrerit erat vitae iaculis facilisis. Ut dignissim odio a nunc
+            ornare fringilla. Fusce pretium tincidunt accumsan. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Duis hendrerit erat
+            vitae iaculis facilisis. Ut dignissim odio a nunc ornare fringilla.
+            Fusce pretium tincidunt accumsan. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Duis hendrerit erat vitae iaculis
+            facilisis. Ut dignissim odio a nunc ornare fringilla. Fusce pretium
+            tincidunt accumsan. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Duis hendrerit erat vitae iaculis facilisis. Ut
+            dignissim odio a nunc ornare fringilla. Fusce pretium tincidunt
+            accumsan. ❤️ Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Duis hendrerit erat vitae iaculis facilisis. Ut dignissim odio
+            a nunc ornare fringilla. Fusce pretium tincidunt accumsan. Lorem
+            ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit
+            erat vitae iaculis facilisis. Ut dignissim odio a nunc ornare
+            fringilla. Fusce pretium tincidunt accumsan. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Duis hendrerit erat vitae iaculis
+            facilisis. Ut dignissim odio a nunc ornare fringilla. Fusce pretium
+            tincidunt accumsan. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Duis hendrerit erat vitae iaculis facilisis. Ut
+            dignissim odio a nunc ornare fringilla. Fusce pretium tincidunt
+            accumsan. ❤️
+          </div>
+          <div id="courses">
+            <h3>Your Courses</h3>
+            <hr />
+          </div>
+        </div>
+      </aside>
+
+      <section>
+        <div id="upload">
+          <div class="switcher">
+            <a href="/settings">Settings</a>
+            <div
+              style="
+                font-family: 'Arbutus Slab', sans-serif;
+                font-size: 30px;
+                padding: 5%;
+              "
+            >
+              |
+            </div>
+            <a href="/upload">Upload a new course</a>
+          </div>
+          <form
+            action="#"
+            method="post"
+            enctype="multipart/form-data"
+            id="form"
+          >
+            <div class="forms">
+              <label for="course" class="labels">Name</label>
+              <input
+                type="text"
+                name="Course name"
+                id="course"
+                class="inputs"
+              />
+            </div>
+            <div class="forms">
+              <label for="image" class="labels">Image</label>
+              <input type="file" name="file-picker" class="inputs" />
+            </div>
+            <div class="forms">
+              <label for="file" class="labels" id="file">File</label>
+              <input type="file" name="Course name" class="inputs" />
+            </div>
+
+            <input type="submit" value="Upload your Course" id="btn-upload" />
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div id="fleft">&copy; 2024 TextLearn</div>
+      <div id="fright">
+        <div id="about">About Us</div>
+        <div id="join">Join The TL team</div>
+      </div>
+    </footer>
+  </body>
+</html>

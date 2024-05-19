@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-    <h1>Welcome to Your Website</h1>
-    <p>This is the home page.</p>
-    <a href="/data">View Data</a>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="hleft"><a href="/">Home</a></div>
+      <div id="hcenter">TextLearn</div>
+      <div id="hright">
+        <a href="/login">Login</a> or <a href="/signup">Sign Up</a>
+      </div>
+    </header>
+
+    <main>
+      <div id="image-container">
+        <img src="/images/danielimage.jpg" alt="Course Image" />
+        <div id="content">
+          <div id="p">
+            <p id="start">START LEARNING TODAY</p>
+          </div>
+          <div id="button-container">
+            <input
+              type="button"
+              id="button"
+              value="Search for courses"
+              name="Search courses"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="fleft">&copy; 2024 TextLearn</div>
+      <div id="fright">
+        <div id="about">About Us</div>
+        <div id="join">Join The TL team</div>
+      </div>
+    </footer>
+  </body>
 </html>
