@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/toita86/TextLearn#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
