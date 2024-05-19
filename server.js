@@ -18,14 +18,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Home route
+// ROUTES
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-// data route
-app.get('/data', (req, res) => {
-    res.render('data');
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+app.get('/upload', (req, res) => {
+    res.render('upload');
+});
+
+app.get('/settings', (req, res) => {
+    res.render('settings');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about');
 });
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
