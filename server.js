@@ -103,4 +103,8 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+app.get('/marketplace', (req, res) => {
+    res.render('marketplace');
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));

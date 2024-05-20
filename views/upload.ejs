@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextLearn</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -10,7 +12,7 @@
       <div id="logo">TextLearn</div>
       <div class="nav-link">
         <a href="/settings">User</a>
-        <a href="#">Market Place</a>
+        <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
 
@@ -55,17 +57,18 @@
       <section>
         <div id="upload">
           <div class="switcher">
-            <a href="/settings">Settings</a>
-            <div
-              style="
-                font-family: 'Arbutus Slab', sans-serif;
-                font-size: 30px;
-                padding: 5%;
-              "
-            >
-              |
-            </div>
-            <a href="/upload">Upload a new course</a>
+            <input
+              class="btn-upload2"
+              type="button"
+              value="settings"
+              onclick="window.location.href='/settings'"
+            />
+            <input
+              class="btn-upload2"
+              type="button"
+              value="upload a new course"
+              onclick="window.location.href='/upload'"
+            />
           </div>
           <form
             action="#"
@@ -100,7 +103,7 @@
     <footer>
       <div id="fleft">&copy; 2024 TextLearn</div>
       <div id="fright">
-        <div id="about">About Us</div>
+        <div id="about"><a href="about">About US</a></div>
         <div id="join">Join The TL team</div>
       </div>
     </footer>
