@@ -9,7 +9,11 @@
       <div class="nav-link"><a href="/">Home</a></div>
       <div id="logo">TextLearn</div>
       <div class="nav-link">
-        <a href="/settings">User</a>
+        <% if (msgToUser == true) { %>
+          <a href="/settings">User</a>
+        <% } else {%>
+            <a href="/signup">Sign Up</a>
+        <% } %>
         <a href="#">Market Place</a>
       </div>
     </header>
@@ -29,6 +33,9 @@
           <input type="submit" value="login" id="btn-upload" />
         </form>
       </div>
+      <% if (msgToUser) { %>
+        <p><%= msgToUser %></p>
+      <% } %>
     </div>
 
     <footer>

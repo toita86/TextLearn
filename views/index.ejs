@@ -9,11 +9,15 @@
       <div class="nav-link"><a href="/">Home</a></div>
       <div id="logo">TextLearn</div>
       <div class="nav-link">
-        <a href="/login">Login</a>
-        <div style="font-family: 'Arbutus Slab', sans-serif; font-size: 1em">
-          or
-        </div>
-        <a href="/signup">Sign Up</a>
+        <% if (isAuth) { %>
+          <a href="/settings">User</a>
+        <% } else {%>
+          <a href="/login">Login</a>
+          <div style="font-family: 'Arbutus Slab', sans-serif; font-size: 1em">
+            or
+          </div>
+          <a href="/signup">Sign Up</a>
+        <% } %>
       </div>
     </header>
 

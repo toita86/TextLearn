@@ -18,22 +18,11 @@
       <aside>
         <div id="user">
           <img src="/images/user.png" id="usr-image" alt="User Image" />
-          <div id="username">Username</div>
+          <div id="username"><%= user.name %></div>
           <h1>BIO</h1>
           <div id="bio">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            hendrerit erat vitae iaculis facilisis. Ut dignissim odio a nunc
-            ornare fringilla. Fusce pretium tincidunt accumsan. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Duis hendrerit erat
-            vitae iaculis facilisis. Ut dignissim odio a nunc ornare fringilla.
-            Fusce pretium tincidunt accumsan. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Duis hendrerit erat vitae iaculis
-            facilisis. Ut dignissim odio a nunc ornare fringilla. Fusce pretium
-            tincidunt accumsan. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Duis hendrerit erat vitae iaculis facilisis. Ut
-            dignissim odio a nunc ornare fringilla. Fusce pretium tincidunt
-            accumsan. ❤️
-          </div>
+            <%= user.bio ? user.bio : "Change me!" %>
+          </div>          
           <div id="courses">
             <h3>Your Courses</h3>
             <hr />
@@ -58,15 +47,14 @@
           </div>
           <form
             action="#"
-            method="post"
-            enctype="multipart/form-data"
+            method="POST"
             id="form"
           >
-            <label for="username" class="labels2">Username</label>
+            <label for="updtname" class="labels2">Username</label>
             <div class="forms2">
               <input
                 type="text"
-                name="change username"
+                name="updtname"
                 id="user-change"
                 class="inputs"
               />
@@ -74,10 +62,10 @@
                 Change<br />Username
               </button>
             </div>
-            <label for="bio" class="labels2">Bio</label>
+            <label for="updtbio" class="labels2">Bio</label>
             <div class="forms2">
               <textarea
-                name="change bio"
+                name="updtbio"
                 id="bio-input"
                 class="inputs"
               ></textarea>
