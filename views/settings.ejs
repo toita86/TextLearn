@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/style.css" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
   </head>
   <body>
     <header>
@@ -12,7 +22,7 @@
       <div id="logo">TextLearn</div>
       <div class="nav-link">
         <a href="/settings">User</a>
-        <a href="#">Market Place</a>
+        <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
 
@@ -22,9 +32,7 @@
           <img src="/images/user.png" id="usr-image" alt="User Image" />
           <div id="username"><%= user.name %></div>
           <h1>BIO</h1>
-          <div id="bio">
-            <%= user.bio ? user.bio : "Change me!" %>
-          </div>          
+          <div id="bio"><%= user.bio ? user.bio : "Change me!" %></div>
           <div id="courses">
             <h3>Your Courses</h3>
             <hr />
@@ -35,23 +43,20 @@
       <section>
         <div id="upload">
           <div class="switcher">
-            <a href="/settings">Settings</a>
-            <div
-              style="
-                font-family: 'Arbutus Slab', sans-serif;
-                font-size: 2em;
-                padding: 5%;
-              "
-            >
-              |
-            </div>
-            <a href="/upload">Upload a new course</a>
+            <input
+              class="btn-upload2"
+              type="button"
+              value="settings"
+              onclick="window.location.href='/settings'"
+            />
+            <input
+              class="btn-upload2"
+              type="button"
+              value="upload a new course"
+              onclick="window.location.href='/upload'"
+            />
           </div>
-          <form
-            action="#"
-            method="POST"
-            id="form"
-          >
+          <form action="#" method="POST" id="form">
             <label for="updtname" class="labels2">Username</label>
             <div class="forms2">
               <input
@@ -66,11 +71,7 @@
             </div>
             <label for="updtbio" class="labels2">Bio</label>
             <div class="forms2">
-              <textarea
-                name="updtbio"
-                id="bio-input"
-                class="inputs"
-              ></textarea>
+              <textarea name="updtbio" id="bio-input" class="inputs"></textarea>
               <button type="submit" class="btn-upload2" id="changeBio">
                 Change<br />Bio
               </button>
@@ -83,7 +84,7 @@
     <footer>
       <div id="fleft">&copy; 2024 TextLearn</div>
       <div id="fright">
-        <div id="about">About Us</div>
+        <div id="about"><a href="about">About US</a></div>
         <div id="join">Join The TL team</div>
       </div>
     </footer>

@@ -20,16 +20,16 @@ body {
 /* Header configurazioni */
 header {
     display: flex;
-    flex-wrap: wrap; /* Consente agli elementi di andare su una nuova riga se necessario */
-    padding: 2%;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center; /* Centra verticalmente gli elementi */
+    align-items: center;
+    padding: 1%;
     background-color: #FFC61A;
 }
 
 header .nav-link {
     display: flex;
-    gap: 3vh; /* Spazio tra i link */
+    gap: 6%;
     font-size: 1.5em;
 }
 
@@ -37,24 +37,34 @@ header .nav-link {
     font-size: 2.5em;
     font-weight: bolder;
     font-family: 'barlow', cursive;
-    margin: 0 auto; /* Centro il logo orizzontalmente */
-    padding-left: 10%;
+    margin-left: 12%;
 }
 
 /* Media Queries per schermi piccoli */
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* Dispone gli elementi in una colonna su schermi piccoli */
+        flex-direction: column;
+        align-items: center;
+        padding: 4%;
     }
 
     header .nav-link {
-        justify-content: center; /* Centro i link di navigazione su schermi piccoli */
-        margin-bottom: 0; /* Aggiungi margine inferiore per separare gli elementi verticalmente */
+        flex-direction: row;
+        justify-content: center;
+        gap: 2vh;
+        width: 100%;
+        margin: 0;
     }
 
     #logo {
-        position: static; /* Rimuove il posizionamento assoluto per il layout colonna */
-        transform: none; /* Rimuove la trasformazione */
+        margin-bottom: 1vh;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    header .nav-link {
+        justify-content: flex-end;
     }
 }
 
@@ -108,7 +118,6 @@ main {
 }
 
 #image-container {
-    position: relative; /* Posizionamento relativo */
     width: 100vw; /* Larghezza al 100% */
     height: 100vh; /* Altezza al 100% */
 }
@@ -131,6 +140,7 @@ main {
     display: flex; 
     flex-direction: column; /* Dispone gli elementi in colonna */
     align-items: center; /* Allinea gli elementi al centro */
+    
 }
 
 #p {
@@ -138,21 +148,21 @@ main {
 }
 
 #start {
-    min-width: 100%;
+    width: 100%;
     font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 8vh; /* Dimensione del testo adattabile */
+    font-size: 4em; /* Dimensione del testo adattabile */
     text-align: center; 
     color: white; 
 }
 
 #button-container {
-    padding-top: 0; 
+    padding: 0;
 }
 
 #button {
     padding: 1vw 2vh; 
     font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 4vh; /* Dimensione del testo adattabile */
+    font-size: 2em; /* Dimensione del testo adattabile */
     background-color: #FFC61A; 
     border: none; 
 }
@@ -162,14 +172,14 @@ main {
 }
 
 /* Stili per dispositivi mobili */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
 
     #start {
-        font-size: 6vh; /* Dimensione del testo per dispositivi mobili */
+        font-size: 2em; /* Dimensione del testo per dispositivi mobili */
     }
 
     #button {
-        font-size: 6vh; /* Dimensione del pulsante per dispositivi mobili */
+        font-size: 1em; /* Dimensione del pulsante per dispositivi mobili */
     }
 }
 
@@ -197,7 +207,7 @@ aside {
 }
 
 #usr-image {
-    width: 30%; 
+    width: 40%; 
     position: relative; 
     left: 50%; 
     transform: translateX(-50%); 
@@ -209,6 +219,7 @@ aside {
     padding: 2%; 
     text-align: center; 
 }
+
 
 #user h1 {
     font-family: 'Arbutus Slab', cursive; 
@@ -223,6 +234,24 @@ aside {
     padding: 2%; 
     padding-bottom: 3%; 
     text-align: left; 
+}
+
+@media screen and (max-width: 768px) {
+    #usr-image {
+        width: 60%; 
+    }
+
+    #username {
+        font-size: 1.3em;
+    }
+    #user h1 {
+        font-size: 1.2em;
+    }
+    
+    #bio {
+        font-size: 0.8em; 
+    }
+    
 }
 
 #courses {
@@ -249,14 +278,15 @@ section {
     display: flex; 
     justify-content: center; 
     align-items: center; 
+    box-sizing: border-box;
 }
 
 /* Upload configurazioni */
 #upload {
     background-color: #C6A064; 
     padding: 4%; 
-    width: 85%; 
-    max-width: 90%; 
+    width: 80%;
+    max-width: 100%; /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
     height: 80%;
     overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */
 }
@@ -268,7 +298,7 @@ section {
     align-items: center; 
     justify-content: center; 
     /*center form in the middle*/
-    height: 50vh; /*prende tutta la larghezza di upload*/
+    height: auto; /* Annulla l'altezza fissa per adattarsi dinamicamente al contenuto */
     box-sizing: border-box;
 }
 
@@ -283,11 +313,9 @@ section {
 }
 
 .labels {
-
-
     font-family: 'Arbutus Slab', sans-serif; 
     color: #FFF4EA;
-    font-size: clamp(3vh, 6vh, 16px); /* Imposta la dimensione del testo tra il 3% e il 6% dell'altezza del viewport, ma non inferiore a 16px */
+    font-size: 1.5em; 
     padding: 0; 
     align-self: center;
 }
@@ -301,23 +329,35 @@ section {
     font-size: 1.5em; 
     padding: 2%; 
     background-color: #EDDBCC;
-    width: 50%;
+    width: 80%;
 }
 
 #btn-upload {
     font-family: 'Arbutus Slab', sans-serif; 
     font-size: 1.2em; 
-    padding: 2.5vh; 
+    padding: 2.5%; 
     background-color: #372A28; 
     color: #EDDBCC;
     border: none; 
     margin-top: 2%;
 }
 
+@media screen and (max-width: 768px) {
+    #btn-upload {
+        font-size: 0.8em;
+    }
+
+    .labels {
+        font-size: 0.8em;
+    }
+}
+
 #btn-upload:hover {
     background-color: #8f7f7c; 
     color: #372A28;
 }
+
+  
 
 /*-------------------- LOGIN.HTML / SIGNUP.HTML -------------------*/
 
@@ -331,6 +371,7 @@ section {
     height: 100%;
     margin-bottom: 5vh; /* Offset for footer height */
     position: relative;
+    box-sizing: border-box;
 }
 
 /* Styling for login heading */
@@ -350,13 +391,11 @@ section {
     align-items: center;
     justify-content: center;
     width: 70%;
-    height: 80%;
-    padding: 3vh;
+    height: auto;
+    padding: 1.8%;
     background-color: #C6A064;
     border: 2px solid black;
 }
-
-
 
 
 /*-------------------- SETTINGS.HTML -------------------*/
@@ -364,15 +403,21 @@ section {
 .switcher {
     display: flex; 
     flex-direction: row; 
-    align-items: center; 
     padding: 0;
-    width: 60%;
-    margin: 0 auto;
-    margin-left: 30%;
+    width: 100%;
+    margin-bottom: 2%;
+    justify-content: center;
 }
 
 .switcher a {
-    font-size: clamp(3vh, 6vh, 16px); /* Imposta la dimensione del testo tra il 3% e il 6% dell'altezza del viewport, ma non inferiore a 16px */
+    font-size: 1.4em; 
+}
+
+@media screen and (max-width: 768px) {
+    .switcher .btn-upload2 {
+        font-size: 0.8em;
+    }
+     
 }
 
 .forms2 {
@@ -387,8 +432,9 @@ section {
 .labels2 {
     font-family: 'Arbutus Slab', sans-serif; 
     color: #FFF4EA;
-    font-size: clamp(3vh, 6vh, 16px); /* Imposta la dimensione del testo tra il 3% e il 6% dell'altezza del viewport, ma non inferiore a 16px */
+    font-size: 1.4em;
     padding: 0; 
+    padding-bottom: 1%;
     align-self: flex-start;
     padding-left: 5%;
 }
@@ -413,6 +459,16 @@ section {
     border: none; 
     margin: 0;
     margin-left: 5%;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-upload2 {
+        font-size: 0.8em;
+    }
+
+    .labels2 {
+        font-size: 0.8em;
+    }
 }
 
 .btn-upload2:hover {
@@ -504,3 +560,101 @@ section {
 }
 
 
+/*-------------------- MARKETPLACE.HTML -------------------*/
+
+#marketplace-title {
+    font-family: 'Arbutus Slab', sans-serif; 
+    font-size: 2em; 
+    padding: 0; 
+    align-self: center;
+    margin: 1%;
+}
+
+#finder {
+    width: 70%;
+    padding: 0.5%;
+    font-family: 'Arbutus Slab', sans-serif; 
+    font-size: 1.5em;  
+    background-color:#372A28;
+    color:#EDDBCC;
+    align-self: center;;
+}
+
+#cardbox {
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap; /* Per consentire alle carte di andare a capo */
+    align-self: center;
+    background-color: #C6A064;
+}
+
+#cards {
+    width: calc(20vw - 1vw); /* Imposta la larghezza della carta in modo che tre carte stiano in una riga */
+    margin: 2%;
+    margin-left: 3%;
+    padding: 2%;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    padding: 2%;
+    background-color: #EDDBCC;
+}
+
+#cards img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
+#card-title {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+#subscribe-btn {
+    width: 10vw;
+    font-family: 'Arbutus Slab', sans-serif;
+    color: #EDDBCC; 
+    font-size: 1.5vw;  
+    background-color: #372A28;
+    position: relative;
+    left: 25%;
+    border: none;
+    padding: 1.8vh;
+}
+
+#subscribe-btn:hover {
+    background-color: #8f7f7c; 
+    color: #372A28;
+}
+
+/* Stili per dimensioni dello schermo inferiori a 768px (smartphone) */
+@media (max-width: 768px) {
+    #marketplace-title {
+        font-size: 1.5em; /* Riduci la dimensione del titolo */
+    }
+
+    #finder {
+        width: 90%; /* Riduci la larghezza del finder */
+        font-size: 1em; /* Riduci la dimensione del testo */
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    #cardbox {
+        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
+        justify-content: center;
+    }
+
+    #cards {
+        width: calc(30% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
+    }
+
+    #subscribe-btn {
+        width: 100%; /* Riduci la larghezza del pulsante */
+        font-size: 0.8em; /* Riduci la dimensione del testo del pulsante */
+        left: 3%; /* Riduci lo spostamento orizzontale del pulsante */
+    }
+}

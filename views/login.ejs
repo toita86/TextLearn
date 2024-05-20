@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/style.css" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
   </head>
   <body>
     <header>
@@ -12,9 +22,9 @@
       <div id="logo">TextLearn</div>
       <div class="nav-link">
         <% if (msgToUser == true) { %>
-          <a href="/settings">User</a>
+        <a href="/settings">User</a>
         <% } else {%>
-            <a href="/signup">Sign Up</a>
+        <a href="/signup">Sign Up</a>
         <% } %>
         <a href="#">Market Place</a>
       </div>
@@ -36,14 +46,14 @@
         </form>
       </div>
       <% if (msgToUser) { %>
-        <p><%= msgToUser %></p>
+      <p><%= msgToUser %></p>
       <% } %>
     </div>
 
     <footer>
       <div id="fleft">&copy; 2024 TextLearn</div>
       <div id="fright">
-        <div id="about">About Us</div>
+        <div id="about"><a href="about">About US</a></div>
         <div id="join">Join The TL team</div>
       </div>
     </footer>
