@@ -22,3 +22,10 @@ CREATE TABLE IF NOT EXISTS user_sub_courses (
     status VARCHAR(50),
     PRIMARY KEY (user_id, course_id)
 );
+
+CREATE TABLE IF NOT EXISTS "session" (
+  "sid" VARCHAR NOT NULL COLLATE "default",
+  "sess" JSON NOT NULL,
+  "expire" TIMESTAMP(6) NOT NULL,
+  PRIMARY KEY ("sid")
+) WITH (OIDS=FALSE);
