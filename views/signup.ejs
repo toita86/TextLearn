@@ -46,6 +46,9 @@
           <input type="submit" value="Sign" id="btn-upload" />
         </form>
       </div>
+      <% if (msgToUser) { %>
+        <p><%= msgToUser %></p>
+      <% } %>
     </div>
 
     <footer>

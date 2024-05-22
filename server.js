@@ -83,7 +83,9 @@ app.post('/login', async (req, res)  => {
 });   
 
 app.get('/signup', (req, res) => {
-    res.render('signup');
+    res.render('signup',{
+        msgToUser: false
+    });
 });
 
 app.post('/signup', async (req, res) => {
@@ -94,8 +96,8 @@ app.post('/signup', async (req, res) => {
         const result = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
         const existingUser = result.rows;
         if (existingUser.length > 0) {
-            return res.render('register', {
-                message: 'This email is already in use'
+            return res.render('signup', {
+                msgToUser: 'This email is already in use'
             });
         }
 
