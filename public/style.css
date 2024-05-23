@@ -15,59 +15,44 @@ html, body {
 body {
     flex: 1; /* Permette al body di espandersi per coprire tutto lo spazio disponibile */
     width: 100%; 
+    min-width: 320px; /* Dimensione minima del viewport */
+    min-height: 600px; /* Altezza minima del viewport */
 }
 
 /* Header configurazioni */
 header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: flex; /* Utilizza flexbox per il layout */ 
+    flex-direction: column;
     align-items: center;
     padding: 1%;
     background-color: #FFC61A;
-}
-
-header .nav-link {
-    display: flex;
-    gap: 6%;
+    font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.5em;
 }
 
 #logo {
-    font-size: 2.5em;
+    font-size: 1.7em;
+    font-family: 'barlow', sans-serif;
     font-weight: bolder;
-    font-family: 'barlow', cursive;
-    margin-left: 12%;
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+#nav-link {
+    display: flex;
+    gap: 5vh; /* Espandi gli elementi tra loro di 5vh */
+    justify-content: center;
+    width: 100%;
+    text-align: center;
 }
 
 /* Media Queries per schermi piccoli */
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 4%;
-    }
-
-    header .nav-link {
+    #nav-link {
         flex-direction: row;
-        justify-content: center;
-        gap: 2vh;
-        width: 100%;
-        margin: 0;
-    }
-
-    #logo {
-        margin-bottom: 1vh;
-        margin-left: 0;
+        gap: 4%; /* Riduci il gap per schermi piccoli */
     }
 }
-
-@media (min-width: 768px) {
-    header .nav-link {
-        justify-content: flex-end;
-    }
-}
-
 
 
 /* Footer configurazioni */
@@ -78,10 +63,7 @@ footer {
     background-color: #FFF4EA; 
     margin-top: auto; 
     font-family: 'Arbutus Slab', sans-serif;
-}
-
-footer div {
-    font-size: 1.2em; 
+    font-size: 1.5em;
 }
 
 #fleft {
@@ -90,6 +72,7 @@ footer div {
 
 #fright {
     display: flex; 
+    gap:2vh
 }
 
 #join {
@@ -101,8 +84,20 @@ a {
     text-decoration: none; 
     color: black; 
     font-family: 'Arbutus Slab', sans-serif;
+    cursor: pointer;
 }
 
+a:hover {
+    color:#8f7f7c;
+    transition: 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        font-size: 1.2em;
+    }
+    
+}
 
 
 /*-------------------- INDEX.HTML -------------------*/
@@ -114,7 +109,6 @@ main {
     justify-content: center; 
     position: relative; 
     padding: 0;  
-    box-sizing: border-box; 
 }
 
 #image-container {
@@ -129,18 +123,17 @@ main {
     width: 100%; 
     height: 100%; 
     object-fit: cover; /* Adatta l'immagine */
-    box-sizing: border-box;
 }
 
 #content {
     position: absolute; 
     top: 50%; 
     left: 50%; 
+    height: auto;
     transform: translate(-50%, -50%); 
     display: flex; 
     flex-direction: column; /* Dispone gli elementi in colonna */
     align-items: center; /* Allinea gli elementi al centro */
-    
 }
 
 #p {
@@ -157,14 +150,16 @@ main {
 
 #button-container {
     padding: 0;
+    margin-bottom: 10%;
 }
 
 #button {
-    padding: 1vw 2vh; 
+    padding: 3% ; 
     font-family: 'Arbutus Slab', sans-serif; 
     font-size: 2em; /* Dimensione del testo adattabile */
     background-color: #FFC61A; 
     border: none; 
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
 }
 
 #button:hover {
@@ -173,17 +168,189 @@ main {
 
 /* Stili per dispositivi mobili */
 @media only screen and (max-width: 768px) {
+    main {
+        flex-direction: column; /* Cambia direzione dei flex per piccoli schermi */
+    }
 
     #start {
-        font-size: 2em; /* Dimensione del testo per dispositivi mobili */
+        font-size: 3em; /* Dimensione del testo per dispositivi mobili */
     }
 
     #button {
-        font-size: 1em; /* Dimensione del pulsante per dispositivi mobili */
+        font-size: 2em; /* Dimensione del pulsante per dispositivi mobili */
     }
 }
 
-/*-------------------- UPLOAD.HTML -------------------*/
+/* Stili per dispositivi molto piccoli */
+@media only screen and (max-width: 480px) {
+    #start {
+        font-size: 1.5em; /* Ulteriore riduzione del testo per schermi molto piccoli */
+    }
+
+    #button {
+        font-size: 0.875em; /* Riduzione del pulsante per schermi molto piccoli */
+        padding: 2% 3%; /* Aggiusta padding per migliorare l'usabilità su piccoli dispositivi */
+    }
+}
+
+
+/*-------------------- UPLOAD.HTML - SETTINGS.HTML + COMMON CONFIGURATIONS -------------------*/
+
+/* UPLOAD.HTML */
+
+/* Section configurazioni */
+section { 
+    display: flex; 
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    padding: 0; 
+    background-color: #372A28; 
+    
+}
+
+/* Upload configurazioni */
+#upload {
+    background-color: #C6A064; 
+    padding: 4%; 
+    width: 80%;
+    max-width: 100%; /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
+    height: 80%;
+    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */
+}
+
+#form {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    /*center form in the middle*/
+    height: auto; /* Annulla l'altezza fissa per adattarsi dinamicamente al contenuto */
+}
+
+.forms {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 1%;
+    width: 100%;
+}
+
+/*NB: labels, input and button are common also for login and signup*/
+
+.labels {
+    font-family: 'Arbutus Slab', sans-serif; 
+    color: #FFF4EA;
+    font-size: 1.5em; 
+    padding: 0; 
+    align-self: center;
+}
+
+#file { /*necessario?*/
+    margin-right: 3%
+}
+
+.inputs {
+    font-family: 'Barlow', sans-serif; 
+    font-size: 1em; 
+    padding: 2%; 
+    background-color: #EDDBCC;
+    width: 80%;
+    text-align: center;
+}
+
+#btn-signup {
+    font-family: 'Arbutus Slab', sans-serif; 
+    font-size: 1.2em; 
+    padding: 2.5%; 
+    background-color: #372A28; 
+    color: #EDDBCC;
+    border: none; 
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    #btn-signup {
+        font-size: 0.8em;
+    }
+
+}
+
+#btn-upload:hover {
+    background-color: #8f7f7c; 
+    color: #372A28;
+}
+
+/*SETTINGS.HTML*/
+
+.forms2 {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;  
+    width: 90%;
+    padding: 0;
+    padding-bottom: 2%;
+}
+
+.labels2 {
+    font-family: 'Arbutus Slab', sans-serif; 
+    color: #FFF4EA;
+    font-size: 1.4em;
+    padding: 0; 
+    padding-bottom: 1%;
+    align-self: flex-start;
+    padding-left: 5%;
+}
+
+#user-change {
+    width: 75%;
+}
+
+#bio-input {
+    height: 70%; 
+    width: 69%;
+    resize: none;
+    border: none;
+}
+
+.btn-upload2 {
+    margin: 2%;
+    font-family: 'Arbutus Slab', sans-serif; 
+    font-size: 1.2em; 
+    padding: 2.5%; 
+    background-color: #372A28; 
+    color: #EDDBCC;
+    border: none; 
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+
+    .forms2 {
+        flex-direction: column;
+    }
+
+    .btn-upload2 {
+        font-size: 0.8em;
+    }
+
+}
+
+.btn-upload2:hover {
+    background-color: #8f7f7c; 
+    color: #372A28;
+}
+
+#changeBio {
+    margin-left: 5.9%;
+    padding: 2.5vh 4.1vh;
+}
+
+/*COMMON CONFIGURATIONS*/
 
 .container {
     display: flex; 
@@ -195,9 +362,7 @@ aside {
     width: 40%; 
     padding: 2%; 
     background-color: #EDDBCC; 
-    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */
-    box-sizing: border-box; /* Include padding e bordi nella larghezza e altezza */
-    font-size: 1.2em;
+    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */    font-size: 1.2em;
 }
 
 
@@ -211,7 +376,14 @@ aside {
     position: relative; 
     left: 50%; 
     transform: translateX(-50%); 
+    cursor: pointer;
 }
+
+#usr-image:hover {
+    transform: translateX(-50%) scale(1.05);
+    transition: 0.3s ease-in;
+}
+
 
 #username {
     font-family: 'Arbutus Slab', sans-serif; 
@@ -261,7 +433,9 @@ aside {
     background-color: #FFF4EA; 
     margin-left: 50%; 
     transform: translateX(-50%); 
+    margin-bottom: 3%;
 }
+
 
 #courses h3 {
     font-family: 'Arbutus Slab', sans-serif; 
@@ -270,91 +444,87 @@ aside {
     margin: 0; 
 }
 
-/* Section configurazioni */
-section {
-    flex: 1; 
-    padding: 0; 
-    background-color: #372A28; 
+.course {
     display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    box-sizing: border-box;
+    flex-direction: row; 
+    justify-content: space-between;
+    margin-bottom: 2%;
+    margin: 0;
 }
 
-/* Upload configurazioni */
-#upload {
-    background-color: #C6A064; 
-    padding: 4%; 
-    width: 80%;
-    max-width: 100%; /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
-    height: 80%;
-    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */
-}
-
-#form {
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    /*center form in the middle*/
-    height: auto; /* Annulla l'altezza fissa per adattarsi dinamicamente al contenuto */
-    box-sizing: border-box;
-}
-
-.forms {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    padding: 1%;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.labels {
+.course-title {
     font-family: 'Arbutus Slab', sans-serif; 
-    color: #FFF4EA;
-    font-size: 1.5em; 
-    padding: 0; 
-    align-self: center;
+    font-size: 1em; 
+    margin-top: 1.2%;
 }
 
-#file { /*necessario?*/
-    margin-right: 3%
-}
-
-.inputs {
-    font-family: 'Barlow', sans-serif; 
-    font-size: 1.5em; 
-    padding: 2%; 
-    background-color: #EDDBCC;
-    width: 80%;
-}
-
-#btn-upload {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.2em; 
-    padding: 2.5%; 
-    background-color: #372A28; 
+.courses-buttons {
+    background-color: #372A28;
     color: #EDDBCC;
     border: none; 
-    margin-top: 2%;
+    cursor: pointer;
+    padding: 2%;
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1em;
+
+    /*
+    white-space: nowrap;  Il testo non viene avvolto, ma viene troncato se è troppo lungo 
+    overflow: hidden;
+    text-overflow: ellipsis;  Mostra "..." se il testo viene troncato 
+    */
+}
+
+.courses-buttons:hover{
+    background-color: #8f7f7c;
+    color:#372A28;
+} 
+
+@media screen and (max-width: 768px) {
+    #courses h3 {
+        font-size: 0.8em;
+    }
+
+    .course {
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    .course-title {
+        font-size: 0.8em;
+        margin-bottom: 1%;
+    }
+
+    .courses-buttons {
+        font-size: 0.8em;
+    }
+}
+
+.switcher {
+    display: flex; 
+    flex-direction: row; 
+    padding: 0;
+    width: 100%;
+    margin-bottom: 2%;
+    justify-content: center;
+}
+
+.switcher a {
+    font-size: 1.4em; 
 }
 
 @media screen and (max-width: 768px) {
-    #btn-upload {
+
+    .switcher {
+        display: flex;
+        flex-direction: column;
+    }
+    .switcher .btn-upload2 {
         font-size: 0.8em;
     }
-
-    .labels {
-        font-size: 0.8em;
-    }
-}
-
-#btn-upload:hover {
-    background-color: #8f7f7c; 
-    color: #372A28;
+     
 }
 
   
@@ -367,11 +537,11 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin-bottom: 5vh; /* Offset for footer height */
-    position: relative;
-    box-sizing: border-box;
+    margin-bottom: 5%; /* Offset for footer height */
+    margin-left: 50%; 
+    transform: translateX(-50%);
 }
 
 /* Styling for login heading */
@@ -395,90 +565,20 @@ section {
     padding: 1.8%;
     background-color: #C6A064;
     border: 2px solid black;
+    font-size: 1.5em;
 }
 
-
-/*-------------------- SETTINGS.HTML -------------------*/
-
-.switcher {
-    display: flex; 
-    flex-direction: row; 
+.labels-login {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.3em;
     padding: 0;
-    width: 100%;
-    margin-bottom: 2%;
-    justify-content: center;
-}
-
-.switcher a {
-    font-size: 1.4em; 
+    color:#FFF4EA;
 }
 
 @media screen and (max-width: 768px) {
-    .switcher .btn-upload2 {
+    .labels-login {
         font-size: 0.8em;
     }
-     
-}
-
-.forms2 {
-    display: flex; 
-    flex-direction: row; 
-    align-items: center;  
-    width: 90%;
-    padding: 0;
-    padding-bottom: 2%;
-}
-
-.labels2 {
-    font-family: 'Arbutus Slab', sans-serif; 
-    color: #FFF4EA;
-    font-size: 1.4em;
-    padding: 0; 
-    padding-bottom: 1%;
-    align-self: flex-start;
-    padding-left: 5%;
-}
-
-#user-change {
-    width: 70%;
-}
-
-#bio-input {
-    height: 20vh; 
-    width: 70%;
-    resize: none;
-    border: none;
-}
-
-.btn-upload2 {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.2em; 
-    padding: 2.5vh; 
-    background-color: #372A28; 
-    color: #EDDBCC;
-    border: none; 
-    margin: 0;
-    margin-left: 5%;
-}
-
-@media screen and (max-width: 768px) {
-    .btn-upload2 {
-        font-size: 0.8em;
-    }
-
-    .labels2 {
-        font-size: 0.8em;
-    }
-}
-
-.btn-upload2:hover {
-    background-color: #8f7f7c; 
-    color: #372A28;
-}
-
-#changeBio {
-    margin-left: 5.9%;
-    padding: 2.5vh 4.1vh;
 }
 
 /*-------------------- ABOUT.HTML -------------------*/
@@ -492,9 +592,8 @@ section {
     width: 90%;
     height: 100%;
     margin-bottom: 5%; /* Offset for footer height */
-    position: relative;
-    left: /*centered*/ 2.5%;
-    padding: 2%; /* Add some padding to ensure content doesn't touch edges */
+    margin-left: 50%; 
+    transform: translateX(-50%); 
 }
 
 /* Styling for the "About Us" text */
@@ -517,7 +616,6 @@ section {
     padding: 1.5%;
     background-color: #C6A064;
     border: 2px solid black;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
 /* Styling for the review form title */
@@ -540,6 +638,18 @@ section {
     padding-bottom: 2%;
     position: relative;
     left: 40%;
+}
+
+@media screen and (max-width: 768px) {
+    #review-box-form p {
+        font-size: 1.7em;
+    }
+
+    #stars img {
+        width: 30%;
+        position: relative;
+        left: 35%;
+    }
 }
 
 /* Styling for the review text */
@@ -580,16 +690,29 @@ section {
     align-self: center;;
 }
 
+#container-marketplace {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 #cardbox {
     width: 80%;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-wrap: wrap; /* Per consentire alle carte di andare a capo */
     align-self: center;
-    background-color: #C6A064;
+    overflow-y: auto;
+    
+    background-image: url('images/Sfondo2.png'); /* Imposta l'immagine di sfondo */
+    background-size: cover; /* Ridimensiona l'immagine per coprire l'intero body */
+    background-position: center; /* Centra l'immagine all'interno del body */
+    background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
 }
 
-#cards {
+.cards {
     width: calc(20vw - 1vw); /* Imposta la larghezza della carta in modo che tre carte stiano in una riga */
     margin: 2%;
     margin-left: 3%;
@@ -601,34 +724,76 @@ section {
     background-color: #EDDBCC;
 }
 
-#cards img {
+.cards:hover {
+    transform: translateZ(0.5vw) scale(1.05); 
+    transition: 0.2s ease-in; /*l'animazione diventa sempre piu veloce*/
+    /*ritardo nell'animazione*/
+}
+
+.cards img {
     width: 100%;
     height: 70%;
     object-fit: cover;
 }
 
-#card-title {
+.card-title {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.5vw;
+    font-size: 1.2em;
     text-align: center;
 }
 
-#subscribe-btn {
+.button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.subscribe-btn {
     width: 10vw;
     font-family: 'Arbutus Slab', sans-serif;
     color: #EDDBCC; 
-    font-size: 1.5vw;  
+    font-size: 1.1em;  
     background-color: #372A28;
-    position: relative;
-    left: 25%;
     border: none;
-    padding: 1.8vh;
+    padding: 3%;
+    margin: 2%;
+    
+    cursor: pointer;
 }
 
-#subscribe-btn:hover {
+.subscribe-btn:hover {
     background-color: #8f7f7c; 
     color: #372A28;
 }
+
+.popup-container {
+    position: absolute; /* Posizione fissa rispetto alla finestra del browser */
+    top: 62%; /* Posiziona al centro verticale della finestra */
+    left: 50%; /* Posiziona al centro orizzontale della finestra */
+    transform: translate(-50%, -50%); /* Centra orizzontalmente e verticalmente */
+    background-color:#EDDBCC; /* Colore di sfondo */
+    padding: 20px; /* Spazio interno */
+    z-index: 9999; /* Livello dello z-index per essere sopra altri contenuti */
+    display: none; /* Inizialmente nascosto */
+
+    font-family: 'arbutus slab', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    height: 50%;
+    overflow-y: auto;
+}
+
+/* Stile per il pulsante di chiusura del popup */
+.close-btn {
+    font-size: 1.2em;
+    position: absolute; /* Posizione assoluta all'interno del contenitore popup */
+    top: 5px; /* Spazio superiore */
+    right: 5px; /* Spazio destro */
+    cursor: pointer; /* Cambia il cursore quando si passa sopra */
+}
+
+
 
 /* Stili per dimensioni dello schermo inferiori a 768px (smartphone) */
 @media (max-width: 768px) {
@@ -648,13 +813,57 @@ section {
         justify-content: center;
     }
 
-    #cards {
+    .cardbox-img {
+        width: 0.1%;
+    }
+
+    .cards {
         width: calc(30% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
     }
 
-    #subscribe-btn {
-        width: 100%; /* Riduci la larghezza del pulsante */
-        font-size: 0.8em; /* Riduci la dimensione del testo del pulsante */
-        left: 3%; /* Riduci lo spostamento orizzontale del pulsante */
+    .card-title {
+        font-family: 'Arbutus Slab', sans-serif;
+        font-size: 0.8em;
+        text-align: center;
     }
+
+
+    .subscribe-btn {
+        width: 100%;
+        font-size: 0.8em;
+        position: relative;
+        left: 0;
+    }
+
+    .popup-container {
+        font-size: 1em;
+        width: 80%;
+        height: 50%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .button-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/*-------------------- READER.HTML -------------------*/
+
+#box-reader {
+    background-color:#C6A064; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reader {
+    background-color:#fff;
+    width: 80%;
+    height: 100%;
 }
