@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+  </head>
+  <body>
+    <header>
+      <div id="logo">TextLearn</div>
+      <div id="nav-link">
+        <a href="/">Home</a>
+        <a href="/settings">User </a>
+        <a href="/marketplace">MarketPlace</a>
+      </div>
+    </header>
+
+    <p id="marketplace-title">MARKETPLACE</p>
+    <input type="text" id="finder" placeholder="Find" />
+
+    <div id="cardbox">
+      <div class="cards">
+        <img src="images/social_media.png" id="card-img" alt="lesson image" />
+        <p class="card-title">Social Media Management</p>
+        <div class="button-container">
+          <button onclick="openDescription()" class="subscribe-btn">
+            Description
+          </button>
+          <button class="subscribe-btn">Subscribe</button>
+        </div>
+      </div>
+      <div class="cards">
+        <img src="images/social_media.png" id="card-img" alt="lesson image" />
+        <p class="card-title">Social Media Management</p>
+        <div class="button-container">
+          <button onclick="openDescription()" class="subscribe-btn">
+            Description
+          </button>
+          <button class="subscribe-btn">Subscribe</button>
+        </div>
+      </div>
+      <div class="cards">
+        <img src="images/social_media.png" id="card-img" alt="lesson image" />
+        <p class="card-title">Social Media Management</p>
+        <div class="button-container">
+          <button onclick="openDescription()" class="subscribe-btn">
+            Description
+          </button>
+          <button class="subscribe-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenitore del popup -->
+    <div id="popup" class="popup-container">
+      <!-- Pulsante di chiusura del popup -->
+      <span class="close-btn" onclick="closeDescription()">close</span>
+      <!-- Contenuto del popup -->
+      <h2>Description</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor eos quam
+        aliquam voluptatem placeat neque, quidem ex consequatur quia excepturi
+        perferendis animi inventore cum accusantium? Iste cumque voluptatibus
+        porro ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Dolor eos quam aliquam voluptatem placeat neque, quidem ex consequatur
+        quia excepturi perferendis animi inventore cum accusantium? Iste cumque
+        voluptatibus porro ducimus! Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Dolor eos quam aliquam voluptatem placeat neque,
+        quidem ex consequatur quia excepturi perferendis animi inventore cum
+        accusantium? Iste cumque voluptatibus porro ducimus! Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Dolor eos quam aliquam voluptatem
+        placeat neque, quidem ex consequatur quia excepturi perferendis animi
+        inventore cum accusantium? Iste cumque voluptatibus porro ducimus! Lorem
+        ipsum dolor sit amet consectetur adipisicing elit. Dolor eos quam
+        aliquam voluptatem placeat neque, quidem ex consequatur quia excepturi
+        perferendis animi inventore cum accusantium? Iste cumque voluptatibus
+        porro ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Dolor eos quam aliquam voluptatem placeat neque, quidem ex consequatur
+        quia excepturi perferendis animi inventore cum accusantium? Iste cumque
+        voluptatibus porro ducimus!
+      </p>
+    </div>
+
+    <footer>
+      <div id="fleft">&copy; 2024 TextLearn</div>
+      <div id="fright">
+        <div id="about"><a href="/about">About US</a></div>
+        <div id="join">Join The TL team</div>
+      </div>
+    </footer>
+
+    <script>
+      // Funzione per aprire il popup
+      function openDescription() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "block"; // Mostra il popup
+      }
+
+      // Funzione per chiudere il popup
+      function closeDescription() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "none"; // Nasconde il popup
+      }
+    </script>
+  </body>
+</html>
