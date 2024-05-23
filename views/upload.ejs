@@ -32,32 +32,10 @@
       <aside>
         <div id="user">
           <img src="/images/user.png" id="usr-image" alt="User Image" />
-          <div id="username">Username</div>
+          <div id="username"><%= user.name %></div>
           <h1>BIO</h1>
           <div id="bio">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            hendrerit erat vitae iaculis facilisis. Ut dignissim odio a nunc
-            ornare fringilla. Fusce pretium tincidunt accumsan. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Duis hendrerit erat
-            vitae iaculis facilisis. Ut dignissim odio a nunc ornare fringilla.
-            Fusce pretium tincidunt accumsan. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Duis hendrerit erat vitae iaculis
-            facilisis. Ut dignissim odio a nunc ornare fringilla. Fusce pretium
-            tincidunt accumsan. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Duis hendrerit erat vitae iaculis facilisis. Ut
-            dignissim odio a nunc ornare fringilla. Fusce pretium tincidunt
-            accumsan. ❤️ Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Duis hendrerit erat vitae iaculis facilisis. Ut dignissim odio
-            a nunc ornare fringilla. Fusce pretium tincidunt accumsan. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit
-            erat vitae iaculis facilisis. Ut dignissim odio a nunc ornare
-            fringilla. Fusce pretium tincidunt accumsan. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Duis hendrerit erat vitae iaculis
-            facilisis. Ut dignissim odio a nunc ornare fringilla. Fusce pretium
-            tincidunt accumsan. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Duis hendrerit erat vitae iaculis facilisis. Ut
-            dignissim odio a nunc ornare fringilla. Fusce pretium tincidunt
-            accumsan. ❤️
+            <%= user.bio ? user.bio : "Change me!" %>
           </div>
           <div id="courses">
             <h3>Your Courses</h3>
@@ -84,26 +62,25 @@
           </div>
           <form
             action="#"
-            method="post"
+            method="POST"
             enctype="multipart/form-data"
             id="form"
           >
             <div class="forms">
-              <label for="course" class="labels">Name</label>
-              <input
-                type="text"
-                name="Course name"
-                id="course"
-                class="inputs"
-              />
+              <label for="course_name" class="labels">Name</label>
+              <input type="text" name="course_name" id="course" class="inputs" />
             </div>
             <div class="forms">
-              <label for="image" class="labels">Image</label>
-              <input type="file" name="file-picker" class="inputs" />
+              <label for="course_image" class="labels">Image</label>
+              <input type="file" name="course_image" class="inputs" />
             </div>
             <div class="forms">
-              <label for="file" class="labels" id="file">File</label>
-              <input type="file" name="Course name" class="inputs" />
+              <label for="course_file" class="labels" id="file">File</label>
+              <input type="file" name="course_file" class="inputs" />
+            </div>
+            <div class="forms">
+              <label for="course_descr" class="labels">Description</label>
+              <textarea  name="course_descr" class="inputs"></textarea>
             </div>
 
             <input type="submit" value="Upload your Course" id="btn-upload" />

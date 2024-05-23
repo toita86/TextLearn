@@ -3,13 +3,13 @@ const session = require('express-session');
 const pool = require('./db')
 const PgSession = require('connect-pg-simple')(session);
 const bodyParser = require('body-parser');
+const bcrypt = require("bcryptjs");
+const { user } = require('pg/lib/defaults');
+const multer = require('multer');
 const path = require('path');
 const port = 8080;
 
 const app = express();
-
-// Set EJS as templating engine
-app.set('view engine', 'ejs');
 
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
@@ -35,8 +35,43 @@ app.use(session({
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
-const bcrypt = require("bcryptjs");
-const { user } = require('pg/lib/defaults');
+// Set storage engine
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, 'uploads/'); // Set upload directory
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+  
+  // Init upload
+  const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1000000 }, // Set file size limit (optional)
+    fileFilter: function(req, file, cb) {
+      checkFileType(file, cb);
+    }
+  }).fields([
+    { name: 'course_image', maxCount: 1 },
+    { name: 'course_file', maxCount: 1 }
+  ]);
+  
+  // Check file type
+  function checkFileType(file, cb) {
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|md/;
+    // Check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+  
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb('Error: Images and Mark Down documents only!');
+    }
+  }
 
 // ROUTES
 app.get('/', (req, res) => {
@@ -113,12 +148,67 @@ app.post('/signup', async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        return res.send("An error occurred");
+        return res.render('signup', {
+            msgToUser: 'An error occured'
+        });
     }
 });
 
 app.get('/upload', (req, res) => {
-    res.render('upload');
+    if(req.session.isAuth == true){
+        res.render('upload',{
+            user: req.session.user
+        });
+    } else {
+        res.render('login', {
+            msgToUser: "Log in first"
+        });
+    }
+});
+
+const upload_form = upload.fields([{ name: 'course_image', maxCount: 1 }, { name: 'course_file', maxCount: 1 }])
+
+app.post('/upload', upload_form,  async function (req, res) {
+    // upload(req, res, async (err) => {
+    //     if (err) {
+    //       return res.render('upload', {
+    //         msgToUser: err
+    //       });
+    //     } else {
+    const { course_name, course_descr } = req.body;
+    const course_image = req.files['course_image'][0].path;
+    const course_file = req.files['course_file'][0].path;
+    
+    try {
+        //const user_id = await pool.query('SELECT id FROM users WHERE email = $1', [req.session.user.email]);
+        const courses_title = await pool.query('SELECT title FROM courses WHERE author_id = $1', [req.session.user.id]);
+        // iterarte through the courses_title array to check if the course title already exists in the database
+        for (let i = 0; i < courses_title.rows.length; i++) {
+            const course = courses_title.rows[i].title;
+            if (course === course_name) {
+                console.log("Course already exists");
+                return res.render('upload', {
+                    msgToUser: 'Course already exists',
+                    user: req.session.user
+                });
+            }
+        }    
+        //otherwise, upload the course to the database
+        await pool.query('INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)', [req.session.user.id, course_name, course_descr, course_image, course_file]);
+        
+        return res.render('upload', {
+            msgToUser: 'Course uploaded successfully',
+            user: req.session.user
+        });
+    } catch (error) {
+        console.error(error);
+        return res.render('upload', {
+            msgToUser: 'An error occured',
+            user: req.session.user
+        });
+    }
+    //     }
+    // });
 });
 
 app.get('/settings', (req, res) => {
