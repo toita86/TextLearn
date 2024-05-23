@@ -18,10 +18,10 @@
   </head>
   <body>
     <header>
-      <div class="nav-link"><a href="/">Home</a></div>
       <div id="logo">TextLearn</div>
-      <div class="nav-link">
-        <a href="/settings">User</a>
+      <div id="nav-link">
+        <a href="/">Home</a>
+        <a href="/settings">User </a>
         <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
@@ -29,12 +29,42 @@
     <div class="container">
       <aside>
         <div id="user">
-          <img src="/images/user.png" id="usr-image" alt="User Image" />
-          <div id="username"><%= user.name %></div>
+          <img
+            src="/images/user.png"
+            id="usr-image"
+            alt="change image"
+            onclick=""
+          />
+
+          <div id="username">Username</div>
           <h1>BIO</h1>
-          <div id="bio"><%= user.bio ? user.bio : "Change me!" %></div>
+          <div id="bio">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio
+            laborum similique officia dolorum qui deleniti voluptatem omnis
+            aliquid ad nisi itaque nulla natus expedita, cumque fugiat,
+            sapiente, delectus quia cupiditate.
+          </div>
           <div id="courses">
             <h3>Your Courses</h3>
+            <hr />
+            <div class="course">
+              <div class="course-title">Social Media Management</div>
+              <button class="courses-buttons">Delete</button>
+            </div>
+            <hr />
+            <div class="course">
+              <div class="course-title">Cooking</div>
+              <button class="courses-buttons">Delete</button>
+            </div>
+            <hr />
+          </div>
+          <div id="courses">
+            <h3>Subscribed Courses</h3>
+            <hr />
+            <div class="course">
+              <div class="course-title">Social Media Management</div>
+              <button class="courses-buttons">Quit</button>
+            </div>
             <hr />
           </div>
         </div>
@@ -69,12 +99,14 @@
                 Change<br />Username
               </button>
             </div>
-            <label for="updtbio" class="labels2">Bio</label>
+            <label for="updatebio" class="labels2">Bio</label>
             <div class="forms2">
-              <textarea name="updtbio" id="bio-input" class="inputs"></textarea>
-              <button type="submit" class="btn-upload2" id="changeBio">
-                Change<br />Bio
-              </button>
+              <textarea
+                name="updatebio"
+                id="bio-input"
+                class="inputs"
+              ></textarea>
+              <button type="submit" class="btn-upload2">Change<br />Bio</button>
             </div>
           </form>
         </div>

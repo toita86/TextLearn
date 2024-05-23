@@ -18,32 +18,27 @@
   </head>
   <body>
     <header>
-      <div class="nav-link"><a href="/">Home</a></div>
       <div id="logo">TextLearn</div>
-      <div class="nav-link">
-        <a href="/login">Login</a>
-        <a href="#">Market Place</a>
+      <div id="nav-link">
+        <a href="/">Home</a>
+        <a href="/settings">User </a>
+        <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
 
     <div class="login-subscribe">
-      <p>Sign Up</p>
+      <p>Login</p>
       <div class="login-subscribe-form">
-        <form action="/signup" method="POST" id="form">
+        <form action="/login" method="POST" id="form">
           <div class="forms">
-            <label for="name" class="labels">Username </label>
-            <input type="text" name="name" class="inputs" />
-          </div>
-          <div class="forms">
-            <label for="email" class="labels">Email</label>
+            <label for="email" class="labels-login">Email</label>
             <input type="text" name="email" class="inputs" />
           </div>
           <div class="forms">
-            <label for="password" class="labels">Password</label>
+            <label for="password" class="labels-login">Password</label>
             <input type="password" name="password" class="inputs" />
           </div>
-
-          <input type="submit" value="Sign" id="btn-upload" />
+          <input type="submit" value="login" id="btn-upload" />
         </form>
       </div>
     </div>
