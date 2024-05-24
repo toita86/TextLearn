@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js"></script>
     <link
       rel="icon"
       type="image/png"
@@ -21,15 +22,15 @@
       <div id="logo">TextLearn</div>
       <div id="nav-link">
         <a href="/">Home</a>
-        <a href="/settings">User </a>
         <a href="/marketplace">MarketPlace</a>
+        <a href="/" id="1-entry"></a>
       </div>
     </header>
 
     <div class="login-subscribe">
       <p>SignUp</p>
       <div class="login-subscribe-form">
-        <form action="/signup" method="POST" id="form">
+        <form action="/signup" method="post" id="form">
           <div class="forms">
             <label for="name" class="labels-login">Username </label>
             <input type="text" name="name" class="inputs" />
@@ -46,9 +47,7 @@
           <input type="submit" value="Sign" id="btn-signup" />
         </form>
       </div>
-      <% if (msgToUser) { %>
-        <p><%= msgToUser %></p>
-      <% } %>
+        <p id="msgToUser"></p>
     </div>
 
     <footer>

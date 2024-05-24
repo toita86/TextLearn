@@ -35,6 +35,18 @@ app.use(session({
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
+app.get('/session-data', async (req, res) => {
+    if (!req.session.isAuth) {
+        res.json({ isAuth: false });
+        return;
+    }
+    res.json({ 
+        isAuth: req.session.isAuth,
+        username: req.session.user.name,
+        bio: req.session.user.bio
+    });
+});
+
 // Set storage engine
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -75,15 +87,11 @@ const storage = multer.diskStorage({
 
 // ROUTES
 app.get('/', (req, res) => {
-    res.render('index',{
-        isAuth: req.session.isAuth
-    });
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 app.get('/login', (req, res) => {
-    res.render('login',{
-        msgToUser: false
-    });
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
 app.post('/login', async (req, res)  => {
@@ -118,9 +126,7 @@ app.post('/login', async (req, res)  => {
 });   
 
 app.get('/signup', (req, res) => {
-    res.render('signup',{
-        msgToUser: false
-    });
+    res.sendFile(path.join(__dirname, 'views', 'signup.html'));
 });
 
 app.post('/signup', async (req, res) => {
@@ -143,83 +149,71 @@ app.post('/signup', async (req, res) => {
         await pool.query('INSERT INTO users (name, email, password_digest) VALUES ($1, $2, $3)', [name, email, hashedPassword]);
 
         // Render the success message
-        return res.render('login', {
-            msgToUser: 'User registered!'
-        });
+        return res.redirect('login');
     } catch (error) {
         console.error(error);
-        return res.render('signup', {
-            msgToUser: 'An error occured'
-        });
+        return res.redirect('signup');
     }
 });
 
 app.get('/upload', (req, res) => {
     if(req.session.isAuth == true){
-        res.render('upload',{
-            user: req.session.user
-        });
+        res.sendFile(path.join(__dirname, 'views', 'upload.html'));
     } else {
-        res.render('login', {
-            msgToUser: "Log in first"
-        });
+        res.redirect('login');
     }
 });
 
-const upload_form = upload.fields([{ name: 'course_image', maxCount: 1 }, { name: 'course_file', maxCount: 1 }])
+// const upload_form = upload.fields([{ name: 'course_image', maxCount: 1 }, { name: 'course_file', maxCount: 1 }])
 
-app.post('/upload', upload_form,  async function (req, res) {
-    // upload(req, res, async (err) => {
-    //     if (err) {
-    //       return res.render('upload', {
-    //         msgToUser: err
-    //       });
-    //     } else {
-    const { course_name, course_descr } = req.body;
-    const course_image = req.files['course_image'][0].path;
-    const course_file = req.files['course_file'][0].path;
+// app.post('/upload', upload_form,  async function (req, res) {
+//     // upload(req, res, async (err) => {
+//     //     if (err) {
+//     //       return res.render('upload', {
+//     //         msgToUser: err
+//     //       });
+//     //     } else {
+//     const { course_name, course_descr } = req.body;
+//     const course_image = req.files['course_image'][0].path;
+//     const course_file = req.files['course_file'][0].path;
     
-    try {
-        //const user_id = await pool.query('SELECT id FROM users WHERE email = $1', [req.session.user.email]);
-        const courses_title = await pool.query('SELECT title FROM courses WHERE author_id = $1', [req.session.user.id]);
-        // iterarte through the courses_title array to check if the course title already exists in the database
-        for (let i = 0; i < courses_title.rows.length; i++) {
-            const course = courses_title.rows[i].title;
-            if (course === course_name) {
-                console.log("Course already exists");
-                return res.render('upload', {
-                    msgToUser: 'Course already exists',
-                    user: req.session.user
-                });
-            }
-        }    
-        //otherwise, upload the course to the database
-        await pool.query('INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)', [req.session.user.id, course_name, course_descr, course_image, course_file]);
+//     try {
+//         //const user_id = await pool.query('SELECT id FROM users WHERE email = $1', [req.session.user.email]);
+//         const courses_title = await pool.query('SELECT title FROM courses WHERE author_id = $1', [req.session.user.id]);
+//         // iterarte through the courses_title array to check if the course title already exists in the database
+//         for (let i = 0; i < courses_title.rows.length; i++) {
+//             const course = courses_title.rows[i].title;
+//             if (course === course_name) {
+//                 console.log("Course already exists");
+//                 return res.render('upload', {
+//                     msgToUser: 'Course already exists',
+//                     user: req.session.user
+//                 });
+//             }
+//         }    
+//         //otherwise, upload the course to the database
+//         await pool.query('INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)', [req.session.user.id, course_name, course_descr, course_image, course_file]);
         
-        return res.render('upload', {
-            msgToUser: 'Course uploaded successfully',
-            user: req.session.user
-        });
-    } catch (error) {
-        console.error(error);
-        return res.render('upload', {
-            msgToUser: 'An error occured',
-            user: req.session.user
-        });
-    }
-    //     }
-    // });
-});
+//         return res.render('upload', {
+//             msgToUser: 'Course uploaded successfully',
+//             user: req.session.user
+//         });
+//     } catch (error) {
+//         console.error(error);
+//         return res.render('upload', {
+//             msgToUser: 'An error occured',
+//             user: req.session.user
+//         });
+//     }
+//     //     }
+//     // });
+// });
 
 app.get('/settings', (req, res) => {
     if(req.session.isAuth == true){
-        res.render('settings',{
-            user: req.session.user
-        });
+        res.sendFile(path.join(__dirname, 'views', 'settings.html'));
     } else {
-        res.render('login', {
-            msgToUser: "Log in first"
-        });
+        return res.redirect('login');    
     }
 });
 
@@ -253,9 +247,7 @@ app.post('/settings', async (req, res) => {
         req.session.user = user;
 
         // Render the settings page with the updated user data
-        return res.render('settings', {
-            user: req.session.user
-        });
+        return res.redirect('settings');
     } catch (error) {
         console.error(error);
         return res.send("An error occurred");
@@ -263,11 +255,11 @@ app.post('/settings', async (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.render('about');
+    res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
 app.get('/marketplace', (req, res) => {
-    res.render('marketplace');
+    res.sendFile(path.join(__dirname, 'views', 'marketplace.html'));
 });
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
