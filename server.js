@@ -35,15 +35,16 @@ app.use(session({
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
-app.get('/session-data', async (req, res) => {
+app.get('/session-data', (req, res) => {
     if (!req.session.isAuth) {
         res.json({ isAuth: false });
         return;
     }
-    res.json({ 
+    return res.json({ 
         isAuth: req.session.isAuth,
         username: req.session.user.name,
-        bio: req.session.user.bio
+        bio: req.session.user.bio,
+        msgToUser: req.session.msgToUser
     });
 });
 
@@ -103,17 +104,20 @@ app.post('/login', async (req, res)  => {
         // Check if user with that email is in the database
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email])
         const user = result.rows[0];
-        if (!user) return res.status(401).render('login', {
-            msgToUser: 'User not found'
-        });
+        if (!user){
+            req.session.msgToUser = 'User not found';
+            return res.redirect('login');
+        }
 
         // Check if the hashed password matches with the one in the database
         const registeredPassword = user.password_digest;
         const passwordMatch = await bcrypt.compare(password, registeredPassword);
-        if (!passwordMatch) return res.status(401).render('login', {
-            msgToUser: 'Wrong Password'
-        });
+        if (!passwordMatch){
+            req.session.msgToUser = 'Wrong Password';
+            return res.redirect('login');
+        }
         
+        req.session.msgToUser = false;
         req.session.user = user;
         req.session.isAuth = true;
 
@@ -137,9 +141,8 @@ app.post('/signup', async (req, res) => {
         const result = await pool.query('SELECT email FROM users WHERE email = $1', [email]);
         const existingUser = result.rows;
         if (existingUser.length > 0) {
-            return res.render('signup', {
-                msgToUser: 'This email is already in use'
-            });
+            req.session.msgToUser = 'Email already in use';
+            return res.redirect('signup');
         }
 
         // Hash the password
@@ -149,6 +152,7 @@ app.post('/signup', async (req, res) => {
         await pool.query('INSERT INTO users (name, email, password_digest) VALUES ($1, $2, $3)', [name, email, hashedPassword]);
 
         // Render the success message
+        req.session.msgToUser = 'User registered!';
         return res.redirect('login');
     } catch (error) {
         console.error(error);
@@ -160,6 +164,7 @@ app.get('/upload', (req, res) => {
     if(req.session.isAuth == true){
         res.sendFile(path.join(__dirname, 'views', 'upload.html'));
     } else {
+        req.session.msgToUser = 'Log in first!';
         res.redirect('login');
     }
 });
