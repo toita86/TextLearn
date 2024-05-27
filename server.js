@@ -80,10 +80,11 @@ const upload = multer({
 function checkFileType(file, cb) {
     // Allowed ext
     const filetypes = /jpeg|jpg|png|md/;
+    const mimetypes = /image\/jpeg|image\/jpg|image\/png|text\/markdown|text\/plain/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
-    const mimetype = filetypes.test(file.mimetype);
+    const mimetype = mimetypes.test(file.mimetype);
     
     if (mimetype && extname) {
         return cb(null, true);
@@ -177,11 +178,13 @@ app.get('/upload', (req, res) => {
 
 
 app.post('/upload', upload,  async function (req, res) {
-    const { course_name, course_descr } = req.body;
-    const course_image = req.files['course_image'][0].path;
-    const course_file = req.files['course_file'][0].path;
     
     try {
+        const { course_name, course_descr } = req.body;
+
+        const course_image = req.files['course_image'][0].path;
+        const course_file = req.files['course_file'][0].path;
+
         const courses_title = await pool.query('SELECT title FROM courses WHERE author_id = $1', [req.session.user.id]);
         // iterarte through the courses_title array to check if the course title already exists in the database
         for (let i = 0; i < courses_title.rows.length; i++) {
@@ -199,6 +202,10 @@ app.post('/upload', upload,  async function (req, res) {
         return res.redirect('upload');
     } catch (error) {
         console.error(error);
+        if(error.TypeError !== null){
+            req.session.msgToUser = 'No files selected';
+            return res.redirect('upload');
+        }
         req.session.msgToUser = 'An error occured';
         return res.redirect('upload');
     }
