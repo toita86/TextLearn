@@ -4,9 +4,11 @@ services:
     image: text-learn-app
     build: .
     ports:
-      - "8080:8080"  # Map port 8080 of the host to port 8080 of the container
+      - "8080:8080" # Map port 8080 of the host to port 8080 of the container
     depends_on: # Wait for the database to be ready before starting the app
       - db
+    volumes:
+      - text-learn-uploads:/usr/src/app/uploads
   db:
     image: postgres
     environment:
@@ -14,7 +16,7 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: pass123
     ports:
-      - "5432:5432"  # Expose PostgreSQL port internally
+      - "5432:5432" # Expose PostgreSQL port internally
     volumes:
       - text-learn-db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -26,9 +28,10 @@ services:
       PGW_DB_PASS: pass123
       PGW_DB_NAME: text-learn
     ports:
-       - "8081:8081"   # Expose pgweb port internally
+      - "8081:8081" # Expose pgweb port internally
     depends_on: # Wait for the database to be ready before starting the app
-       - db
+      - db
 
 volumes:
   text-learn-db:
+  text-learn-uploads:
