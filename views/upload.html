@@ -50,19 +50,7 @@
           </div>
           <div id="courses">
             <h3>Your Courses</h3>
-            <hr />
-            <div class="course" id="1">
-              <div class="course-title">Social Media Management</div>
-              <button class="courses-buttons" onclick="deleteCourse('1')">
-                Delete
-              </button>
-            </div>
-            <div class="course" id="2">
-              <div class="course-title">Cooking</div>
-              <button class="courses-buttons" onclick="deleteCourse('2')">
-                Delete
-              </button>
-            </div>
+            
           </div>
           <div id="courses">
             <h3>Subscribed Courses</h3>
@@ -100,23 +88,26 @@
             id="form"
           >
             <div class="forms">
-              <label for="course" class="labels">Name</label>
+              <label for="course_name" class="labels">Name</label>
               <input
                 type="text"
-                name="Course name"
+                name="course_name"
                 id="course"
                 class="inputs"
               />
             </div>
             <div class="forms">
-              <label for="image" class="labels">Image</label>
-              <input type="file" name="file-picker" class="inputs" />
+              <label for="course_image" class="labels">Image</label>
+              <input type="file" name="course_image" class="inputs" />
             </div>
             <div class="forms">
-              <label for="file" class="labels" id="file">File</label>
-              <input type="file" name="Course name" class="inputs" />
+              <label for="course_file" class="labels" id="file">File</label>
+              <input type="file" name="course_file" class="inputs" />
             </div>
-
+            <div class="forms">
+              <label for="course_descr" class="labels">Description</label>
+              <textarea  name="course_descr" class="inputs"></textarea>
+            </div>
             <input type="submit" value="Upload your Course" id="btn-signup" />
           </form>
           <p id="msgToUser"></p>
