@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
     <script src="/script.js"></script>
     <script src="/settings-courses.js"></script>
@@ -17,14 +18,24 @@
       sizes="16x16"
       href="/images/favicon-16x16.png"
     />
+    <script src="/front_side.js"></script>
+    <title>TextLearn - Settings</title>
   </head>
   <body>
     <header>
       <div id="logo">TextLearn</div>
       <div id="nav-link">
         <a href="/">Home</a>
-        <a href="/marketplace">MarketPlace</a>
         <a href="/" id="1-entry"></a>
+        <a href="/marketplace">MarketPlace</a>
+      </div>
+      <div id="hamburger" onclick="openNav()">&#9776;</div>
+      <div id="x_button" onclick="openNav()">&times;</div>
+
+      <div id="nav-link-mini">
+        <a href="/">Home</a>
+        <a href="/" id="1-entry"></a>
+        <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
 
@@ -38,10 +49,13 @@
             onclick=""
           />
 
-          <div id="username"></div>
+          <div id="username">Username</div>
           <h1>BIO</h1>
           <div id="bio">
-            Change me!
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio
+            laborum similique officia dolorum qui deleniti voluptatem omnis
+            aliquid ad nisi itaque nulla natus expedita, cumque fugiat,
+            sapiente, delectus quia cupiditate.
           </div>
           <div id="courses">
             <h3>Your Courses</h3>
@@ -74,7 +88,7 @@
               onclick="window.location.href='/upload'"
             />
           </div>
-          <form action="/settings" method="POST" id="form">
+          <form action="#" method="POST" id="form">
             <label for="updtname" class="labels2">Username</label>
             <div class="forms2">
               <input
@@ -89,11 +103,7 @@
             </div>
             <label for="updtbio" class="labels2">Bio</label>
             <div class="forms2">
-              <textarea
-                name="updtbio"
-                id="bio-input"
-                class="inputs"
-              ></textarea>
+              <textarea name="updtbio" id="bio-input" class="inputs"></textarea>
               <button type="submit" class="btn-upload2">Change<br />Bio</button>
             </div>
           </form>

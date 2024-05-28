@@ -9,7 +9,7 @@ html, body {
     margin: 0; 
     display: flex; /* Utilizza flexbox per il layout */
     flex-direction: column; /* Imposta la direzione del flex su colonna */
-    background-color: #FFC61A;
+    background-color:#FFC61A;
 }
 
 body {
@@ -27,32 +27,82 @@ header {
     padding: 1%;
     background-color: #FFC61A;
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 #logo {
-    font-size: 1.7em;
+    font-size: 2em;
     font-family: 'barlow', sans-serif;
     font-weight: bolder;
     text-align: center;
-    margin-bottom: 1%;
+    margin-bottom: 0.5%;
+}
+
+#hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-family: 'barlow', sans-serif;
+    z-index: 9999;
+    background-color:#FFC61A; /*per evitare che la navlink durante l'animazioe si vede sotto*/
+}
+
+#x_button {
+    display: none;
+    cursor: pointer;
+    font-size: 1.8em;
+    font-family: 'barlow', sans-serif;
+    z-index: 9999;
+    background-color:#FFC61A; /*per evitare che la navlink durante l'animazioe si vede sotto*/
 }
 
 #nav-link {
     display: flex;
-    gap: 5vh; /* Espandi gli elementi tra loro di 5vh */
+    gap: 6%; /* Espandi gli elementi tra loro di 5vh */
     justify-content: center;
-    width: 100%;
-    text-align: center;
+    width: 30%;
 }
 
-/* Media Queries per schermi piccoli */
-@media (max-width: 768px) {
-    #nav-link {
-        flex-direction: row;
-        gap: 4%; /* Riduci il gap per schermi piccoli */
+#nav-link-mini {
+    gap: 6%;
+    text-align: center;
+    justify-content: center;
+    background-color: #FFC61A;
+    width: auto;
+    font-family: 'arbutus slab', sans-serif;
+    font-size: 1.2em;
+    position: absolute; /* Fissa il menu alla finestra del browser */
+    right: 0; /* Distanza dal lato destro della finestra */
+    top: 50px; /* Distanza dal lato superiore della finestra */
+    z-index: 9999;
+    padding: 2%;
+    display: none; /* Nasconde il menu per default */
+
+    flex-direction: column;
+}
+
+
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(20%);
+    } to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
+
+@keyframes slideLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    } to {
+        opacity: 0;
+        transform: translateX(20%);
+    }
+}
+
 
 
 /* Footer configurazioni */
@@ -63,7 +113,8 @@ footer {
     background-color: #FFF4EA; 
     margin-top: auto; 
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    z-index: 9999;
 }
 
 #fleft {
@@ -90,13 +141,6 @@ a {
 a:hover {
     color:#8f7f7c;
     transition: 0.3s;
-}
-
-@media screen and (max-width: 768px) {
-    footer {
-        font-size: 1.2em;
-    }
-    
 }
 
 
@@ -130,6 +174,7 @@ main {
     top: 50%; 
     left: 50%; 
     height: auto;
+    width: 60%;
     transform: translate(-50%, -50%); 
     display: flex; 
     flex-direction: column; /* Dispone gli elementi in colonna */
@@ -166,33 +211,6 @@ main {
     background-color: #dbc47f; 
 }
 
-/* Stili per dispositivi mobili */
-@media only screen and (max-width: 768px) {
-    main {
-        flex-direction: column; /* Cambia direzione dei flex per piccoli schermi */
-    }
-
-    #start {
-        font-size: 3em; /* Dimensione del testo per dispositivi mobili */
-    }
-
-    #button {
-        font-size: 2em; /* Dimensione del pulsante per dispositivi mobili */
-    }
-}
-
-/* Stili per dispositivi molto piccoli */
-@media only screen and (max-width: 480px) {
-    #start {
-        font-size: 1.5em; /* Ulteriore riduzione del testo per schermi molto piccoli */
-    }
-
-    #button {
-        font-size: 0.875em; /* Riduzione del pulsante per schermi molto piccoli */
-        padding: 2% 3%; /* Aggiusta padding per migliorare l'usabilità su piccoli dispositivi */
-    }
-}
-
 
 /*-------------------- UPLOAD.HTML - SETTINGS.HTML + COMMON CONFIGURATIONS -------------------*/
 
@@ -204,10 +222,14 @@ section {
     flex-direction: row;
     justify-content: center; 
     align-items: center; 
-    width: 100%;
+    width: 80%;
     padding: 0; 
-    background-color: #372A28; 
-    
+
+    background-image: url("images/Sfondo2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #C6A064;
 }
 
 /* Upload configurazioni */
@@ -239,12 +261,12 @@ section {
     width: 100%;
 }
 
-/*NB: labels, input and button are common also for login and signup*/
+/*NB: labels, input e button sono configurazioni usate anche per il login e signup*/
 
 .labels {
     font-family: 'Arbutus Slab', sans-serif; 
     color: #FFF4EA;
-    font-size: 1.5em; 
+    font-size: 1.2em; 
     padding: 0; 
     align-self: center;
 }
@@ -255,7 +277,7 @@ section {
 
 .inputs {
     font-family: 'Barlow', sans-serif; 
-    font-size: 1em; 
+    font-size: 1.2em; 
     padding: 2%; 
     background-color: #EDDBCC;
     width: 80%;
@@ -273,12 +295,11 @@ section {
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-    #btn-signup {
-        font-size: 0.8em;
-    }
-
+#btn-signup:hover {
+    background-color: #8f7f7c; 
+    color: #372A28;
 }
+
 
 #btn-upload:hover {
     background-color: #8f7f7c; 
@@ -299,7 +320,7 @@ section {
 .labels2 {
     font-family: 'Arbutus Slab', sans-serif; 
     color: #FFF4EA;
-    font-size: 1.4em;
+    font-size: 1.2em;
     padding: 0; 
     padding-bottom: 1%;
     align-self: flex-start;
@@ -328,18 +349,6 @@ section {
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-
-    .forms2 {
-        flex-direction: column;
-    }
-
-    .btn-upload2 {
-        font-size: 0.8em;
-    }
-
-}
-
 .btn-upload2:hover {
     background-color: #8f7f7c; 
     color: #372A28;
@@ -354,9 +363,10 @@ section {
 
 .container {
     display: flex; 
-    flex: 1; 
-    height: 80%;
+    flex-direction: row;
+    height: 100%;
 }
+
 
 aside {
     width: 40%; 
@@ -372,16 +382,16 @@ aside {
 }
 
 #usr-image {
-    width: 40%; 
-    position: relative; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    cursor: pointer;
+    display: block;
+    width: 30%;
+    margin: 0; /* Centra orizzontalmente */
+    align-self: center;
 }
 
+
 #usr-image:hover {
-    transform: translateX(-50%) scale(1.05);
-    transition: 0.3s ease-in;
+    transform: scale(1.1);
+    transition: 0.2s ease-in;
 }
 
 
@@ -400,30 +410,12 @@ aside {
     margin-bottom: 0; 
 }
 
-#bio {
+aside #bio {
     font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.1em; 
+    font-size: 1.2em; 
     padding: 2%; 
     padding-bottom: 3%; 
     text-align: left; 
-}
-
-@media screen and (max-width: 768px) {
-    #usr-image {
-        width: 60%; 
-    }
-
-    #username {
-        font-size: 1.3em;
-    }
-    #user h1 {
-        font-size: 1.2em;
-    }
-    
-    #bio {
-        font-size: 0.8em; 
-    }
-    
 }
 
 #courses {
@@ -439,7 +431,7 @@ aside {
 
 #courses h3 {
     font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1em; 
+    font-size: 1.2em; 
     padding: 0; 
     margin: 0; 
 }
@@ -448,24 +440,34 @@ aside {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
-    margin-bottom: 2%;
     margin: 0;
+    margin-bottom: 2%;
+    padding-bottom: 2%;
+    border-bottom: 1px solid black;
 }
 
-.course-title {
+.slideLeft {
+    animation: slideLeft 0.5s forwards;
+}
+
+aside .course-title {
     font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1em; 
+    font-size: 1.2em; 
     margin-top: 1.2%;
+    width: 70%;
+    text-align: left;
+    word-wrap: break-word;
 }
 
-.courses-buttons {
+aside .courses-buttons {
     background-color: #372A28;
     color: #EDDBCC;
     border: none; 
     cursor: pointer;
     padding: 2%;
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1em;
+    font-size: 1.2em;
+    height: 30%; /* Per evitare che il pulsante abbia un'altezza troppo alta con curse titles lunghi*/
 
     /*
     white-space: nowrap;  Il testo non viene avvolto, ma viene troncato se è troppo lungo 
@@ -479,59 +481,28 @@ aside {
     color:#372A28;
 } 
 
-@media screen and (max-width: 768px) {
-    #courses h3 {
-        font-size: 0.8em;
-    }
-
-    .course {
-        display: flex; 
-        flex-direction: column; 
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-    }
-
-    .course-title {
-        font-size: 0.8em;
-        margin-bottom: 1%;
-    }
-
-    .courses-buttons {
-        font-size: 0.8em;
-    }
-}
-
 .switcher {
     display: flex; 
     flex-direction: row; 
     padding: 0;
     width: 100%;
-    margin-bottom: 2%;
+    margin-bottom: 12%;
     justify-content: center;
 }
 
-.switcher a {
-    font-size: 1.4em; 
+.switcher .btn-upload2 {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2em;
+    padding: 2.5%;
+    background-color: #372A28;
+    color: #EDDBCC;
+    border: none;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-
-    .switcher {
-        display: flex;
-        flex-direction: column;
-    }
-    .switcher .btn-upload2 {
-        font-size: 0.8em;
-    }
-     
-}
-
-  
 
 /*-------------------- LOGIN.HTML / SIGNUP.HTML -------------------*/
 
-/* Main container for login */
 .login-subscribe {
     display: flex;
     flex-direction: column;
@@ -539,51 +510,63 @@ aside {
     justify-content: center;
     width: 90%;
     height: 100%;
-    margin-bottom: 5%; /* Offset for footer height */
+    margin-bottom: 5%;
     margin-left: 50%; 
     transform: translateX(-50%);
 }
 
-/* Styling for login heading */
 .login-subscribe p {
     font-family: 'Arbutus Slab', sans-serif;
+    color:#EDDBCC;
     font-size: 2em;
     padding: 0;
     margin: 0;
-    align-self: flex-start; /* Align to the left */
-    padding-left: 13.3%; /* Adjust padding as necessary */
+    align-self: flex-start; 
+    padding-left: 13.3%; 
 }
 
-/* Styling for login form container */
+
 .login-subscribe-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    text-align: center; /* centa tutto il testo, anche i bottoni */
     width: 70%;
     height: auto;
     padding: 1.8%;
     background-color: #C6A064;
     border: 2px solid black;
-    font-size: 1.5em;
+}
+
+.login-subscribe-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-subscribe-form form #btn-signup {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2em;
+    padding: 2%;
+    background-color: #372A28;
+    color: #EDDBCC;
+    border: none;
+    cursor: pointer;
 }
 
 .labels-login {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.3em;
+    font-size: 1.2em;
     padding: 0;
     color:#FFF4EA;
 }
 
-@media screen and (max-width: 768px) {
-    .labels-login {
-        font-size: 0.8em;
-    }
-}
 
 /*-------------------- ABOUT.HTML -------------------*/
 
-/* General styling for the review box */
 #review-box {
     display: flex;
     flex-direction: column;
@@ -591,65 +574,50 @@ aside {
     justify-content: center;
     width: 90%;
     height: 100%;
-    margin-bottom: 5%; /* Offset for footer height */
+    margin-bottom: 5%; 
     margin-left: 50%; 
     transform: translateX(-50%); 
 }
 
-/* Styling for the "About Us" text */
+
 #review-box p {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 2em;
+    font-size: 1.2em;
     margin: 0;
-    align-self: flex-start; /* Align to the left */
-    padding-left: 10%; /* Adjust padding as necessary */
+    align-self: flex-start; /* alinea a sinistra */
+    padding-left: 8.5%;
 }
 
-/* Styling for the review form box */
 #review-box-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 80%;
-    height: auto; /* Use auto to let the height adjust based on content */
+    height: auto; /*aggiusta l'altezza in base al contenuto*/
     padding: 1.5%;
     background-color: #C6A064;
     border: 2px solid black;
 }
 
-/* Styling for the review form title */
+
 #review-box-form p {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 2.5em;
-    margin: 0;
-    width: 50%;
     padding: 0;
-    text-align: center; /* Center align text */
-    margin-bottom: 2%;
-    position: relative;
-    left: 25%;
+    margin: 0;
+    align-self: center;
+    text-align: center;
+    padding-bottom: 2%;
 }
 
 #stars img {
     width: 20%;
     height: auto;
-    display: block; /* Ensure image takes full width of the container */
+    display: block; 
     padding-bottom: 2%;
     position: relative;
     left: 40%;
-}
-
-@media screen and (max-width: 768px) {
-    #review-box-form p {
-        font-size: 1.7em;
-    }
-
-    #stars img {
-        width: 30%;
-        position: relative;
-        left: 35%;
-    }
 }
 
 /* Styling for the review text */
@@ -657,7 +625,7 @@ aside {
     width: 70%;
     font-family: 'Arbutus Slab', sans-serif;
     text-align: center;
-    font-size: 1.2em; /* Use viewport height for font size */
+    font-size: 1.2em; 
     margin-bottom: 3%;
 }
 
@@ -665,7 +633,7 @@ aside {
     width: 70%;
     font-family: 'Arbutus Slab', sans-serif;
     text-align: center;
-    font-size: 1.2em; /* Use viewport height for font size */
+    font-size: 1.2em; 
     font-weight: bolder;
 }
 
@@ -700,28 +668,24 @@ aside {
 
 #cardbox {
     width: 80%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap; /* Per consentire alle carte di andare a capo */
     align-self: center;
     overflow-y: auto;
+    justify-content: center;
     
-    background-image: url('images/Sfondo2.png'); /* Imposta l'immagine di sfondo */
-    background-size: cover; /* Ridimensiona l'immagine per coprire l'intero body */
-    background-position: center; /* Centra l'immagine all'interno del body */
-    background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
+    background-color:#C6A064 ;
 }
 
 .cards {
     width: calc(20vw - 1vw); /* Imposta la larghezza della carta in modo che tre carte stiano in una riga */
-    margin: 2%;
-    margin-left: 3%;
+    margin: 1%;
     padding: 2%;
     flex-direction: column;
     align-self: center;
-    justify-content: center;
-    padding: 2%;
     background-color: #EDDBCC;
+    height: auto;
 }
 
 .cards:hover {
@@ -732,13 +696,13 @@ aside {
 
 .cards img {
     width: 100%;
-    height: 70%;
+    height: 30vh;
     object-fit: cover;
 }
 
 .card-title {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: center;
 }
 
@@ -746,14 +710,15 @@ aside {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
 }
 
 .subscribe-btn {
-    width: 10vw;
+    width: 50%;
     font-family: 'Arbutus Slab', sans-serif;
     color: #EDDBCC; 
-    font-size: 1.1em;  
+    font-size: 1.2em;  
+    text-overflow: ellipsis; /*aggiunge i puntini*/
+    overflow: hidden; /*evita che il testo del bottone vada fuori*/
     background-color: #372A28;
     border: none;
     padding: 3%;
@@ -767,80 +732,64 @@ aside {
     color: #372A28;
 }
 
-.popup-container {
-    position: absolute; /* Posizione fissa rispetto alla finestra del browser */
+#popup {
+    position: fixed; /* Posizione fissa rispetto alla finestra del browser */
     top: 62%; /* Posiziona al centro verticale della finestra */
     left: 50%; /* Posiziona al centro orizzontale della finestra */
     transform: translate(-50%, -50%); /* Centra orizzontalmente e verticalmente */
-    background-color:#EDDBCC; /* Colore di sfondo */
+    background-color: #EDDBCC; /* Colore di sfondo */
     padding: 20px; /* Spazio interno */
     z-index: 9999; /* Livello dello z-index per essere sopra altri contenuti */
     display: none; /* Inizialmente nascosto */
 
     font-family: 'arbutus slab', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: center;
     height: 50%;
     overflow-y: auto;
 }
 
-/* Stile per il pulsante di chiusura del popup */
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100%);
+    } 
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -50%);
+    } 
+    to {
+        transform: translate(-50%, 100%);
+    }
+}
+
+.open {
+    display: block;
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.close {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+/*Senza forward il popup dalla posizione iniziale 
+ritornera in posizione iniziale e viceversa. Con forward
+il popup dalla posizione finale passa all'ultimo stato 
+della transizione e ci rimane e viceversa per garantire
+una transizione piu fluida*/
+
 .close-btn {
-    font-size: 1.2em;
-    position: absolute; /* Posizione assoluta all'interno del contenitore popup */
-    top: 5px; /* Spazio superiore */
-    right: 5px; /* Spazio destro */
-    cursor: pointer; /* Cambia il cursore quando si passa sopra */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
 }
 
-
-
-/* Stili per dimensioni dello schermo inferiori a 768px (smartphone) */
-@media (max-width: 768px) {
-    #marketplace-title {
-        font-size: 1.5em; /* Riduci la dimensione del titolo */
-    }
-
-    #finder {
-        width: 90%; /* Riduci la larghezza del finder */
-        font-size: 1em; /* Riduci la dimensione del testo */
-        padding-top: 2%;
-        padding-bottom: 2%;
-    }
-
-    #cardbox {
-        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
-        justify-content: center;
-    }
-
-    .cardbox-img {
-        width: 0.1%;
-    }
-
-    .cards {
-        width: calc(30% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
-    }
-
-    .card-title {
-        font-family: 'Arbutus Slab', sans-serif;
-        font-size: 0.8em;
-        text-align: center;
-    }
-
-
-    .subscribe-btn {
-        width: 100%;
-        font-size: 0.8em;
-        position: relative;
-        left: 0;
-    }
-
-    .popup-container {
-        font-size: 1em;
-        width: 80%;
-        height: 50%;
-    }
-}
 
 @media screen and (max-width: 400px) {
     .button-container {
@@ -867,3 +816,566 @@ aside {
     width: 80%;
     height: 100%;
 }
+
+
+/*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
+
+
+@media screen and (max-width: 1920px) {
+
+    #logo {
+        font-size: 2em;
+    }
+
+    #nav-link-mini {
+        font-size: 1.2em;
+    }
+
+    #footer {
+        font-size: 1em;
+    }
+
+    #start {
+        font-size: 4em;
+    }
+
+    #review, .labels-login, .labels, .labels2, .inputs, #btn-signup, .subscribe-btn {
+        font-size: 1.5em;
+    }
+
+    .btn-upload2 {
+        font-size: 1.5em;
+    }
+
+    .switcher .btn-upload2 {
+        font-size: 1.5em;
+    }
+
+    #reviewer {
+        font-size: 1.5em;
+    }
+
+    .courses-buttons {
+        font-size: 1.3em;
+    }
+
+    .course-title {
+        font-size: 1.3em;
+    }
+
+    #review-box p {
+        font-size: 2.5em;
+    }
+
+    #review-box-form p {
+        font-size: 2.5em;
+
+    }
+}
+
+@media screen and (max-width: 1366px) {
+
+    #logo {
+        font-size: 1.8em;
+    }
+
+    #nav-link-mini {
+        font-size: 1em;
+    }
+
+    #footer {
+        font-size: 1em;
+    }
+
+    #start {
+        font-size: 3em;
+    }
+
+    #button {
+        font-size: 2em;
+    }
+
+    .card-title {
+        font-size: 1.2em;
+    }
+
+
+    .subscribe-btn {    
+        font-size: 1.1em;   
+    }
+
+    #popup {
+        font-size: 1.2em;
+    }
+
+    #review-box p {
+        font-size: 2em;
+    }
+
+    #review-box-form p {
+        font-size: 2em;
+    }
+
+    .labels-login, .course-title, .labels, .labels2, .inputs, .courses-buttons, #btn-signup, .subscribe-btn, .btn-upload2 {
+        font-size: 1.2em;
+    }
+
+    .login-subscribe-form #btn-signup {
+        font-size: 1em;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+
+    #nav-link-mini {
+        display: none;
+    }
+
+    #hamburger {
+        display: block;
+    }
+
+    footer {
+        font-size: 1.2em;
+    }
+
+    main {
+        flex-direction: column; /* Cambia direzione dei flex per piccoli schermi */
+    }
+
+    #start {
+        font-size: 3em; /* Dimensione del testo per dispositivi mobili */
+    }
+
+    #button {
+        font-size: 2em; /* Dimensione del pulsante per dispositivi mobili */
+    }
+
+    .login-subscribe-form #btn-signup {
+        font-size: 1em;
+    }
+
+    #user-change {
+        width: 100%;
+    }
+
+    #bio-input {
+        width: 100%;
+    }    
+
+    .labels2 {
+        padding-left: 3%;
+        font-size: 2;
+    }
+
+    .forms2 {
+        flex-direction: column;
+    }
+
+    .btn-upload2 {
+        font-size: 2em;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    aside {
+        width: 96%;
+    }
+
+    section {
+        width: 100%;
+        border-top: 10px solid black;
+    }
+
+    #usr-image {
+        width: 30%; 
+    }
+
+    #username {
+        font-size: 1.5em;
+    }
+    #user h1 {
+        font-size: 1.3em;
+    }
+    
+    #bio {
+        font-size: 1em; 
+    }
+
+    #courses h3 {
+        font-size: 1em;
+    }
+
+
+    .course-title {
+        font-size: 1em;
+        margin-bottom: 1%;
+    }
+
+    .courses-buttons {
+        font-size: 1em;
+    }
+
+    .switcher {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .switcher .btn-upload2 {
+        font-size: 1em;
+    }
+
+    .btn-upload2 {
+        font-size: 1em;
+    }
+
+    .labels-login {
+        font-size: 1em;
+    }
+
+    #review-box-form p {
+        font-size: 2em;
+    }
+
+    #review {
+        font-size: 1em;
+    }
+
+    #stars img {
+        width: 30%;
+        position: relative;
+        left: 35%;
+    }
+
+    #marketplace-title {
+        font-size: 1.7em; /* Riduci la dimensione del titolo */
+    }
+
+    #finder {
+        width: 90%; /* Riduci la larghezza del finder */
+        font-size: 1.2em; /* Riduci la dimensione del testo */
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    #cardbox {
+        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
+    }
+
+    .cardbox-img {
+        width: 0.1%;
+    }
+
+    .cards {
+        width: calc(35% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
+        margin: 2%;
+    }
+
+    .card-title {
+        font-family: 'Arbutus Slab', sans-serif;
+        font-size: 1.2em;
+        text-align: center;
+        text-wrap: wrap;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+
+    .cards .subscribe-btn {
+        width: 100%;
+        font-size: 1em;
+        position: relative;
+        left: 0;
+    }
+
+    #popup {
+        font-size: 1em;
+        width: 80%;
+        height: 50%;
+    }
+
+    #reader {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    #logo {
+        font-size: 1.2em;
+    }
+
+    #nav-link-mini {
+        display: none;
+        font-size: 0.7em;
+        top: 3%;
+    }
+
+    #hamburger {
+        display: block;
+        font-size: 0.9em;
+    }
+
+    #x_button {
+        font-size: 1.2em;
+    }
+
+    footer {
+        font-size: 0.8em;
+    }
+
+    #start {
+        font-size: 2.5em; /* Dimensione del testo per dispositivi mobili */
+    }
+
+    #button {
+        font-size: 1.5em; /* Dimensione del pulsante per dispositivi mobili */
+    }
+
+    #btn-signup {
+        font-size: 0.8em;
+    }
+
+    #user-change {
+        width: 100%;
+    }
+
+    #bio-input {
+        width: 100%;
+    }
+
+    .forms2 {
+        flex-direction: column;
+    }
+
+    .btn-upload2 {
+        font-size: 0.8em;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    aside {
+        width: 96%;
+    }
+
+    section {
+        width: 100%;
+        border-top: 10px solid black;
+    }
+
+    #usr-image {
+        width: 30%; 
+    }
+
+    #username {
+        font-size: 1.2em;
+    }
+    #user h1 {
+        font-size: 1em;
+    }
+    
+    aside #bio {
+        font-size: 0.8em; 
+    }
+
+    #courses h3 {
+        font-size: 0.8em;
+    }
+
+
+    aside .course-title { 
+        font-size: 0.8em;   
+    }
+
+    aside .courses-buttons {
+        font-size: 0.8em;
+    }
+
+    .switcher {
+        display: flex;
+        flex-direction: column;
+    }
+    .switcher .btn-upload2 {
+        font-size: 0.8em;
+    }
+
+
+    .forms {
+        font-size: 1.5em;
+    }
+
+    .btn-upload2 {
+        font-size: 1.5em;
+    }
+
+    .login-subscribe-form form #btn-signup {
+        font-size: 1.1em;
+    }
+
+    .login-subscribe p {
+        font-size: 1.5em;
+        padding: 0;
+    }
+
+    .login-subscribe-form {
+        width: 100%;
+    }
+
+
+    .labels {
+        font-size: 1em;
+    }
+
+    .labels2 {
+        font-size: 1em;
+    }
+
+    .inputs {
+        font-size: 0.8em;
+    }
+
+    .labels-login {
+        font-size: 0.8em;
+    }
+
+    #review-box-form {
+        width: 100%;
+    }
+
+    #review-box p {
+        font-size: 1.5em;
+        padding: 0;
+    }
+
+
+    #review-box-form p {
+        font-size: 1.4em;
+        text-align: center;
+    }
+
+    #stars img {
+        width: 30%;
+        position: relative;
+        left: 35%;
+    }
+
+    #review {
+        font-size: 0.9em;
+    }
+
+    #marketplace-title {
+        font-size: 1.2em; /* Riduci la dimensione del titolo */
+    }
+
+    #finder {
+        width: 90%; /* Riduci la larghezza del finder */
+        font-size: 1em; /* Riduci la dimensione del testo */
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    #cardbox {
+        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
+    }
+
+    .cardbox-img {
+        width: 0.1%;
+    }
+
+    .cards {
+        width: calc(35% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
+        margin: 2%;
+    }
+
+    .card-title {
+        font-family: 'Arbutus Slab', sans-serif;
+        font-size: 1em;
+        text-align: center;
+    }
+
+
+    .subscribe-btn {    
+        width: 100%;
+        font-size: 0.8em;
+        position: relative;
+        left: 0;
+    }
+
+    #popup {
+        font-size: 1em;
+        width: 80%;
+        height: 50%;
+    }
+
+    #popup h2 {
+        font-size: 1.5em;
+    }
+
+    #popup p {
+        font-size: 1em;
+    }
+
+
+    .close-btn {
+        font-size: 1.5em;
+    }
+
+    #reader {
+        width: 100%;
+    }
+
+    .login-subscribe-form #btn-signup {
+        font-size: 0.8em;
+    }
+    
+}
+
+@media screen and (max-width: 1081px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+}
+
+/*senza questo media screen l'icona hambuger non si mostrava per schermi superiori a 768px di larghezza*/
+@media screen and (max-width: 1080px) {
+
+    #hamburger {
+        display: block;
+    }
+
+}
+
+/*senza questo media screen ad uno width di 516px la parte destradel footer non èra posizionta perfettamente a destra*/
+@media screen and (max-width: 516px) {
+    #fright {
+        text-align: right;
+    }
+}
+
+
+
+    
+
+    
+

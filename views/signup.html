@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
-    <script src="/script.js"></script>
     <link
       rel="icon"
       type="image/png"
@@ -16,21 +16,31 @@
       sizes="16x16"
       href="/images/favicon-16x16.png"
     />
+    <script src="/front_side.js"></script>
+    <title>TextLearn - SignUp</title>
   </head>
-  <body>
+  <body background="/images/index_wallpaper.jpeg">
     <header>
       <div id="logo">TextLearn</div>
       <div id="nav-link">
         <a href="/">Home</a>
-        <a href="/marketplace">MarketPlace</a>
         <a href="/" id="1-entry"></a>
+        <a href="/marketplace">MarketPlace</a>
+      </div>
+      <div id="hamburger" onclick="openNav()">&#9776;</div>
+      <div id="x_button" onclick="openNav()">&times;</div>
+
+      <div id="nav-link-mini">
+        <a href="/">Home</a>
+        <a href="/" id="1-entry"></a>
+        <a href="/marketplace">MarketPlace</a>
       </div>
     </header>
 
     <div class="login-subscribe">
       <p>SignUp</p>
       <div class="login-subscribe-form">
-        <form action="/signup" method="post" id="form">
+        <form action="/signup" method="POST">
           <div class="forms">
             <label for="name" class="labels-login">Username </label>
             <input type="text" name="name" class="inputs" />
