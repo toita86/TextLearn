@@ -7,7 +7,9 @@ fetch("/session-data")
       document.getElementById("1-entry").textContent = "User";
 
       document.getElementById("username").textContent = data.username;
-      document.getElementById("bio").textContent = data.bio;
+      if (!(data.bio === null || data.bio === "")) {
+        document.getElementById("bio").textContent = data.bio;
+      }
       if (data.msgToUser) {
         document.getElementById("msgToUser").textContent = data.msgToUser;
       }
