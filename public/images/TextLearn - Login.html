@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <script src="/script.js"></script>
+    <title>TextLearn - Login</title>
+  </head>
+  <body>
+    <header>
+      <div id="logo">TextLearn</div>
+      <div id="nav-link">
+        <a href="/">Home</a>
+        <a href="/settings">User </a>
+        <a href="/marketplace">MarketPlace</a>
+      </div>
+      <div id="hamburger" onclick="openNav()">&#9776;</div>
+      <div id="x_button" onclick="openNav()">&times;</div>
+    </header>
+
+    <div class="login-subscribe">
+      <p>Login</p>
+      <div class="login-subscribe-form">
+        <form action="/login" method="POST">
+          <div class="forms">
+            <label for="email" class="labels-login">Email</label>
+            <input type="text" name="email" class="inputs" />
+          </div>
+          <div class="forms">
+            <label for="password" class="labels-login">Password</label>
+            <input type="password" name="password" class="inputs" />
+          </div>
+          <input type="submit" value="login" id="btn-signup" />
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div id="fleft">&copy; 2024 TextLearn</div>
+      <div id="fright">
+        <div id="about"><a href="/about">About US</a></div>
+        <div id="join">Join The TL team</div>
+      </div>
+    </footer>
+  <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
