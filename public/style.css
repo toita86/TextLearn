@@ -160,7 +160,7 @@ main {
     height: 100vh; /* Altezza al 100% */
 }
 
-#image-container img {
+#image-container video {
     position: absolute; 
     top: 0; 
     left: 0; 
