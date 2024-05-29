@@ -9,12 +9,12 @@ fetch("/session-data")
           entry.href = "/settings";
           entry.textContent = "User";
 
+          if (data.msgToUser) {
+            document.getElementById("msgToUser").textContent = data.msgToUser;
+          }
           document.getElementById("username").textContent = data.username;
           if (data.bio) {
             document.getElementById("bio").textContent = data.bio;
-          }
-          if (data.msgToUser) {
-            document.getElementById("msgToUser").textContent = data.msgToUser;
           }
         } else {
           entry.href = "/signup";

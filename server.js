@@ -35,9 +35,26 @@ app.use(
     secret: "your_secret_key", // Replace with your own secret
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      sameSite: "Strict", // Allows the cookie to be sent in all contexts
+    }, // 30 days
   })
 );
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Failed to log out.");
+    }
+    res.clearCookie("connect.sid", {
+      path: "/",
+      sameSite: "None",
+      secure: true,
+    }); // This line ensures the cookie is cleared
+    res.sendStatus(200);
+  });
+});
 
 app.get("/session-data", (req, res) => {
   if (!req.session.isAuth) {

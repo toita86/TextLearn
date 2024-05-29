@@ -55,6 +55,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
     }
+
+    logOutButton = document.getElementById("log-out-btn");
+    logOutButton.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to Log Out?")) {
+        const response = await fetch("/logout", {
+          method: "POST",
+          credentials: "same-origin",
+        });
+
+        if (response.ok) {
+          window.location = "/login";
+        } else {
+          console.error("Logout failed");
+        }
+      }
+    });
   } catch (error) {
     console.error("Error fetching courses:", error);
   }
