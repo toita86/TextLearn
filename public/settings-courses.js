@@ -1,61 +1,119 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    if (document.getElementById("courses") !== null) {
-      const response = await fetch("/user-courses");
-      const data = await response.json();
-
-      if (data.isAuth) {
-        const coursesContainer = document.getElementById("courses");
-
-        data.courses.forEach((course) => {
-          const hr = document.createElement("hr");
-          const courseDiv = document.createElement("div");
-          courseDiv.className = "course";
-          courseDiv.id = course.id;
-
-          const courseTitle = document.createElement("div");
-          courseTitle.className = "course-title";
-          courseTitle.textContent = course.title;
-
-          const deleteButton = document.createElement("button");
-          deleteButton.className = "courses-buttons";
-          deleteButton.textContent = "Delete";
-          deleteButton.onclick = "deleteCourse(" + course.id + ")";
-          deleteButton.addEventListener("click", async () => {
-            if (confirm("Are you sure you want to delete this course?")) {
-              try {
-                const deleteResponse = await fetch(
-                  `/delete-course/${course.id}`,
-                  {
-                    method: "DELETE",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                  }
-                );
-                const deleteResult = await deleteResponse.json();
-                if (deleteResponse.ok) {
-                  alert(deleteResult.message);
-                  courseDiv.remove(); // Remove the course element from the DOM
-                  hr.remove(); // Remove the associated <hr> element
-                } else {
-                  alert(deleteResult.message);
-                }
-              } catch (error) {
-                console.error("Error deleting course:", error);
-                alert("An error occurred while deleting the course.");
-              }
-            }
-          });
-          courseDiv.appendChild(courseTitle);
-          courseDiv.appendChild(deleteButton);
-
-          coursesContainer.appendChild(hr);
-          coursesContainer.appendChild(courseDiv);
-        });
-      }
+    const response = await fetch("/user-courses");
+    const data = await response.json();
+    if (data.isAuth) {
+      const coursesContainer = document.getElementById("courses");
+      data.courses.forEach((course) => {
+        coursesListing(course, coursesContainer);
+      });
     }
+
+    const responseSub = await fetch("/user-sub-courses");
+    const dataSub = await responseSub.json();
+    if (dataSub.isAuth) {
+      const coursesContainerSub = document.getElementById("sub-courses");
+      dataSub.courses.forEach((course) => {
+        coursesListing(course, coursesContainerSub);
+      });
+    }
+
+    logOutButton = document.getElementById("log-out-btn");
+    logOutButton.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to Log Out?")) {
+        const response = await fetch("/logout", {
+          method: "POST",
+          credentials: "same-origin",
+        });
+
+        if (response.ok) {
+          window.location = "/login";
+        } else {
+          console.error("Logout failed");
+        }
+      }
+    });
   } catch (error) {
     console.error("Error fetching courses:", error);
   }
 });
+
+function coursesListing(course, coursesContainer) {
+  const hr = document.createElement("hr");
+  const courseDiv = document.createElement("div");
+  courseDiv.className = "course";
+  courseDiv.id = course.id;
+
+  const courseTitle = document.createElement("div");
+  courseTitle.className = "course-title";
+  courseTitle.textContent = course.title;
+
+  let button;
+
+  if (coursesContainer.id === "sub-courses") {
+    const unSubButton = document.createElement("button");
+    unSubButton.className = "courses-buttons";
+    unSubButton.textContent = "Unsubscribe";
+    unSubButton.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to unsubscribe form this course?")) {
+        try {
+          const unsubResponse = await fetch(`/unsub-course/${course.id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const unsubResult = await unsubResponse.json();
+          if (unsubResponse.ok) {
+            course = coursesContainer.querySelector(`[id="${course.id}"]`);
+            course.classList.add("slideLeft");
+            setTimeout(() => {
+              course.style.display = "none";
+            }, 300); // Durata dell'animazione
+          } else {
+            alert(unsubResult.message);
+          }
+        } catch (error) {
+          console.error("Error unsubscribing the course:", error);
+          alert("An error occurred while unsubscribing from the course.");
+        }
+      }
+    });
+    button = unSubButton;
+  } else {
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "courses-buttons";
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to delete this course?")) {
+        try {
+          const deleteResponse = await fetch(`/delete-course/${course.id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const deleteResult = await deleteResponse.json();
+          if (deleteResponse.ok) {
+            course = coursesContainer.querySelector(`[id="${course.id}"]`);
+            course.classList.add("slideLeft");
+            setTimeout(() => {
+              course.style.display = "none";
+            }, 300); // Durata dell'animazione
+          } else {
+            alert(deleteResult.message);
+          }
+        } catch (error) {
+          console.error("Error deleting course:", error);
+          alert("An error occurred while deleting the course.");
+        }
+      }
+    });
+    button = deleteButton;
+  }
+  courseDiv.appendChild(courseTitle);
+  courseDiv.appendChild(button);
+
+  coursesContainer.appendChild(hr);
+  coursesContainer.appendChild(courseDiv);
+}
