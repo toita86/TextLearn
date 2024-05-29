@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS user_sub_courses (
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE,
     subscription_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(50),
     PRIMARY KEY (user_id, course_id)
 );
 

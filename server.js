@@ -271,6 +271,103 @@ app.get("/user-courses", async (req, res) => {
   }
 });
 
+app.post("/subscribe/:id", async (req, res) => {
+  const courseId = req.params.id;
+  if (!req.session.isAuth) {
+    req.session.msgToUser = "You must be logged in to subscribe";
+    return res.redirect("/login");
+  }
+  try {
+    const preSubVerification = await pool.query(
+      "SELECT * FROM user_sub_courses WHERE user_id=$1 AND course_id=$2",
+      [req.session.user.id, courseId]
+    );
+    if (preSubVerification.rowsCount > 0) {
+      req.session.msgToUser = "You already subscribed to this course";
+      return res.redirect("/marketplace");
+    }
+
+    const result = await pool.query(
+      "INSERT INTO user_sub_courses (user_id, course_id, subscription_date) VALUES ($1, $2, $3) RETURNING *",
+      [req.session.user.id, courseId, new Date()]
+    );
+    if (result.rowsCount === 0) {
+      req.session.msgToUser = "There was an error while subscribing";
+      return res.redirect("/marketplace");
+    } else {
+      return res.status(200).json({
+        message: "Subscribed to course successfully!",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "An error occured while fetching courses",
+      isAuth: true,
+    });
+  }
+});
+
+app.delete("/unsub-course/:id", async (req, res) => {
+  const courseId = req.params.id;
+  if (!req.session.isAuth) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const result = await pool.query(
+      "DELETE FROM user_sub_courses WHERE user_id = $1 AND course_id = $2 RETURNING *",
+      [courseId, req.session.user.id]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message:
+          "Subscription not found or not authorized to unsubscribe this course",
+      });
+    }
+    return res.json({ message: "Unsubscribed successfully" });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while unsubscribing the course" });
+  }
+});
+
+app.get("/user-sub-courses", async (req, res) => {
+  if (!req.session.isAuth) {
+    return res.json({ isAuth: false, courses: [] });
+  }
+
+  try {
+    // Fetch subscribed course IDs
+    const subedCourses = await pool.query(
+      "SELECT course_id FROM user_sub_courses WHERE user_id = $1",
+      [req.session.user.id]
+    );
+
+    // Collect course details
+    const coursesInfoPromises = subedCourses.rows.map(async (course) => {
+      const result = await pool.query(
+        "SELECT id, title FROM courses WHERE id = $1",
+        [course.course_id]
+      );
+      return result.rows[0]; // Assuming there is exactly one course per id
+    });
+
+    const coursesInfo = await Promise.all(coursesInfoPromises);
+
+    return res.json({ isAuth: true, courses: coursesInfo });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      isAuth: true,
+      courses: [],
+      error: "An error occurred while fetching courses",
+    });
+  }
+});
+
 app.delete("/delete-course/:id", async (req, res) => {
   const courseId = req.params.id;
   if (!req.session.isAuth) {
@@ -366,7 +463,7 @@ app.get("/marketplace", async (req, res) => {
 app.get("/marketplace-courses", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT title, descr, thumbnail_path, file_path FROM courses"
+      "SELECT id, title, descr, thumbnail_path, file_path FROM courses"
     );
     return res.json({ isAuth: req.session.isAuth, courses: result.rows });
   } catch (error) {
