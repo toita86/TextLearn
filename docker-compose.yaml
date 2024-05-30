@@ -16,7 +16,7 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: pass123
     ports:
-      - "5432:5432" # Expose PostgreSQL port internally
+      - "5432" # Expose PostgreSQL port internally
     volumes:
       - text-learn-db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
