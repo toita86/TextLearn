@@ -179,6 +179,14 @@ app.post("/signup", async (req, res) => {
       return res.redirect("signup");
     }
 
+    if (name === "" || email === "" || password === "") {
+      req.session.msgToUser = "Please fill in all fields";
+      return res.redirect("signup");
+    } else if (password.length < 1) {
+      //CHANGE ME BEFORE RELEASE
+      req.session.msgToUser = "Password must be at least 6 characters long";
+      return res.redirect("signup");
+    }
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 8);
 
