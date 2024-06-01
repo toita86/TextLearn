@@ -4,6 +4,10 @@ const pool = require("./db");
 const PgSession = require("connect-pg-simple")(session);
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
+const marked = require("marked");
+const fs = require("fs");
+const { JSDOM } = require("jsdom");
+const createDOMPurify = require("dompurify");
 const { user } = require("pg/lib/defaults");
 const multer = require("multer");
 const path = require("path");
@@ -111,7 +115,7 @@ function checkFileType(file, cb) {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb("Error: Images and Mark Down documents only!");
+    return cb(new Error("Error: Images and Markdown documents only!"));
   }
 }
 
@@ -214,49 +218,65 @@ app.get("/upload", (req, res) => {
   }
 });
 
-app.post("/upload", upload, async function (req, res) {
-  try {
-    const { course_name, course_descr } = req.body;
-
-    const course_image = req.files["course_image"][0].path;
-    const course_file = req.files["course_file"][0].path;
-
-    const courses_title = await pool.query(
-      "SELECT title FROM courses WHERE author_id = $1",
-      [req.session.user.id]
-    );
-    // iterarte through the courses_title array to check if the course title already exists in the database
-    for (let i = 0; i < courses_title.rows.length; i++) {
-      const course = courses_title.rows[i].title;
-      if (course === course_name) {
-        req.session.msgToUser = "Course already exists";
+app.post("/upload", function (req, res) {
+  upload(req, res, async function (err) {
+    if (err) {
+      // Handle file type errors
+      if (err.message === "Error: Images and Markdown documents only!") {
+        req.session.msgToUser =
+          "Only .jpg, .png images and .md documents are allowed";
         return res.redirect("upload");
       }
-    }
-    //otherwise, upload the course to the database
-    await pool.query(
-      "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
-      [
-        req.session.user.id,
-        course_name,
-        course_descr,
-        course_image,
-        course_file,
-      ]
-    );
 
-    req.session.msgToUser = "Course uploaded successfully";
-
-    return res.redirect("upload");
-  } catch (error) {
-    console.error(error);
-    if (error.TypeError !== null) {
-      req.session.msgToUser = "No files selected";
+      // Handle other multer errors
+      req.session.msgToUser = "An error occurred during file upload";
       return res.redirect("upload");
     }
-    req.session.msgToUser = "An error occured";
-    return res.redirect("upload");
-  }
+
+    try {
+      const { course_name, course_descr } = req.body;
+
+      const course_image = req.files["course_image"][0].path;
+      const course_file = req.files["course_file"][0].path;
+
+      const courses_title = await pool.query(
+        "SELECT title FROM courses WHERE author_id = $1",
+        [req.session.user.id]
+      );
+
+      // Iterate through the courses_title array to check if the course title already exists in the database
+      for (let i = 0; i < courses_title.rows.length; i++) {
+        const course = courses_title.rows[i].title;
+        if (course === course_name) {
+          req.session.msgToUser = "Course already exists";
+          return res.redirect("upload");
+        }
+      }
+
+      // Otherwise, upload the course to the database
+      await pool.query(
+        "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
+        [
+          req.session.user.id,
+          course_name,
+          course_descr,
+          course_image,
+          course_file,
+        ]
+      );
+
+      req.session.msgToUser = "Course uploaded successfully";
+      return res.redirect("upload");
+    } catch (error) {
+      console.error(error);
+      if (error.TypeError !== null) {
+        req.session.msgToUser = "No files selected";
+        return res.redirect("upload");
+      }
+      req.session.msgToUser = "An error occurred";
+      return res.redirect("upload");
+    }
+  });
 });
 
 app.get("/user-courses", async (req, res) => {
@@ -465,6 +485,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/marketplace", async (req, res) => {
+  req.session.msgToUser = "";
   res.sendFile(path.join(__dirname, "views", "marketplace.html"));
 });
 
@@ -502,11 +523,58 @@ app.post("/marketplace-search", async (req, res) => {
   }
 });
 
-app.get("/reader", (req, res) => {
-  if (req.session.isAuth == true) {
-    res.sendFile(path.join(__dirname, "views", "reader.html"));
-  } else {
-    return res.redirect("login");
+app.get("/reader/:id", (req, res) => {
+  try {
+    if (req.session.isAuth == true) {
+      res.sendFile(path.join(__dirname, "views", "reader.html"));
+    } else {
+      return res.redirect("/login");
+    }
+  } catch (err) {
+    return res.redirect("/settings");
+  }
+});
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
+
+// Route to get the HTML content of a course
+app.get("/course-reader/:id", async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const isSubscribed = await pool.query(
+      `SELECT * FROM user_sub_courses WHERE user_id=$1 AND course_id=$2`,
+      [req.session.user.id, courseId]
+    );
+
+    if (!isSubscribed.rows.length > 0) {
+      req.session.msgToUser = "You are not subscribed to this course";
+      return res.json({ content: "Nothing here to see..." });
+    }
+
+    const filePath = await pool.query(
+      `SELECT file_path FROM courses WHERE id=$1`,
+      [courseId]
+    );
+    if (filePath == null) {
+      return res.status(404).send("Course not found");
+    }
+
+    fs.readFile(filePath.rows[0].file_path, "utf8", (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(404).send("Course not found");
+      }
+
+      // Convert markdown to HTML
+      const htmlContent = marked.parse(data);
+      const sanitizedContent = DOMPurify.sanitize(htmlContent);
+
+      // Send HTML content as JSON response
+      res.json({ content: sanitizedContent });
+    });
+  } catch (err) {
+    return res.status(404).send("Course not found");
   }
 });
 
