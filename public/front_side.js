@@ -25,10 +25,10 @@ function handleResize() {
 }
 
 // Chiamare handleResize quando la finestra viene ridimensionata
-window.addEventListener("resize", handleResize);
+window.addEventListener('resize', handleResize);
 
 // Chiamare handleResize quando la pagina viene caricata
-window.addEventListener("load", handleResize);
+window.addEventListener('load', handleResize);
 
 // GESRIONE DEL MENU AD HAMBURGER
 function openNav() {
@@ -38,14 +38,15 @@ function openNav() {
     navlink.style.animation = "slideRight 0.5s";
     document.getElementById("x_button").style.display = "block";
     document.getElementById("hamburger").style.display = "none";
-  } else if (document.getElementById("x_button").style.display !== "none") {
+
+} else if (document.getElementById("x_button").style.display !== "none") {
     navlink.style.animation = "slideLeft 0.5s";
     setTimeout(() => {
       navlink.style.display = "none";
     }, 300); // Wait for the slideLeft animation to finish
-    document.getElementById("x_button").style.display = "none";
-    document.getElementById("hamburger").style.display = "block";
-  }
+  document.getElementById("x_button").style.display = "none";
+  document.getElementById("hamburger").style.display = "block";
+}
 }
 
 //POPUP DESCRIZIONE MAKETPLACE
@@ -59,10 +60,27 @@ function openDescription() {
 
 // Funzione per chiudere il popup
 function closeDescription() {
-  var popup = document.getElementById("popup");
-  popup.classList.remove("open");
-  popup.classList.add("close");
-  setTimeout(function () {
-    popup.style.display = "none";
-  }, 500); // Durata dell'animazione
+    var popup = document.getElementById("popup");
+    popup.classList.remove("open");
+    popup.classList.add("close");
+    setTimeout(function() {
+        popup.style.display = "none";
+    }, 500); // Durata dell'animazione
 }
+
+function deleteCourse(id) {
+    course = document.getElementById(id);
+    course.classList.add("slideLeft");
+    setTimeout(() => {
+        course.style.display = "none";
+    }, 300);// Durata dell'animazione
+}
+
+
+/*mostra il titiolo del corso a cui sono iscritto o creato al passaggio del mouse come alert*/
+course = document.getElementsByClassName('course');
+course.getElementsById('course-title').addEventListener('hover', function() {
+  alert(this.textContent);
+});
+
+

@@ -3,29 +3,40 @@
 @import url('https://fonts.cdnfonts.com/css/arbutus-slab');
 @import url('https://fonts.cdnfonts.com/css/barlow');
 
+html {
+    font-size: 1.2rem;
+}
+
 /* Fare in modo che il body copra tutta la pagina */
-html, body {
+html,
+body {
     height: 100vh;
-    margin: 0; 
-    display: flex; /* Utilizza flexbox per il layout */
-    flex-direction: column; /* Imposta la direzione del flex su colonna */
-    background-color:#FFC61A;
+    margin: 0;
+    display: flex;
+    /* Utilizza flexbox per il layout */
+    flex-direction: column;
+    /* Imposta la direzione del flex su colonna */
+    background-color: #FFC61A;
 }
 
 body {
-    flex: 1; /* Permette al body di espandersi per coprire tutto lo spazio disponibile */
-    width: 100%; 
-    min-width: 320px; /* Dimensione minima del viewport */
-    min-height: 600px; /* Altezza minima del viewport */
+    flex: 1;
+    /* Permette al body di espandersi per coprire tutto lo spazio disponibile */
+    width: 100%;
+    min-width: 320px;
+    /* Dimensione minima del viewport */
+    min-height: 600px;
+    /* Altezza minima del viewport */
 }
 
 * {
-    box-sizing: border-box; /*assicura che i margini e i padding degli elementi non causino sovrapposizione*/
+    box-sizing: border-box;
+    /*assicura che i margini e i padding degli elrementi non causino sovrapposizione*/
 }
 
 /* Header configurazioni */
 header {
-    display: flex; /* Utilizza flexbox per il layout */ 
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1%;
@@ -34,7 +45,7 @@ header {
 }
 
 #logo {
-    font-size: 2em;
+    font-size: 2rem;
     font-family: 'barlow', sans-serif;
     font-weight: bolder;
     text-align: center;
@@ -44,26 +55,34 @@ header {
 #hamburger {
     display: none;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-family: 'barlow', sans-serif;
     z-index: 9999;
-    background-color:#FFC61A; /*per evitare che la navlink durante l'animazioe si vede sotto*/
+    background-color: #FFC61A;
+    /*per evitare che la navlink durante l'animazioe si vede sotto*/
+
+    margin-right: 2%;
 }
 
 #x_button {
     display: none;
     cursor: pointer;
-    font-size: 1.8em;
+    font-size: 1.7rem;
     font-family: 'barlow', sans-serif;
     z-index: 9999;
-    background-color:#FFC61A; /*per evitare che la navlink durante l'animazioe si vede sotto*/
+    background-color: #FFC61A;
+    /*per evitare che la navlink durante l'animazioe si vede sotto*/
+
+    margin-right: 2%;
 }
 
 #nav-link {
     display: flex;
-    gap: 6%; /* Espandi gli elementi tra loro di 5vh */
+    gap: 6%;
+    /* Espandi gli elrementi tra loro di 5vh */
     justify-content: center;
     width: 100%;
+    font-size: 1.2rem;
 }
 
 #nav-link-mini {
@@ -73,14 +92,19 @@ header {
     background-color: #FFC61A;
     width: auto;
     font-family: 'arbutus slab', sans-serif;
-    position: absolute; /* Fissa il menu alla finestra del browser */
-    right: 0; /* Distanza dal lato destro della finestra */
-    top: 50px; /* Distanza dal lato superiore della finestra */
+    position: absolute;
+    /* Fissa il menu alla finestra del browser */
+    right: 0;
+    /* Distanza dal lato destro della finestra */
+    top: 50px;
+    /* Distanza dal lato superiore della finestra */
     z-index: 9999;
     padding: 2%;
-    display: none; /* Nasconde il menu per default */
+    display: none;
+    /* Nasconde il menu per default */
 
     flex-direction: column;
+    margin-top: 2%;
 }
 
 
@@ -89,7 +113,9 @@ header {
     from {
         opacity: 0;
         transform: translateX(20%);
-    } to {
+    }
+
+    to {
         opacity: 1;
         transform: translateX(0);
     }
@@ -99,7 +125,9 @@ header {
     from {
         opacity: 1;
         transform: translateX(0);
-    } to {
+    }
+
+    to {
         opacity: 0;
         transform: translateX(20%);
     }
@@ -109,39 +137,41 @@ header {
 
 /* Footer configurazioni */
 footer {
-    display: flex; /* Utilizza flexbox per il layout */
-    justify-content: space-between; /* Distribuisce gli elementi orizzontalmente */
-    padding: 0.5vh; 
-    background-color: #FFF4EA; 
-    margin-top: auto; 
+    display: flex;
+    /* Utilizza flexbox per il layout */
+    justify-content: space-between;
+    /* Distribuisce gli elrementi orizzontalmente */
+    padding: 0.5vh;
+    background-color: #FFF4EA;
+    margin-top: auto;
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     z-index: 9999;
 }
 
 #fleft {
-    padding-left: 1vh; 
+    padding-left: 1vh;
 }
 
 #fright {
-    display: flex; 
-    gap:2vh
+    display: flex;
+    gap: 2vh
 }
 
 #join {
-    padding-right: 2vh; 
-    padding-left: 2vh; 
+    padding-right: 2vh;
+    padding-left: 2vh;
 }
 
 a {
-    text-decoration: none; 
-    color: black; 
+    text-decoration: none;
+    color: black;
     font-family: 'Arbutus Slab', sans-serif;
     cursor: pointer;
 }
 
 a:hover {
-    color:#8f7f7c;
+    color: #8f7f7c;
     transition: 0.3s;
 }
 
@@ -149,50 +179,56 @@ a:hover {
 /*-------------------- INDEX.HTML -------------------*/
 
 main {
-    flex: 1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-    padding: 0;  
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
 }
 
 #image-container {
-    width: 100vw; /* Larghezza al 100% */
-    height: 100vh; /* Altezza al 100% */
+    width: 100vw;
+    /* Larghezza al 100% */
+    height: 100vh;
+    /* Altezza al 100% */
 }
 
 #image-container video {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; /* Adatta l'immagine */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Adatta l'immagine */
 }
 
 #content {
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
     height: auto;
     width: 60%;
-    transform: translate(-50%, -50%); 
-    display: flex; 
-    flex-direction: column; /* Dispone gli elementi in colonna */
-    align-items: center; /* Allinea gli elementi al centro */
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    /* Dispone gli elrementi in colonna */
+    align-items: center;
+    /* Allinea gli elrementi al centro */
 }
 
 #p {
-    padding-bottom: 0; 
+    padding-bottom: 0;
 }
 
 #start {
     width: 100%;
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 4em; /* Dimensione del testo adattabile */
-    text-align: center; 
-    color: white; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 4rem;
+    /* Dimensione del testo adattabile */
+    text-align: center;
+    color: white;
 }
 
 #button-container {
@@ -201,16 +237,18 @@ main {
 }
 
 #button {
-    padding: 3% ; 
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 2em; /* Dimensione del testo adattabile */
-    background-color: #FFC61A; 
-    border: none; 
-    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    padding: 3%;
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.5rem;
+    /* Dimensione del testo adattabile */
+    background-color: #FFC61A;
+    border: none;
+    cursor: pointer;
+    /* Cambia il cursore al passaggio del mouse */
 }
 
 #button:hover {
-    background-color: #dbc47f; 
+    background-color: #dbc47f;
 }
 
 
@@ -219,14 +257,14 @@ main {
 /* UPLOAD.HTML */
 
 /* Section configurazioni */
-section { 
-    display: flex; 
+section {
+    display: flex;
     flex-direction: row;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     width: 80%;
     height: 100%;
-    padding: 0; 
+    padding: 0;
 
     background-image: url("images/Sfondo2.png");
     background-size: cover;
@@ -237,30 +275,33 @@ section {
 
 /* Upload configurazioni */
 #upload {
-    background-color: #C6A064; 
-    padding: 2%; 
+    background-color: #C6A064;
+    padding: 2%;
     width: 80%;
-    max-width: 100%; /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
+    max-width: 100%;
+    /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
     max-height: 100vh;
     height: 80%;
-    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */
+    overflow-y: auto;
+    /* Aggiunge la barra di scorrimento verticale */
 }
 
 #form {
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     /*center form in the middle*/
-    height: auto; /* Annulla l'altezza fissa per adattarsi dinamicamente al contenuto */
+    height: auto;
+    /* Annulla l'altezza fissa per adattarsi dinamicamente al contenuto */
 }
 
 .forms {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1%;
     width: 100%;
 }
@@ -268,64 +309,65 @@ section {
 /*NB: labels, input e button sono configurazioni usate anche per il login e signup*/
 
 .labels {
-    font-family: 'Arbutus Slab', sans-serif; 
+    font-family: 'Arbutus Slab', sans-serif;
     color: #FFF4EA;
-    font-size: 1.5em; 
-    padding: 0; 
+    font-size: 1.2rem;
+    padding: 0;
     align-self: center;
 }
 
-#file { /*necessario?*/
+#file {
+    /*necessario?*/
     margin-right: 3%
 }
 
 .inputs {
-    font-family: 'Barlow', sans-serif; 
-    font-size: 1.5em; 
-    padding: 2%; 
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.2rem;
+    padding: 2%;
     background-color: #EDDBCC;
     width: 80%;
     text-align: center;
 }
 
 #btn-signup {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em; 
-    padding: 2.5%; 
-    background-color: #372A28; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 2.5%;
+    background-color: #372A28;
     color: #EDDBCC;
-    border: none; 
+    border: none;
     margin-top: 2%;
     cursor: pointer;
 }
 
 #btn-signup:hover {
-    background-color: #8f7f7c; 
+    background-color: #8f7f7c;
     color: #372A28;
 }
 
 
 #btn-upload:hover {
-    background-color: #8f7f7c; 
+    background-color: #8f7f7c;
     color: #372A28;
 }
 
 /*SETTINGS.HTML*/
 
 .forms2 {
-    display: flex; 
-    flex-direction: row; 
-    align-items: center;  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 90%;
     padding: 0;
     padding-bottom: 2%;
 }
 
 .labels2 {
-    font-family: 'Arbutus Slab', sans-serif; 
+    font-family: 'Arbutus Slab', sans-serif;
     color: #FFF4EA;
-    font-size: 1.5em;
-    padding: 0; 
+    font-size: 1.2rem;
+    padding: 0;
     padding-bottom: 1%;
     align-self: flex-start;
     padding-left: 5%;
@@ -336,7 +378,7 @@ section {
 }
 
 #bio-input {
-    height: 70%; 
+    height: 70%;
     width: 69%;
     resize: none;
     border: none;
@@ -344,17 +386,17 @@ section {
 
 .btn-upload2 {
     margin: 2%;
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em; 
-    padding: 2.5%; 
-    background-color: #372A28; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 2.5%;
+    background-color: #372A28;
     color: #EDDBCC;
-    border: none; 
+    border: none;
     cursor: pointer;
 }
 
 .btn-upload2:hover {
-    background-color: #8f7f7c; 
+    background-color: #8f7f7c;
     color: #372A28;
 }
 
@@ -366,29 +408,31 @@ section {
 /*COMMON CONFIGURATIONS*/
 
 .container {
-    display: flex; 
+    display: flex;
     flex-direction: row;
     height: 100%;
 }
 
 
 aside {
-    width: 40%; 
-    padding: 2%; 
-    background-color: #EDDBCC; 
-    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale */    font-size: 1.2em;
+    width: 40%;
+    padding: 2%;
+    background-color: #EDDBCC;
+    overflow-y: auto;
+    /* Aggiunge la barra di scorrimento verticale */
 }
 
 
 #user {
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
 }
 
 #usr-image {
     display: block;
     width: 30%;
-    margin: 0; /* Centra orizzontalmente */
+    margin: 0;
+    /* Centra orizzontalmente */
     align-self: center;
 }
 
@@ -400,50 +444,52 @@ aside {
 
 
 #username {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.8em; 
-    padding: 2%; 
-    text-align: center; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.8rem;
+    padding: 2%;
+    text-align: center;
 }
 
 
 #user h1 {
-    font-family: 'Arbutus Slab', cursive; 
-    font-size: 1.5em; 
-    padding: 2.2%; 
-    margin-bottom: 0; 
+    font-family: 'Arbutus Slab', cursive;
+    font-size: 1.5rem;
+    padding: 2.2%;
+    margin-bottom: 0;
 }
 
 aside #bio {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em; 
-    padding: 2%; 
-    padding-bottom: 3%; 
-    text-align: left; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 2%;
+    padding-bottom: 3%;
+    text-align: left;
 }
 
-#courses, #sub-courses {
-    padding: 2%; 
-    width: 80%; 
-    border: 2px solid black; 
-    background-color: #FFF4EA; 
-    align-self: center; 
+#courses,
+#sub-courses {
+    padding: 2%;
+    width: 80%;
+    border: 2px solid black;
+    background-color: #FFF4EA;
+    align-self: center;
     margin-bottom: 3%;
     box-sizing: border-box;
 }
 
 
-#courses h3, #sub-courses h3 {
+#courses h3,
+#sub-courses h3 {
     width: 100%;
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em; 
-    padding: 0; 
-    margin: 0; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 0;
 }
 
 .course {
-    display: flex; 
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin: 0;
     margin-bottom: 2%;
@@ -456,8 +502,8 @@ aside #bio {
 }
 
 aside .course-title {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
     margin-top: 1.2%;
     width: 70%;
     text-align: left;
@@ -467,12 +513,13 @@ aside .course-title {
 aside .courses-buttons {
     background-color: #372A28;
     color: #EDDBCC;
-    border: none; 
+    border: none;
     cursor: pointer;
     padding: 2%;
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.5em;
-    height: 30%; /* Per evitare che il pulsante abbia un'altezza troppo alta con curse titles lunghi*/
+    font-size: 1.2rem;
+    height: 30%;
+    /* Per evitare che il pulsante abbia un'altezza troppo alta con curse titles lunghi*/
 
     /*
     white-space: nowrap;  Il testo non viene avvolto, ma viene troncato se è troppo lungo 
@@ -481,14 +528,14 @@ aside .courses-buttons {
     */
 }
 
-.courses-buttons:hover{
+.courses-buttons:hover {
     background-color: #8f7f7c;
-    color:#372A28;
-} 
+    color: #372A28;
+}
 
 .switcher {
-    display: flex; 
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     padding: 0;
     width: 100%;
     margin-bottom: 12%;
@@ -497,7 +544,7 @@ aside .courses-buttons {
 
 .switcher .btn-upload2 {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2rem;
     padding: 2.5%;
     background-color: #372A28;
     color: #EDDBCC;
@@ -507,7 +554,7 @@ aside .courses-buttons {
 
 .switcher .btn-upload2:hover {
     background-color: #8f7f7c;
-    color:#372A28;
+    color: #372A28;
 }
 
 
@@ -520,19 +567,18 @@ aside .courses-buttons {
     justify-content: center;
     width: 90%;
     height: 100%;
-    margin-bottom: 5%;
-    margin-left: 50%; 
+    margin-left: 50%;
     transform: translateX(-50%);
 }
 
 .login-subscribe p {
     font-family: 'Arbutus Slab', sans-serif;
-    color:#EDDBCC;
-    font-size: 2em;
+    color: #EDDBCC;
+    font-size: 1.5rem;
     padding: 0;
     margin: 0;
-    align-self: flex-start; 
-    padding-left: 13.3%; 
+    align-self: flex-start;
+    margin-left: 15%;
 }
 
 
@@ -540,7 +586,8 @@ aside .courses-buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center; /* centa tutto il testo, anche i bottoni */
+    text-align: center;
+    /* centa tutto il testo, anche i bottoni */
     width: 70%;
     height: auto;
     padding: 1.8%;
@@ -559,7 +606,7 @@ aside .courses-buttons {
 
 .login-subscribe-form form #btn-signup {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     padding: 2%;
     background-color: #372A28;
     color: #EDDBCC;
@@ -569,9 +616,9 @@ aside .courses-buttons {
 
 .labels-login {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     padding: 0;
-    color:#FFF4EA;
+    color: #FFF4EA;
 }
 
 
@@ -584,18 +631,19 @@ aside .courses-buttons {
     justify-content: center;
     width: 90%;
     height: 100%;
-    margin-bottom: 5%; 
-    margin-left: 50%; 
-    transform: translateX(-50%); 
+    margin-bottom: 5%;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 
 #review-box p {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.5rem;
     margin: 0;
-    align-self: flex-start; /* alinea a sinistra */
-    padding-left: 8.5%;
+    align-self: flex-start;
+    /* alinea a sinistra */
+    padding-left: 10%;
 }
 
 #review-box-form {
@@ -604,7 +652,8 @@ aside .courses-buttons {
     align-items: center;
     justify-content: center;
     width: 80%;
-    height: auto; /*aggiusta l'altezza in base al contenuto*/
+    height: auto;
+    /*aggiusta l'altezza in base al contenuto*/
     padding: 1.5%;
     background-color: #C6A064;
     border: 2px solid black;
@@ -613,7 +662,7 @@ aside .courses-buttons {
 
 #review-box-form p {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 2.5em;
+    font-size: 2rem;
     padding: 0;
     margin: 0;
     align-self: center;
@@ -624,7 +673,7 @@ aside .courses-buttons {
 #stars img {
     width: 20%;
     height: auto;
-    display: block; 
+    display: block;
     padding-bottom: 2%;
     position: relative;
     left: 40%;
@@ -635,7 +684,7 @@ aside .courses-buttons {
     width: 70%;
     font-family: 'Arbutus Slab', sans-serif;
     text-align: center;
-    font-size: 1.2em; 
+    font-size: 1.2rem;
     margin-bottom: 3%;
 }
 
@@ -643,7 +692,7 @@ aside .courses-buttons {
     width: 70%;
     font-family: 'Arbutus Slab', sans-serif;
     text-align: center;
-    font-size: 1.2em; 
+    font-size: 1.2rem;
     font-weight: bolder;
 }
 
@@ -651,9 +700,9 @@ aside .courses-buttons {
 /*-------------------- MARKETPLACE.HTML -------------------*/
 
 #marketplace-title {
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 2em; 
-    padding: 0; 
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 2rem;
+    padding: 0;
     align-self: center;
     margin: 1%;
 }
@@ -661,11 +710,12 @@ aside .courses-buttons {
 #finder {
     width: 70%;
     padding: 0.5%;
-    font-family: 'Arbutus Slab', sans-serif; 
-    font-size: 1.5em;  
-    background-color:#372A28;
-    color:#EDDBCC;
-    align-self: center;;
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    background-color: #372A28;
+    color: #EDDBCC;
+    align-self: center;
+    ;
 }
 
 #container-marketplace {
@@ -680,12 +730,13 @@ aside .courses-buttons {
     width: 80%;
     height: 100%;
     display: flex;
-    flex-wrap: wrap; /* Per consentire alle carte di andare a capo */
+    flex-wrap: wrap;
+    /* Per consentire alle carte di andare a capo */
     align-self: center;
     justify-content: center;
     overflow-y: auto;
-    
-    background-color:#C6A064 ;
+
+    background-color: #C6A064;
 }
 
 .cards {
@@ -697,8 +748,9 @@ aside .courses-buttons {
 }
 
 .cards:hover {
-    transform: translateZ(0.5vw) scale(1.05); 
-    transition: 0.2s ease-in; /*l'animazione diventa sempre piu veloce*/
+    transform: translateZ(0.5vw) scale(1.05);
+    transition: 0.2s ease-in;
+    /*l'animazione diventa srempre piu veloce*/
     /*ritardo nell'animazione*/
 }
 
@@ -710,7 +762,7 @@ aside .courses-buttons {
 
 .card-title {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.4em;
+    font-size: 1.2rem;
     text-align: center;
 }
 
@@ -723,35 +775,45 @@ aside .courses-buttons {
 .cards .subscribe-btn {
     width: 50%;
     font-family: 'Arbutus Slab', sans-serif;
-    color: #EDDBCC; 
-    font-size: 1.2em;  
-    text-overflow: ellipsis; /*aggiunge i puntini*/
-    overflow: hidden; /*evita che il testo del bottone vada fuori*/
+    color: #EDDBCC;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
+    /*aggiunge i puntini*/
+    overflow: hidden;
+    /*evita che il testo del bottone vada fuori*/
     background-color: #372A28;
     border: none;
     padding: 3%;
     margin: 2%;
-    
+
     cursor: pointer;
 }
 
 .subscribe-btn:hover {
-    background-color: #8f7f7c; 
+    background-color: #8f7f7c;
     color: #372A28;
 }
 
 #popup {
-    position: fixed; /* Posizione fissa rispetto alla finestra del browser */
-    top: 62%; /* Posiziona al centro verticale della finestra */
-    left: 50%; /* Posiziona al centro orizzontale della finestra */
-    transform: translate(-50%, -50%); /* Centra orizzontalmente e verticalmente */
-    background-color: #EDDBCC; /* Colore di sfondo */
-    padding: 20px; /* Spazio interno */
-    z-index: 9999; /* Livello dello z-index per essere sopra altri contenuti */
-    display: none; /* Inizialmente nascosto */
+    position: fixed;
+    /* Posizione fissa rispetto alla finestra del browser */
+    top: 62%;
+    /* Posiziona al centro verticale della finestra */
+    left: 50%;
+    /* Posiziona al centro orizzontale della finestra */
+    transform: translate(-50%, -50%);
+    /* Centra orizzontalmente e verticalmente */
+    background-color: #EDDBCC;
+    /* Colore di sfondo */
+    padding: 20px;
+    /* Spazio interno */
+    z-index: 9999;
+    /* Livello dello z-index per essere sopra altri contenuti */
+    display: none;
+    /* Inizialmente nascosto */
 
     font-family: 'arbutus slab', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     text-align: center;
     height: 50%;
     overflow-y: auto;
@@ -760,7 +822,8 @@ aside .courses-buttons {
 @keyframes slideUp {
     from {
         transform: translate(-50%, 100%);
-    } 
+    }
+
     to {
         transform: translate(-50%, -50%);
     }
@@ -769,7 +832,8 @@ aside .courses-buttons {
 @keyframes slideDown {
     from {
         transform: translate(-50%, -50%);
-    } 
+    }
+
     to {
         transform: translate(-50%, 100%);
     }
@@ -794,7 +858,7 @@ una transizione piu fluida*/
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
@@ -811,7 +875,6 @@ una transizione piu fluida*/
 /*-------------------- READER.HTML -------------------*/
 
 #box-reader {
-    background-color:#C6A064; 
     width: 100%;
     height: 100%;
     display: flex;
@@ -819,593 +882,320 @@ una transizione piu fluida*/
     align-items: center;
 }
 
+#reader-header {
+    display: flex;
+    justify-content: space-between;
+    align-self: center; /*allinea il reader-header*/
+    align-items: center; /*allinea gli elrementi al centro*/
+    width: 50%;
+    height: 20%;
+    background-color:#FFC61A;
+    gap: 5%;
+}
+
 #reader {
-    background-color:#fff;
-    width: 80%;
+    background-color: #fff;
+    width: 100%;
     height: 100%;
+}
+
+#reader-header {
+    display: flex;
+    justify-content: space-between;
+    align-self: center; /*allinea il reader-header*/
+    align-items: center; /*allinea gli elrementi al centro*/
+    width: 50%;
+    height: 20%;
+    background-color:#FFC61A;
+    gap: 5%;
+}
+
+#creator {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    margin-left: 5%;
+}
+
+#creator-image {
+    width: 10%;
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
 
+
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
-
-    body {
-        font-size: 1em;
-    }
-
-    #nav-link {
-        font-size: 1.5em;
+    
+    html {
+        font-size: 1.2rem;
     }
 
     #logo {
-        font-size: 2.5em;
-    }
-
-    footer {
-        font-size: 1.5em;
-    }
-
-    .btn-upload2 {
-        font-size: 1em;
-    }
-
-    #usr-image {
-        width: 50%;
-    }
-
-    #username {
-        font-size: 2em;
-    }
-
-    aside {
-        font-size: 1em;
-    }
-
-    section {
-        font-size: 1em;
+        font-size: 3rem;
     }
 
     .login-subscribe p {
-        font-size: 1.8em;
-        margin-left: 2%;
-    }
-
-    .login-subscribe-form {
-        font-size: 1.2em;
-    }
-
-    .card-title {
-        font-size: 1.2em;
-    }
-
-    #review-box {
-        font-size: 1.5em;
+        font-size: 2.5rem;
     }
 
     #review-box p {
-        font-size: 1.5em;
-        margin-left: 2%;
+        font-size: 2.5rem;
     }
 }
-
-@media screen and (min-width: 769px) and (max-width: 1366px) {
-
-    body {
-        font-size: 1em;
+ 
+ @media screen and (min-width: 769px) and (max-width: 1366px) {
+ 
+    html {
+        font-size: 1.2rem;
     }
-
-    header {
-        font-size: 1.5em;
-    }
-
-    #nav-link-mini {
-        font-size: 1em;
-    }
-
-    footer {
-        font-size: 1em;
-    }
-
-    .btn-upload2 {
-        font-size: 1em;
-    }
-
-    aside {
-        font-size: 1em;
-    }
-
-    #usr-image {
-        width: 50%;
-    }
-
-    #username {
-        font-size: 1.5em;
-    }
-
-    .login-subscribe p {
-        font-size: 2.5em;
-        margin-left: 2%;
-    }
-
-    .login-subscribe-form {
-        font-size: 1.5em;
-    }
-
-    .card-title {
-        font-size: 1.5em;
-    }
-
-    .subscribe-btn {
-        font-size: 1.5em;
-    }
-
-    #marketplace-title {  
-        font-size: 2.5em;   
-    }
-
-    #finder {
-        font-size: 2em;   
-    }
-
-    #review-box {
-        font-size: 1.5em;
-    }
-
-    #review-box p {
-        font-size: 1.5em;
-        margin-left: 2%;
-    }
-
-}
-
-@media screen and (min-width: 376px) and (max-width: 768px) {
-
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        font-size: 1.5em;
-    }
-
-    body {
-        font-size: 1em;
-    }
-
-    #nav-link-mini {
-        display: none;
-        font-size: 1em;
-        top: 11%;
-    }
-
-    #hamburger {
-        display: block;
-    }
-
-    footer {
-        font-size: 1.2em;
-    }
-
-    main {
-        flex-direction: column; /* Cambia direzione dei flex per piccoli schermi */
-    }
-
-    #start {
-        font-size: 3em; /* Dimensione del testo per dispositivi mobili */
-    }
-
-    #button {
-        font-size: 2em; /* Dimensione del pulsante per dispositivi mobili */
-    }
-
-    .login-subscribe-form #btn-signup {
-        font-size: 1em;
-    }
-
-    #user-change {
-        width: 100%;
-    }
-
-    #bio-input {
-        width: 100%;
-    }    
-
-    .labels2 {
-        padding-left: 3%;
-        font-size: 1em;
-    }
-
-    .forms2 {
-        flex-direction: column;
-    }
-
-    .btn-upload2 {
-        font-size: 1em;
-    }
-
-    .btn-upload {
-        font-size: 1em;
-    }
-
-    .container {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    aside {
-        width: 100%;
-        height: 40%;
-        font-size: 1em;
-    }
-
-    section {
-        width: 100%;
-        height: 60%;
-        border-top: 10px solid black;
-        font-size: 1em;
-    }
-
-    #usr-image {
-        width: 30%; 
-    }
-
-    #courses h3, #sub-courses h3 {
-        font-size: 1em;
-    }
-
-    #user .course-title {
-        margin-bottom: 1%;
-    }
-
-    #user .courses-buttons {
-        font-size: 1.2em;
-    }
-
-    .switcher {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .labels2 {
-        font-size: 1em;
-    }
-
-    .login-subscribe {
-        font-size: 1em;
-    }
-
-    .login-subscribe p{
-        font-size: 1.5em;
-        margin-left: 2%;
-    }
-
-    #review-box-form {
-        font-size: 1em;
-    }
-
-    #review-box p {
-        font-size: 2em;
-        margin-left: 2%;
-    }
-
-    #review {
-        font-size: 1em;
-    }
-
-    #stars img {
-        width: 30%;
-        position: relative;
-        left: 35%;
-    }
-
-    #marketplace-title {
-        font-size: 1.5em; /* Riduci la dimensione del titolo */
-    }
-
-    #finder {
-        width: 90%; /* Riduci la larghezza del finder */
-        font-size: 1em; /* Riduci la dimensione del testo */
-        padding-top: 2%;
-        padding-bottom: 2%;
-    }
-
-    #cardbox {
-        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
-    }
-
-
-    .cards {
-        width: calc(35% - 4%); /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
-        margin: 2%;
-    }
-
-    .card-title {
-        font-family: 'Arbutus Slab', sans-serif;
-        font-size: 1.5em;
-        text-align: center;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    .button-container {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .cards .subscribe-btn {
-        width: 100%;
-        font-size: 1em;
-        position: relative;
-        left: 0;
-    }
-
-    #finder {
-        font-size: 1em;
-    }
-
-    #popup {
-        font-size: 1em;
-        width: 80%;
-        height: 50%;
-    }
-
-    #reader {
-        width: 100%;
-    }
-
-}
-
-@media screen and (max-width: 375px) {
-
-    body {
-        font-size: 1.2em;
-    }
-
-    header {
-        font-size: 1.5em;
-    }
-
+ 
     #logo {
-        font-size: 1.5em;
+        font-size: 2.3rem;
     }
 
+
+
     #nav-link-mini {
-        font-size: 0.7em;
-        top: 9.8%;
+        font-size: 1.2rem;
     }
 
     #hamburger {
-        font-size: 0.9em;
+        font-size: 2.5rem;
     }
 
     #x_button {
-        font-size: 1.2em;
+        font-size: 2.7rem;
     }
 
-    footer {
-        font-size: 1.2em;
+    .login-subscribe p {
+        font-size: 2rem;
     }
 
-    #start {
-        font-size: 2em; /* Dimensione del testo per dispositivi mobili */
+    #review-box p {
+        font-size: 2rem;
     }
 
-    #button {
-        font-size: 1.5em; /* Dimensione del pulsante per dispositivi mobili */
+    .cards {
+        width: 30%;
     }
 
-    #btn-signup {
-        font-size: 1.2em;
+    .button-container {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
     }
 
-    #user-change {
-        width: 100%;
+    .cards .subscribe-btn {
+    width: 100%;
     }
 
-    #bio-input {
-        width: 100%;
+    .course-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     }
 
+ }
+ 
+ @media screen and (min-width: 376px) and (max-width: 768px) {
+ 
+    html {
+        font-size: 1.2rem;
+    }
+
+    #logo {
+        font-size: 2rem;
+    }
+
+    #nav-link-mini {
+        font-size: 1rem;
+    }
+
+    #hamburger {
+        font-size: 2rem;
+    }
+
+    #x_button {
+        font-size: 2rem;
+    }
+
+    #usr-image {
+        width: 30%;
+    }
 
     .container {
+        display: flex;
         flex-direction: column;
-        width: 100%;
     }
 
     aside {
         width: 100%;
         height: 40%;
-        font-size: 1em;
+    }
+
+    #username {
+        font-size: 2rem;
+    }
+
+    #user h1 {
+        font-size: 2rem;
     }
 
     section {
         width: 100%;
         height: 60%;
-        font-size: 1em;
         border-top: 10px solid black;
     }
 
-    #usr-image {
-        width: 50%; 
+    .login-subscribe p {
+        font-size: 1.5rem;
     }
 
-    #user #username {
-        font-size: 1.5em;
+    #review-box p {
+        font-size: 1.5rem;
     }
 
-    #user h1 {
-        font-size: 1em;
+    #review-box-form p {
+        font-size: 1.2rem;
     }
 
-    aside #bio {
-        font-size: 1em;
+    #review, #reviewer {
+        font-size: 0.8rem;
     }
 
-    #courses h3, #sub-courses h3 {
-        font-size: 1em;
+    #creator-image {
+        width: 20%;
     }
 
-    #user .course-title { 
-        font-size: 1em;   
+    .cards {
+        width: 30%;
     }
 
-    #user .courses-buttons {
-        font-size: 1em;
+    .card-title {
+        font-size: 1rem;
     }
 
-    #upload {
-        font-size: 1em;
-    }
-
-    .switcher {
+    .button-container {
+        width: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
-    .switcher .btn-upload2 {
-        font-size: 1em;
+    .cards .subscribe-btn {
+        width: 100%;
+        font-size: 1rem;
     }
 
-    .btn-upload, .btn-upload2 {
-        font-size: 1em;
+ }
+ 
+ @media screen and (max-width: 375px) {
+ 
+    html {
+        font-size: 1rem;
     }
 
-    #form {
-        margin-top: 30%;
-    }
-
-    #upload #btn-signup {
-        font-size: 1em;
+    #nav-link-mini {
+        display: relative;
     }
 
     .login-subscribe {
-        font-size: 1em;
+        width: 120%;
     }
 
     .login-subscribe p {
-        font-size: 1.5em;
-        padding: 0;
+        font-size: 1.2rem;
     }
 
-    .login-subscribe-form {
-        width: 100%;
-    }
-
-    .labels, .labels2 {
-        font-size: 1em;
-    }
-
-    .inputs {
-        font-size: 1em;
-    }
-
-    #review-box-form {
+    #review-box {
         width: 100%;
     }
 
     #review-box p {
-        font-size: 1.5em;
-        padding: 0;
+        font-size: 1.2rem;
     }
 
-    #review-box-form p {
-        font-size: 1.4em;
-        text-align: center;
+    #review, #reviewer {
+        font-size: 1rem;
+    }
+    
+    #stars {
+        width: 200%;
     }
 
-    #stars img {
-        width: 30%;
-        position: relative;
-        left: 35%;
+    .container {
+        display: flex;
+        flex-direction: column;
     }
 
-    #review {
-        font-size: 0.9em;
+    aside {
+        width: 100%;
+        height: 40%;
+    }
+
+    
+    section {
+        width: 100%;
+        height: 60%;
+        border-top: 10px solid black;
+    }
+
+    #upload {
+        width: 100%;
+        height: 100%;
+
     }
 
     #marketplace-title {
-        font-size: 1.5em; /* Riduci la dimensione del titolo */
-    }
-
-    #finder {
-        width: 100%; /* Riduci la larghezza del finder */
-        font-size: 1.2em; /* Riduci la dimensione del testo */
-        padding-top: 2%;
-        padding-bottom: 2%;
-    }
-
-    #cardbox {
-        width: 100%; /* Imposta la larghezza al 100% per adattarsi allo schermo */
+        font-size: 1.5rem;
     }
 
     .cards {
-        width: 45%; /* Imposta la larghezza della carta in modo che due carte stiano in una riga */
-        margin: 2%;
+        width: 45%;
     }
 
     .card-title {
-        font-family: 'Arbutus Slab', sans-serif;
-        font-size: 1.2em;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        text-align: center;
+        font-size: 1rem;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column; 
+        justify-content: center;
     }
 
     .cards .subscribe-btn {
-        font-size: 1.2em;
         width: 100%;
-        align-self: center;
+        font-size: 1rem;
     }
+ }
+ 
+ @media screen and (max-width: 1081px) {
+ 
+     header {
+         flex-direction: row;
+         justify-content: space-between;
+     }
+ 
+ }
+ 
+ /*senza questo media screen l'icona hambuger non si mostrava per schermi superiori a 768px di larghezza*/
+ @media screen and (max-width: 1080px) {
+ 
+     #hamburger {
+         display: block;
+     }
+ 
+ }
+ 
+ /*senza questo media screen ad uno width di 516px la parte destradel footer non èra posizionta perfettamente a destra*/
+ @media screen and (max-width: 516px) {
+     #fright {
+         text-align: right;
+     }
+ }
 
-    #popup {
-        font-size: 1.2em;
-        width: 80%;
-        height: 50%;
+ @media screen and (min-width: 2000px) {
+    html {
+        font-size: 2em;
     }
-
-    #popup h2 {
-        font-size: 1.5em;
-    }
-
-    #popup p {
-        font-size: 1em;
-    }
-
-
-    .close-btn {
-        font-size: 1.5em;
-    }
-
-    #reader {
-        width: 100%;
-    }
-
-    .login-subscribe-form #btn-signup {
-        font-size: 0.8em;
-    }
-    
-}
-
-@media screen and (max-width: 1081px) {
-
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-}
-
-/*senza questo media screen l'icona hambuger non si mostrava per schermi superiori a 768px di larghezza*/
-@media screen and (max-width: 1080px) {
-
-    #hamburger {
-        display: block;
-    }
-
-}
-
-/*senza questo media screen ad uno width di 516px la parte destradel footer non èra posizionta perfettamente a destra*/
-@media screen and (max-width: 516px) {
-    #fright {
-        text-align: right;
-    }
-}
+ }
