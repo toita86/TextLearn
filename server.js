@@ -111,7 +111,7 @@ function checkFileType(file, cb) {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb("Error: Images and Mark Down documents only!");
+    return cb(new Error("Error: Images and Markdown documents only!"));
   }
 }
 
@@ -214,49 +214,65 @@ app.get("/upload", (req, res) => {
   }
 });
 
-app.post("/upload", upload, async function (req, res) {
-  try {
-    const { course_name, course_descr } = req.body;
-
-    const course_image = req.files["course_image"][0].path;
-    const course_file = req.files["course_file"][0].path;
-
-    const courses_title = await pool.query(
-      "SELECT title FROM courses WHERE author_id = $1",
-      [req.session.user.id]
-    );
-    // iterarte through the courses_title array to check if the course title already exists in the database
-    for (let i = 0; i < courses_title.rows.length; i++) {
-      const course = courses_title.rows[i].title;
-      if (course === course_name) {
-        req.session.msgToUser = "Course already exists";
+app.post("/upload", function (req, res) {
+  upload(req, res, async function (err) {
+    if (err) {
+      // Handle file type errors
+      if (err.message === "Error: Images and Markdown documents only!") {
+        req.session.msgToUser =
+          "Only .jpg, .png images and .md documents are allowed";
         return res.redirect("upload");
       }
-    }
-    //otherwise, upload the course to the database
-    await pool.query(
-      "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
-      [
-        req.session.user.id,
-        course_name,
-        course_descr,
-        course_image,
-        course_file,
-      ]
-    );
 
-    req.session.msgToUser = "Course uploaded successfully";
-
-    return res.redirect("upload");
-  } catch (error) {
-    console.error(error);
-    if (error.TypeError !== null) {
-      req.session.msgToUser = "No files selected";
+      // Handle other multer errors
+      req.session.msgToUser = "An error occurred during file upload";
       return res.redirect("upload");
     }
-    req.session.msgToUser = "An error occured";
-    return res.redirect("upload");
-  }
+
+    try {
+      const { course_name, course_descr } = req.body;
+
+      const course_image = req.files["course_image"][0].path;
+      const course_file = req.files["course_file"][0].path;
+
+      const courses_title = await pool.query(
+        "SELECT title FROM courses WHERE author_id = $1",
+        [req.session.user.id]
+      );
+
+      // Iterate through the courses_title array to check if the course title already exists in the database
+      for (let i = 0; i < courses_title.rows.length; i++) {
+        const course = courses_title.rows[i].title;
+        if (course === course_name) {
+          req.session.msgToUser = "Course already exists";
+          return res.redirect("upload");
+        }
+      }
+
+      // Otherwise, upload the course to the database
+      await pool.query(
+        "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
+        [
+          req.session.user.id,
+          course_name,
+          course_descr,
+          course_image,
+          course_file,
+        ]
+      );
+
+      req.session.msgToUser = "Course uploaded successfully";
+      return res.redirect("upload");
+    } catch (error) {
+      console.error(error);
+      if (error.TypeError !== null) {
+        req.session.msgToUser = "No files selected";
+        return res.redirect("upload");
+      }
+      req.session.msgToUser = "An error occurred";
+      return res.redirect("upload");
+    }
+  });
 });
 
 app.get("/user-courses", async (req, res) => {
