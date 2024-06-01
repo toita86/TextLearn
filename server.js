@@ -465,6 +465,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/marketplace", async (req, res) => {
+  req.session.msgToUser = "";
   res.sendFile(path.join(__dirname, "views", "marketplace.html"));
 });
 
