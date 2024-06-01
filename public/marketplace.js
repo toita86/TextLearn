@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         button_subscribe.textContent = "Join";
         button_subscribe.className = "subscribe-btn";
         button_subscribe.addEventListener("click", async () => {
-          if (confirm("Are you sure you want to delete this course?")) {
+          if (confirm("Are you sure you want to subscribe this course?")) {
             try {
               const subscribeResponse = await fetch(`/subscribe/${course.id}`, {
                 method: "POST",
@@ -109,13 +109,33 @@ function updateCourseCards(courses) {
     const button_desc = document.createElement("button");
     button_desc.textContent = "Description";
     button_desc.className = "subscribe-btn";
+    button_desc.onclick = "openDescription()";
 
-    button_desc.onclick = function () {
-      openDescription(course.descr);
-    };
     const button_subscribe = document.createElement("button");
+    button_subscribe.id = `card-${course.id}`;
     button_subscribe.textContent = "Join";
     button_subscribe.className = "subscribe-btn";
+    button_subscribe.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to subscribe this course?")) {
+        try {
+          const subscribeResponse = await fetch(`/subscribe/${course.id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const subscribeResult = await subscribeResponse.json();
+          if (subscribeResult.ok) {
+            alert(subscribeResult.message);
+          } else {
+            alert(subscribeResult.message);
+          }
+        } catch (error) {
+          console.error("Error subscribing to the course:", error);
+          alert("An error occurred while subscribing to the course.");
+        }
+      }
+    });
 
     div_button.appendChild(button_desc);
     div_button.appendChild(button_subscribe);
@@ -124,6 +144,6 @@ function updateCourseCards(courses) {
     card.appendChild(p);
     card.appendChild(div_button);
 
-    cardbox.appendChild(card);
+    cardbox.append(card);
   });
 }
