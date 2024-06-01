@@ -4,6 +4,10 @@ const pool = require("./db");
 const PgSession = require("connect-pg-simple")(session);
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
+const marked = require("marked");
+const fs = require("fs");
+const { JSDOM } = require("jsdom");
+const createDOMPurify = require("dompurify");
 const { user } = require("pg/lib/defaults");
 const multer = require("multer");
 const path = require("path");
@@ -519,11 +523,58 @@ app.post("/marketplace-search", async (req, res) => {
   }
 });
 
-app.get("/reader", (req, res) => {
-  if (req.session.isAuth == true) {
-    res.sendFile(path.join(__dirname, "views", "reader.html"));
-  } else {
-    return res.redirect("login");
+app.get("/reader/:id", (req, res) => {
+  try {
+    if (req.session.isAuth == true) {
+      res.sendFile(path.join(__dirname, "views", "reader.html"));
+    } else {
+      return res.redirect("/login");
+    }
+  } catch (err) {
+    return res.redirect("/settings");
+  }
+});
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
+
+// Route to get the HTML content of a course
+app.get("/course-reader/:id", async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const isSubscribed = await pool.query(
+      `SELECT * FROM user_sub_courses WHERE user_id=$1 AND course_id=$2`,
+      [req.session.user.id, courseId]
+    );
+
+    if (!isSubscribed.rows.length > 0) {
+      req.session.msgToUser = "You are not subscribed to this course";
+      return res.json({ content: "Nothing here to see..." });
+    }
+
+    const filePath = await pool.query(
+      `SELECT file_path FROM courses WHERE id=$1`,
+      [courseId]
+    );
+    if (filePath == null) {
+      return res.status(404).send("Course not found");
+    }
+
+    fs.readFile(filePath.rows[0].file_path, "utf8", (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(404).send("Course not found");
+      }
+
+      // Convert markdown to HTML
+      const htmlContent = marked.parse(data);
+      const sanitizedContent = DOMPurify.sanitize(htmlContent);
+
+      // Send HTML content as JSON response
+      res.json({ content: sanitizedContent });
+    });
+  } catch (err) {
+    return res.status(404).send("Course not found");
   }
 });
 
