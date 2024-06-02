@@ -152,7 +152,7 @@ app.post("/login", async (req, res) => {
       return res.redirect("login");
     }
 
-    req.session.msgToUser = false;
+    req.session.msgToUser = "";
     req.session.user = user;
     req.session.isAuth = true;
 
