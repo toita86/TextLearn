@@ -764,6 +764,8 @@ aside .courses-buttons {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
     text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .button-container {
@@ -956,8 +958,6 @@ una transizione piu fluida*/
     #logo {
         font-size: 2.3rem;
     }
-
-
 
     #nav-link-mini {
         font-size: 1.2rem;
