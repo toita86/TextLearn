@@ -303,7 +303,9 @@ app.post("/subscribe/:id", async (req, res) => {
   const courseId = req.params.id;
   if (!req.session.isAuth) {
     req.session.msgToUser = "You must be logged in to subscribe";
-    return res.redirect("/login");
+    return res
+      .status(403)
+      .json({ message: "You must be logged in to subscribe" });
   }
   try {
     const preSubVerification = await pool.query(
@@ -312,7 +314,9 @@ app.post("/subscribe/:id", async (req, res) => {
     );
     if (preSubVerification.rowsCount > 0) {
       req.session.msgToUser = "You already subscribed to this course";
-      return res.redirect("/marketplace");
+      return res
+        .status(403)
+        .json({ message: "You already subscribed to this course" });
     }
 
     const result = await pool.query(
@@ -321,7 +325,9 @@ app.post("/subscribe/:id", async (req, res) => {
     );
     if (result.rowsCount === 0) {
       req.session.msgToUser = "There was an error while subscribing";
-      return res.redirect("/marketplace");
+      return res
+        .status(503)
+        .json({ message: "There was an error while subscribing" });
     } else {
       return res.status(200).json({
         message: "Subscribed to course successfully!",
