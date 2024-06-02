@@ -96,7 +96,7 @@ header {
     /* Fissa il menu alla finestra del browser */
     right: 0;
     /* Distanza dal lato destro della finestra */
-    top: 50px;
+    top: 5%;
     /* Distanza dal lato superiore della finestra */
     z-index: 9999;
     padding: 2%;
@@ -132,7 +132,6 @@ header {
         transform: translateX(20%);
     }
 }
-
 
 
 /* Footer configurazioni */
@@ -499,6 +498,7 @@ aside #bio {
 
 .slideLeft {
     animation: slideLeft 0.5s forwards;
+    
 }
 
 aside .course-title {
@@ -896,7 +896,7 @@ una transizione piu fluida*/
 #reader {
     background-color: #fff;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 #reader-header {
@@ -1018,6 +1018,10 @@ una transizione piu fluida*/
         font-size: 2rem;
     }
 
+    #start {
+        font-size: 3rem;
+    }
+
     #usr-image {
         width: 30%;
     }
@@ -1044,6 +1048,10 @@ una transizione piu fluida*/
         width: 100%;
         height: 60%;
         border-top: 10px solid black;
+    }
+
+    .switcher {
+        flex-direction: column;
     }
 
     .login-subscribe p {
@@ -1139,6 +1147,10 @@ una transizione piu fluida*/
         border-top: 10px solid black;
     }
 
+    .switcher {
+        flex-direction: column;
+    }
+
     #upload {
         width: 100%;
         height: 100%;
@@ -1146,7 +1158,11 @@ una transizione piu fluida*/
     }
 
     #marketplace-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        width: 100%;
+        word-wrap: break-word; /* Spezza le parole lunghe */
+        text-overflow: ellipsis; /* Aggiunge "..." se il testo è troppo lungo */
+        white-space: normal; /* Permette al testo di andare a capo */
     }
 
     .cards {
