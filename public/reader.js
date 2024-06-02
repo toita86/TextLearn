@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Check if the course ID is valid
   if (!courseId) {
     console.error("Invalid course ID");
-    document.getElementById("reader").innerHTML = "<p>Invalid course ID</p>";
+    document.getElementById("reader").innerHTML =
+      "<p style='text-align: center;'>Invalid course ID</p>";
     return;
   }
 
@@ -19,10 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(`/course-reader/${courseId}`)
     .then((response) => response.json())
     .then((data) => {
+      document.getElementById("marketplace-title").textContent =
+        data.courseTitle;
       courseContainer.innerHTML = data.content;
     })
     .catch((error) => {
+      document.getElementById("marketplace-title").textContent =
+        "Course Reader";
       console.error("Error fetching course content:", error);
-      courseContainer.innerHTML = "<p>Failed to load course content.</p>";
+      courseContainer.innerHTML =
+        "<p style='text-align: center;'>Failed to load course content.</p>";
     });
 });

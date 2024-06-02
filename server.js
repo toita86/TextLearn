@@ -566,6 +566,11 @@ app.get("/course-reader/:id", async (req, res) => {
       return res.status(404).send("Course not found");
     }
 
+    const courseTitle = await pool.query(
+      `SELECT title FROM courses WHERE id=$1`,
+      [courseId]
+    );
+
     fs.readFile(filePath.rows[0].file_path, "utf8", (err, data) => {
       if (err) {
         console.error(err);
@@ -577,7 +582,10 @@ app.get("/course-reader/:id", async (req, res) => {
       const sanitizedContent = DOMPurify.sanitize(htmlContent);
 
       // Send HTML content as JSON response
-      res.json({ content: sanitizedContent });
+      res.json({
+        courseTitle: courseTitle.rows[0].title,
+        content: sanitizedContent,
+      });
     });
   } catch (err) {
     return res.status(404).send("Course not found");
