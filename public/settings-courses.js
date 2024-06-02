@@ -46,9 +46,10 @@ function coursesListing(course, coursesContainer) {
   courseDiv.className = "course";
   courseDiv.id = course.id;
 
-  const courseTitle = document.createElement("div");
+  const courseTitle = document.createElement("a");
   courseTitle.className = "course-title";
   courseTitle.textContent = course.title;
+  courseTitle.href = `/reader/${course.id}`;
 
   let button;
 

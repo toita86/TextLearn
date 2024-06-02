@@ -152,7 +152,7 @@ app.post("/login", async (req, res) => {
       return res.redirect("login");
     }
 
-    req.session.msgToUser = false;
+    req.session.msgToUser = "";
     req.session.user = user;
     req.session.isAuth = true;
 
@@ -303,7 +303,9 @@ app.post("/subscribe/:id", async (req, res) => {
   const courseId = req.params.id;
   if (!req.session.isAuth) {
     req.session.msgToUser = "You must be logged in to subscribe";
-    return res.redirect("/login");
+    return res
+      .status(403)
+      .json({ message: "You must be logged in to subscribe" });
   }
   try {
     const preSubVerification = await pool.query(
@@ -312,7 +314,9 @@ app.post("/subscribe/:id", async (req, res) => {
     );
     if (preSubVerification.rowsCount > 0) {
       req.session.msgToUser = "You already subscribed to this course";
-      return res.redirect("/marketplace");
+      return res
+        .status(403)
+        .json({ message: "You already subscribed to this course" });
     }
 
     const result = await pool.query(
@@ -321,7 +325,9 @@ app.post("/subscribe/:id", async (req, res) => {
     );
     if (result.rowsCount === 0) {
       req.session.msgToUser = "There was an error while subscribing";
-      return res.redirect("/marketplace");
+      return res
+        .status(503)
+        .json({ message: "There was an error while subscribing" });
     } else {
       return res.status(200).json({
         message: "Subscribed to course successfully!",
@@ -560,6 +566,11 @@ app.get("/course-reader/:id", async (req, res) => {
       return res.status(404).send("Course not found");
     }
 
+    const courseTitle = await pool.query(
+      `SELECT title FROM courses WHERE id=$1`,
+      [courseId]
+    );
+
     fs.readFile(filePath.rows[0].file_path, "utf8", (err, data) => {
       if (err) {
         console.error(err);
@@ -571,7 +582,10 @@ app.get("/course-reader/:id", async (req, res) => {
       const sanitizedContent = DOMPurify.sanitize(htmlContent);
 
       // Send HTML content as JSON response
-      res.json({ content: sanitizedContent });
+      res.json({
+        courseTitle: courseTitle.rows[0].title,
+        content: sanitizedContent,
+      });
     });
   } catch (err) {
     return res.status(404).send("Course not found");
