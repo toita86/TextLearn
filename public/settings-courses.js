@@ -38,7 +38,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error fetching courses:", error);
   }
+
+  if (document.getElementById("remove-account")) {
+    removeAccount = document.getElementById("remove-account");
+    removeAccount.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to delete your account?")) {
+        const response = await fetch("/remove-account", {
+          method: "DELETE",
+          credentials: "same-origin",
+        });
+
+        if (response.ok) {
+          window.location = "/home";
+        } else {
+          console.error("Logout failed");
+        }
+      }
+    });
+  }
 });
+
+/*"same-origin" means that the request will include cookies and HTTP authentication information only if the URL is on the same origin as the calling script. */
 
 function coursesListing(course, coursesContainer) {
   const hr = document.createElement("hr");
