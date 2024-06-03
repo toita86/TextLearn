@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (response.ok) {
-          window.location = "/home";
+          window.location = "/";
         } else {
           console.error("Logout failed");
         }
