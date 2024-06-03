@@ -60,7 +60,7 @@ app.post("/logout", (req, res) => {
   });
 });
 
-app.post("/remove-account", async (req, res) => {
+app.delete("/remove-account", async (req, res) => {
   if (!req.session.isAuth) {
     return res.status(401).json({ message: "Unauthorized" });
   }
