@@ -32,3 +32,4 @@ document.addEventListener("DOMContentLoaded", () => {
         "<p style='text-align: center;'>Failed to load course content.</p>";
     });
 });
+

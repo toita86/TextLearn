@@ -45,9 +45,7 @@
           <img src="/images/user.png" id="usr-image" alt="User Image" />
           <div id="username">Username</div>
           <h1>BIO</h1>
-          <div id="bio">
-            Change me!
-          </div>
+          <div id="bio">Change me!</div>
           <div id="courses">
             <h3>Your Courses</h3>
           </div>
@@ -60,18 +58,20 @@
       <section>
         <div id="upload">
           <div class="switcher">
-            <input
+            <button
               class="btn-upload2"
-              type="button"
               value="settings"
               onclick="window.location.href='/settings'"
-            />
-            <input
+            >
+              Settings
+            </button>
+            <button
               class="btn-upload2"
-              type="button"
               value="upload a new course"
               onclick="window.location.href='/upload'"
-            />
+            >
+              Upload a new course
+            </button>
           </div>
           <form
             action="/upload"
@@ -98,7 +98,7 @@
             </div>
             <div class="forms">
               <label for="course_descr" class="labels">Description</label>
-              <textarea  name="course_descr" class="inputs"></textarea>
+              <textarea name="course_descr" class="inputs"></textarea>
             </div>
             <input type="submit" value="Upload your Course" id="btn-signup" />
           </form>

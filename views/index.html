@@ -40,10 +40,14 @@
 
     <main>
       <div id="image-container">
-        <video autoplay loop muted>
-          <source src="/images/index3.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline>
+          <source src="/images/index3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <!-- Di default, i video su questi dispositivi vengono 
+         riprodotti a schermo intero, ma utilizzando l'attributo 
+         playsinline, è possibile evitarlo e far sì che il video 
+         venga riprodotto all'interno della pagina stessa. -->
         <div id="content">
           <div id="p">
             <!-- svela il potere dell'apprendimento -->

@@ -13,10 +13,10 @@
       href="/images/favicon-32x32.png"
     />
     <link
-    rel="icon"
-    type="image/png"
-    sizes="16x16"
-    href="/images/favicon-16x16.png"
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
     />
     <script src="/front_side.js"></script>
     <title>TextLearn - Settings</title>
@@ -42,18 +42,20 @@
     <div class="container">
       <aside>
         <div id="user">
-          <img
-            src="/images/user.png"
-            id="usr-image"
-            alt="change image"
-          />
-          <form 
-            id="upload-pro-pic" 
-            action="/upload" 
-            method="POST" 
-            enctype="multipart/form-data" 
-            style="display: none;">
-            <input type="file" id="pro-pic-input" name="prof_pic" accept="image/*" />
+          <img src="/images/user.png" id="usr-image" alt="change image" />
+          <form
+            id="upload-pro-pic"
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+            style="display: none"
+          >
+            <input
+              type="file"
+              id="pro-pic-input"
+              name="prof_pic"
+              accept="image/*"
+            />
           </form>
           <div id="username">Username</div>
           <h1>BIO</h1>
@@ -70,18 +72,20 @@
       <section>
         <div id="upload">
           <div class="switcher">
-            <input
+            <button
               class="btn-upload2"
-              type="button"
               value="settings"
               onclick="window.location.href='/settings'"
-            />
-            <input
+            >
+              Settings
+            </button>
+            <button
               class="btn-upload2"
-              type="button"
               value="upload a new course"
               onclick="window.location.href='/upload'"
-            />
+            >
+              Upload a new course
+            </button>
           </div>
           <form action="/settings" method="POST" id="form">
             <label for="updtname" class="labels2">Username</label>
