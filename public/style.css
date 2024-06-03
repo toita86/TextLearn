@@ -404,6 +404,12 @@ section {
     padding: 2.5vh 4.1vh;
 }
 
+#manage-account {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 /*COMMON CONFIGURATIONS*/
 
 .container {
@@ -537,7 +543,6 @@ aside .courses-buttons {
     display: flex;
     flex-direction: row;
     padding: 0;
-    width: 100%;
     margin-bottom: 12%;
     justify-content: center;
 }
@@ -703,7 +708,7 @@ aside .courses-buttons {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 2rem;
     padding: 0;
-    align-self: center;
+    text-align: center;
     margin: 1%;
 }
 
@@ -718,14 +723,6 @@ aside .courses-buttons {
     ;
 }
 
-#container-marketplace {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
 #cardbox {
     width: 80%;
     height: 100%;
@@ -736,15 +733,15 @@ aside .courses-buttons {
     justify-content: center;
     overflow-y: auto;
 
-    background-color: #C6A064;
+    background-color:#C6A064;
 }
 
 .cards {
-    width: auto;
+    width: 30%;
     margin: 1%;
     padding: 2%;
-    align-self: center;
     background-color: #EDDBCC;
+    align-self: center;
 }
 
 .cards:hover {
@@ -756,8 +753,7 @@ aside .courses-buttons {
 
 .cards img {
     width: 100%;
-    height: 30%;
-    object-fit: cover;
+    height: 70%;
 }
 
 .card-title {

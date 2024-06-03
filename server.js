@@ -60,6 +60,29 @@ app.post("/logout", (req, res) => {
   });
 });
 
+app.post("/remove-account", async (req, res) => {
+  if (!req.session.isAuth) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  try {
+    await pool.query("DELETE FROM users WHERE id = $1", [req.session.user.id]);
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send("Failed to log out.");
+      }
+      res.clearCookie("connect.sid", {
+        path: "/",
+        sameSite: "None",
+        secure: true,
+      }); // This line ensures the cookie is cleared
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.get("/session-data", (req, res) => {
   if (!req.session.isAuth) {
     res.json({
