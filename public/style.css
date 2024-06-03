@@ -241,7 +241,9 @@ main {
     font-size: 1.5rem;
     /* Dimensione del testo adattabile */
     background-color: #FFC61A;
+    color: #372A28;
     border: none;
+    border-radius: 0;
     cursor: pointer;
     /* Cambia il cursore al passaggio del mouse */
 }
@@ -720,7 +722,8 @@ aside .courses-buttons {
     background-color: #372A28;
     color: #EDDBCC;
     align-self: center;
-    ;
+    border: none;
+    border-radius: 0;
 }
 
 #cardbox {
