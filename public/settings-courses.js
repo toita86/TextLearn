@@ -35,6 +35,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
     }
+
+    document.getElementById("usr-image").addEventListener("click", () => {
+      document.getElementById("pro-pic-input").click();
+    });
+
+    document.getElementById("pro-pic-input").addEventListener("change", () => {
+      const form = document.getElementById("upload-pro-pic");
+      const formData = new FormData(form);
+
+      fetch("/update-pro-pic", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("usr-image").src = data.imageUrl;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
   } catch (error) {
     console.error("Error fetching courses:", error);
   }

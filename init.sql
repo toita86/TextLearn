@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password_digest TEXT,
-    bio TEXT
+    bio TEXT,
+    picture_path TEXT
 );
 
 CREATE TABLE IF NOT EXISTS courses (
