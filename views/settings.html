@@ -13,10 +13,10 @@
       href="/images/favicon-32x32.png"
     />
     <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/images/favicon-16x16.png"
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/images/favicon-16x16.png"
     />
     <script src="/front_side.js"></script>
     <title>TextLearn - Settings</title>
@@ -46,9 +46,15 @@
             src="/images/user.png"
             id="usr-image"
             alt="change image"
-            onclick=""
           />
-
+          <form 
+            id="upload-pro-pic" 
+            action="/upload" 
+            method="POST" 
+            enctype="multipart/form-data" 
+            style="display: none;">
+            <input type="file" id="pro-pic-input" name="prof_pic" accept="image/*" />
+          </form>
           <div id="username">Username</div>
           <h1>BIO</h1>
           <div id="bio">Change me!</div>
