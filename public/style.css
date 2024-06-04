@@ -241,9 +241,7 @@ main {
     font-size: 1.5rem;
     /* Dimensione del testo adattabile */
     background-color: #FFC61A;
-    color: #372A28;
     border: none;
-    border-radius: 0;
     cursor: pointer;
     /* Cambia il cursore al passaggio del mouse */
 }
@@ -406,12 +404,6 @@ section {
     padding: 2.5vh 4.1vh;
 }
 
-#manage-account {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
 /*COMMON CONFIGURATIONS*/
 
 .container {
@@ -545,6 +537,7 @@ aside .courses-buttons {
     display: flex;
     flex-direction: row;
     padding: 0;
+    width: 100%;
     margin-bottom: 12%;
     justify-content: center;
 }
@@ -723,7 +716,6 @@ aside .courses-buttons {
     color: #EDDBCC;
     align-self: center;
     border: none;
-    border-radius: 0;
 }
 
 #cardbox {
@@ -907,23 +899,23 @@ una transizione piu fluida*/
 
 #reader-header {
     display: flex;
-    justify-content: space-between;
-    align-self: center; /*allinea il reader-header*/
-    align-items: center; /*allinea gli elrementi al centro*/
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /*centra il contenitore*/
     width: 50%;
     height: 20%;
     background-color:#FFC61A;
-    gap: 5%;
 }
 
-#creator {
+#course-name, #creator {
     font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2rem;
-    margin-left: 5%;
+    font-size: 1.7rem;
+    margin: 0 5%;
 }
+
 
 #creator-image {
-    width: 10%;
+    width: 15%;
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
@@ -996,6 +988,10 @@ una transizione piu fluida*/
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    }
+
+    #course-name, #creator {
+        font-size: 1.5rem;
     }
 
  }
@@ -1076,6 +1072,10 @@ una transizione piu fluida*/
 
     #creator-image {
         width: 20%;
+    }
+
+    #course-name, #creator {
+        font-size: 1.2rem;
     }
 
     .cards {
@@ -1186,6 +1186,14 @@ una transizione piu fluida*/
     .cards .subscribe-btn {
         width: 100%;
         font-size: 1rem;
+    }
+
+    #course-name, #creator {
+        font-size: 1.2rem;
+    }
+
+    #creator-image {
+        width: 30%;
     }
  }
  
