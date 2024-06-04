@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // Get the current path from the URL (e.g., /reader/1)
   const path = window.location.pathname;
 
@@ -20,16 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(`/course-reader/${courseId}`)
     .then((response) => response.json())
     .then((data) => {
-      document.getElementById("marketplace-title").textContent =
-        data.courseTitle;
+      document.getElementById("course-name").textContent = data.courseTitle;
       courseContainer.innerHTML = data.content;
     })
     .catch((error) => {
-      document.getElementById("marketplace-title").textContent =
-        "Course Reader";
+      document.getElementById("course-name").textContent = "Course Reader";
       console.error("Error fetching course content:", error);
       courseContainer.innerHTML =
         "<p style='text-align: center;'>Failed to load course content.</p>";
     });
-});
 
+  const creator = await fetch(`/creator-data/${courseId}`);
+  const creatorData = await creator.json();
+
+  if (creatorData.imageUrl != null) {
+    document.getElementById("creator-image").src = creatorData.imageUrl;
+  } else {
+    document.getElementById("creator-image").style.display = "none";
+  }
+  document.getElementById("creator").textContent = creatorData.name;
+});

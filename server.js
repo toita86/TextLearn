@@ -340,6 +340,32 @@ app.post("/upload", function (req, res) {
   }
 });
 
+app.get("/pro-pic", async (req, res) => {
+  try {
+    if (req.session.isAuth == true) {
+      const path = await pool.query(
+        `SELECT picture_path FROM users WHERE id = $1`,
+        [req.session.user.id]
+      );
+      if (path.rows[0].picture_path == null) {
+        res.status(200).json({
+          isAuth: true,
+          imageUrl: "/images/user.png",
+        });
+      } else {
+        res.status(200).json({
+          isAuth: true,
+          imageUrl: path.rows[0].picture_path,
+        });
+      }
+    } else {
+      return res.status(403).send("You are not authorized");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 app.post("/update-pro-pic", (req, res) => {
   if (req.session.isAuth == true) {
     uploadProPic(req, res, async (err) => {
@@ -367,7 +393,7 @@ app.post("/update-pro-pic", (req, res) => {
           prof_pic,
           req.session.user.id,
         ]);
-        console.log(prof_pic);
+
         res.status(200).json({
           imageUrl: prof_pic,
           msgToUser: "Image uploaded successfully",
@@ -695,6 +721,33 @@ app.get("/course-reader/:id", async (req, res) => {
     });
   } catch (err) {
     return res.status(404).send("Course not found");
+  }
+});
+
+app.get("/creator-data/:id", async (req, res) => {
+  try {
+    if (req.session.isAuth == true) {
+      const courseId = req.params.id;
+      const creatorId = await pool.query(
+        `SELECT author_id FROM courses WHERE id=$1`,
+        [courseId]
+      );
+      const creatorData = await pool.query(
+        `SELECT name, picture_path FROM users WHERE id=$1`,
+        [creatorId.rows[0].author_id]
+      );
+      console.log(creatorData);
+
+      res.status(200).json({
+        name: creatorData.rows[0].name,
+        imageUrl: creatorData.rows[0].picture_path,
+      });
+    } else {
+      return res.status(403).send("Unauthorized");
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(404).send("Creator data not found");
   }
 });
 

@@ -36,6 +36,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
+    const responseProPic = await fetch("/pro-pic");
+    const dataProPic = await responseProPic.json();
+    if (dataProPic != null) {
+      document.getElementById("usr-image").src = dataProPic.imageUrl;
+    }
+
     document.getElementById("usr-image").addEventListener("click", () => {
       document.getElementById("pro-pic-input").click();
     });
