@@ -91,7 +91,7 @@ header {
     justify-content: center;
     background-color: #FFC61A;
     width: auto;
-    font-family: 'arbutus slab', sans-serif;
+    font-family: 'Arbutus slab', sans-serif;
     position: absolute;
     /* Fissa il menu alla finestra del browser */
     right: 0;
@@ -329,6 +329,11 @@ section {
     background-color: #EDDBCC;
     width: 80%;
     text-align: center;
+    border: none;
+}
+
+.course-inputs {
+    border: none;
 }
 
 #btn-signup {
@@ -343,12 +348,6 @@ section {
 }
 
 #btn-signup:hover {
-    background-color: #8f7f7c;
-    color: #372A28;
-}
-
-
-#btn-upload:hover {
     background-color: #8f7f7c;
     color: #372A28;
 }
@@ -376,6 +375,7 @@ section {
 
 #user-change {
     width: 75%;
+    border: none;
 }
 
 #bio-input {
@@ -547,21 +547,6 @@ aside .courses-buttons {
     padding: 0;
     margin-bottom: 12%;
     justify-content: center;
-}
-
-.switcher .btn-upload2 {
-    font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2rem;
-    padding: 2.5%;
-    background-color: #372A28;
-    color: #EDDBCC;
-    border: none;
-    cursor: pointer;
-}
-
-.switcher .btn-upload2:hover {
-    background-color: #8f7f7c;
-    color: #372A28;
 }
 
 
@@ -889,7 +874,7 @@ una transizione piu fluida*/
     align-self: center; /*allinea il reader-header*/
     align-items: center; /*allinea gli elrementi al centro*/
     width: 50%;
-    height: 20%;
+    height: 10%;
     background-color:#FFC61A;
     gap: 5%;
 }
@@ -920,10 +905,13 @@ una transizione piu fluida*/
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
     margin-left: 5%;
+    padding: 0;
 }
+
 
 #creator-image {
     width: 10%;
+    padding: 0;
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
@@ -1003,7 +991,7 @@ una transizione piu fluida*/
  @media screen and (min-width: 376px) and (max-width: 768px) {
  
     html {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     #logo {
@@ -1011,7 +999,7 @@ una transizione piu fluida*/
     }
 
     #nav-link-mini {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     #hamburger {
@@ -1052,6 +1040,15 @@ una transizione piu fluida*/
         width: 100%;
         height: 60%;
         border-top: 10px solid black;
+    }
+
+    #upload {
+        width: 100%;
+        height: 100%;
+    }
+
+    .btn-upload2, #btn-signup {
+        font-size: 1.2rem;
     }
 
     .switcher {
