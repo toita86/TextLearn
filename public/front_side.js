@@ -84,5 +84,4 @@ if (results.length > 0) {
   });
 }
 
-/* getelementbyid riestituisce o loggetto identificato o null 
-getleemtnebyclassname restituisce una lista di oggetti*/
+/* getelementbyid riestituisce o loggetto identificato o null*/
