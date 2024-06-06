@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const creatorData = await creator.json();
 
   if (creatorData.imageUrl != null) {
-    document.getElementById("creator-image").src = creatorData.imageUrl;
+    document.getElementById("creator-image").src = `/${creatorData.imageUrl}`;
   } else {
     document.getElementById("creator-image").style.display = "none";
   }

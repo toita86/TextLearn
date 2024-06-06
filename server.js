@@ -736,7 +736,6 @@ app.get("/creator-data/:id", async (req, res) => {
         `SELECT name, picture_path FROM users WHERE id=$1`,
         [creatorId.rows[0].author_id]
       );
-      console.log(creatorData);
 
       res.status(200).json({
         name: creatorData.rows[0].name,
