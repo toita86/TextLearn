@@ -246,6 +246,9 @@ app.post("/signup", async (req, res) => {
       //CHANGE ME BEFORE RELEASE
       req.session.msgToUser = "Password must be at least 6 characters long";
       return res.redirect("signup");
+    } else if (emailCheck(email) === null) {
+      req.session.msgToUser = "Invalid email";
+      return res.redirect("signup");
     }
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 8);
@@ -264,6 +267,14 @@ app.post("/signup", async (req, res) => {
     return res.redirect("signup");
   }
 });
+
+function emailCheck(email) {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}
 
 app.get("/upload", (req, res) => {
   if (req.session.isAuth == true) {
