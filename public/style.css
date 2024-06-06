@@ -449,6 +449,18 @@ aside {
     transition: 0.2s ease-in;
 }
 
+#img-popup {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1rem;
+    padding: 1%;
+    text-align: center;
+    background-color: #FFC61A;
+    position: absolute;
+    left: 22%;
+    top: 23%;
+    z-index: 9999;
+    display: none;
+}
 
 #username {
     font-family: 'Arbutus Slab', sans-serif;
