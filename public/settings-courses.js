@@ -62,6 +62,22 @@ document.addEventListener("DOMContentLoaded", async () => {
           console.error("Error:", error);
         });
     });
+
+    const imgPopup = document.getElementById("img-popup");
+    const img = document.getElementById("usr-image");
+
+    // Verifica che gli elementi esistano nel DOM
+    if (imgPopup && img) {
+      img.addEventListener("mouseover", () => {
+        imgPopup.style.display = "block";
+      });
+
+      img.addEventListener("mouseout", () => {
+        imgPopup.style.display = "none";
+      });
+    } else {
+      console.error("Elementi img-popup o usr-image non trovati nel DOM.");
+    }
   } catch (error) {
     console.error("Error fetching courses:", error);
   }
