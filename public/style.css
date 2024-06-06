@@ -436,7 +436,6 @@ aside {
 }
 
 #usr-image {
-    display: block;
     width: 30%;
     margin: 0;
     /* Centra orizzontalmente */
@@ -455,12 +454,12 @@ aside {
     padding: 1%;
     text-align: center;
     background-color: #FFC61A;
-    position: absolute;
-    left: 22%;
-    top: 23%;
-    z-index: 9999;
-    display: none;
+    visibility: hidden;
+    width: 50%;
+    align-self: center;
+    margin-top: 2%;
 }
+
 
 #username {
     font-family: 'Arbutus Slab', sans-serif;
@@ -480,7 +479,7 @@ aside {
 aside #bio {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
-    padding: 2%;
+    padding: 0;
     padding-bottom: 3%;
     text-align: left;
 }
@@ -734,11 +733,14 @@ aside .courses-buttons {
     overflow-y: auto;
 
     background-color:#C6A064;
+
+    padding: 2%;
 }
 
 .cards {
     width: 30%;
-    margin: 1%;
+    margin: 3%;
+    margin-bottom: 3%;
     padding: 2%;
     background-color: #EDDBCC;
     align-self: center;
@@ -764,6 +766,16 @@ aside .courses-buttons {
     overflow: hidden;
 }
 
+.card-description {
+    font-family: 'Arbutus Slab', sans-serif;
+    height: 20vh;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    margin: 0;
+    margin-bottom: 5%;
+}
+
 .button-container {
     width: 100%;
     display: flex;
@@ -771,7 +783,7 @@ aside .courses-buttons {
 }
 
 .cards .subscribe-btn {
-    width: 50%;
+    width: 100%;
     font-family: 'Arbutus Slab', sans-serif;
     color: #EDDBCC;
     font-size: 1.2rem;
@@ -785,13 +797,6 @@ aside .courses-buttons {
     margin: 2%;
 
     cursor: pointer;
-}
-
-.card-description {
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow-y: auto;
-    height: 30%;
 }
 
 .subscribe-btn:hover {
@@ -931,6 +936,10 @@ una transizione piu fluida*/
 #creator-image {
     width: 10%;
     padding: 0;
+}
+
+pre { /*tag facente parte del rendering del corso testuale*/
+    text-wrap: wrap;
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
@@ -1102,6 +1111,10 @@ una transizione piu fluida*/
         font-size: 1rem;
     }
 
+    .card-description {
+        font-size: 0.8rem;
+    }
+
     .button-container {
         width: 100%;
         display: flex;
@@ -1112,6 +1125,10 @@ una transizione piu fluida*/
     .cards .subscribe-btn {
         width: 100%;
         font-size: 1rem;
+    }
+
+    #img-popup {
+        font-size: 1.2rem;
     }
 
  }
@@ -1191,6 +1208,10 @@ una transizione piu fluida*/
 
     .card-title {
         font-size: 1rem;
+    }
+
+    .card-description {
+        font-size: 0.8rem;
     }
 
     .button-container {

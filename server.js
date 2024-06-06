@@ -269,6 +269,7 @@ app.post("/signup", async (req, res) => {
 });
 
 function emailCheck(email) {
+  return true;
   return String(email)
     .toLowerCase()
     .match(
