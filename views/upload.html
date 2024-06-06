@@ -42,7 +42,21 @@
     <div class="container">
       <aside>
         <div id="user">
-          <img src="/images/user.png" id="usr-image" alt="User Image" />
+          <img src="" id="usr-image" alt="User Image" />
+          <form
+            id="upload-pro-pic"
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+            style="display: none"
+          >
+            <input
+              type="file"
+              id="pro-pic-input"
+              name="prof_pic"
+              accept="image/*"
+            />
+          </form>
           <div id="username">Username</div>
           <h1>BIO</h1>
           <div id="bio">Change me!</div>
