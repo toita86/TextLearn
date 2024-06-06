@@ -88,6 +88,7 @@ if (results.length > 0) {
 getleemtnebyclassname restituisce una lista di oggetti*/
 
 
+//fa imgpopup visibile al passaggio del mouse
 // Assicurati che il DOM sia completamente caricato prima di eseguire il codice
 document.addEventListener('DOMContentLoaded', (event) => {
   const imgPopup = document.getElementById('img-popup');
