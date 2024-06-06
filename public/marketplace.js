@@ -22,11 +22,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const div_button = document.createElement("div");
         div_button.className = "button-container";
 
-        const button_desc = document.createElement("button");
-        button_desc.textContent = "Description";
-        button_desc.className = "subscribe-btn";
-        button_desc.onclick = "openDescription()";
-
         const button_subscribe = document.createElement("button");
         button_subscribe.id = `card-${course.id}`;
         button_subscribe.textContent = "Join";
@@ -53,11 +48,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
 
-        div_button.appendChild(button_desc);
+        const description = document.createElement("p");
+        description.className = "card-description";
+        description.textContent = course.descr;
+
         div_button.appendChild(button_subscribe);
 
         card.appendChild(img);
         card.appendChild(p);
+        card.appendChild(description);
         card.appendChild(div_button);
 
         cardbox.append(card);
@@ -106,11 +105,6 @@ function updateCourseCards(courses) {
     const div_button = document.createElement("div");
     div_button.className = "button-container";
 
-    const button_desc = document.createElement("button");
-    button_desc.textContent = "Description";
-    button_desc.className = "subscribe-btn";
-    button_desc.onclick = "openDescription()";
-
     const button_subscribe = document.createElement("button");
     button_subscribe.id = `card-${course.id}`;
     button_subscribe.textContent = "Join";
@@ -137,11 +131,15 @@ function updateCourseCards(courses) {
       }
     });
 
-    div_button.appendChild(button_desc);
+    const description = document.createElement("p");
+    description.className = "card-description";
+    description.textContent = course.descr;
+
     div_button.appendChild(button_subscribe);
 
     card.appendChild(img);
     card.appendChild(p);
+    card.appendChild(description);
     card.appendChild(div_button);
 
     cardbox.append(card);
