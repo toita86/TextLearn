@@ -775,6 +775,13 @@ aside .courses-buttons {
     cursor: pointer;
 }
 
+.card-description {
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    height: 30%;
+}
+
 .subscribe-btn:hover {
     background-color: #8f7f7c;
     color: #372A28;
@@ -901,7 +908,7 @@ una transizione piu fluida*/
     gap: 5%;
 }
 
-#creator {
+#course-name, #creator {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
     margin-left: 5%;
