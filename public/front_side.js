@@ -96,11 +96,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Verifica che gli elementi esistano nel DOM
   if (imgPopup && img) {
     img.addEventListener('mouseover', () => {
-      imgPopup.style.display = 'block';
+      imgPopup.style.visibility = 'visible';
     });
 
     img.addEventListener('mouseout', () => {
-      imgPopup.style.display = 'none';
+      imgPopup.style.visibility = 'hidden';
     });
   } else {
     console.error('Elementi img-popup o usr-image non trovati nel DOM.');
