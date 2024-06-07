@@ -175,6 +175,17 @@ function checkPPicType(file, cb) {
   }
 }
 
+const updateCourse = multer({
+  storage: storage,
+  limits: { fileSize: 100000000 },
+  fileFilter: (req, file, cb) => {
+    if (path.extname(file.originalname) !== ".md") {
+      return cb(new Error("Error: md files only!"));
+    }
+    return cb(null, true);
+  },
+}).single("course_upd");
+
 // ROUTES
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
@@ -357,6 +368,83 @@ app.post("/upload", function (req, res) {
     res.redirect("login");
   }
 });
+
+app.post("/update-course/:id", async (req, res) => {
+  if (req.session.isAuth) {
+    updateCourse(req, res, async (err) => {
+      if (err) {
+        // Handle file type errors
+        if (err.message === "Error: md files only!") {
+          req.session.msgToUser = "Only .md files are allowed";
+          return res
+            .status(400)
+            .json({ message: "Only .md files are allowed" });
+        }
+        console.log(err);
+        // Handle other multer errors
+        req.session.msgToUser = "An error occurred during file upload";
+        return res.status(404).json({ message: "Course not found" });
+      }
+
+      try {
+        const courseId = req.params.id;
+
+        // Check if a file is uploaded
+        if (!req.file) {
+          req.session.msgToUser = "No file selected";
+          return res.status(400).json({ message: "No file selected" });
+        }
+
+        // Get current course details
+        const course = await pool.query(
+          "SELECT file_path FROM courses WHERE id = $1",
+          [courseId]
+        );
+
+        if (course.rows.length === 0) {
+          return res.status(404).json({ message: "Course not found" });
+        }
+
+        const oldFilePath = course.rows[0].file_path;
+
+        // Delete the old file if it exists
+        if (oldFilePath) {
+          deleteFile(oldFilePath);
+        }
+
+        // Update the database with the new file path
+        const newFilePath = req.file.path;
+        await pool.query("UPDATE courses SET file_path = $1 WHERE id = $2", [
+          newFilePath,
+          courseId,
+        ]);
+
+        req.session.msgToUser = "Course file updated successfully";
+        return res
+          .status(200)
+          .json({ message: "Course file updated successfully" });
+      } catch (err) {
+        console.error(err);
+        req.session.msgToUser = "An error occurred during file upload";
+        return res
+          .status(500)
+          .json({ message: "An error occurred during file upload" });
+      }
+    });
+  } else {
+    return res.status(403).json({ message: "You are not authorized" });
+  }
+});
+
+function deleteFile(filePath) {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error(`Failed to delete file: ${filePath}`, err);
+    } else {
+      console.log(`Successfully deleted file: ${filePath}`);
+    }
+  });
+}
 
 app.get("/pro-pic", async (req, res) => {
   try {

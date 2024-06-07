@@ -114,7 +114,12 @@ function coursesListing(course, coursesContainer) {
   courseTitle.textContent = course.title;
   courseTitle.href = `/reader/${course.id}`;
 
-  let button;
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.id = "course-btns";
+
+  let delbutton;
+  let updateButton;
+  let fileInput;
 
   if (coursesContainer.id === "sub-courses") {
     const unSubButton = document.createElement("button");
@@ -175,10 +180,51 @@ function coursesListing(course, coursesContainer) {
         }
       }
     });
-    button = deleteButton;
+
+    updateButton = document.createElement("button");
+    updateButton.className = "courses-buttons";
+    updateButton.textContent = "Upload";
+
+    fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".md";
+    fileInput.style.display = "none";
+
+    updateButton.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files[0];
+      if (file && confirm("Are you sure you want to update this course?")) {
+        try {
+          const formData = new FormData();
+          formData.append("course_upd", file);
+
+          const updateResponse = await fetch(`/update-course/${course.id}`, {
+            method: "POST",
+            body: formData,
+          });
+
+          const updateResult = await updateResponse.json();
+          if (updateResult.ok) {
+            alert("Course updated successfully!" + updateResult.message);
+          } else {
+            alert(updateResult.message);
+          }
+        } catch (error) {
+          console.error("Error updating course:", error);
+          alert("An error occurred while updating the course.");
+        }
+      }
+    });
+    delbutton = deleteButton;
   }
   courseDiv.appendChild(courseTitle);
-  courseDiv.appendChild(button);
+  buttonsDiv.appendChild(fileInput);
+  buttonsDiv.appendChild(delbutton);
+  buttonsDiv.appendChild(updateButton);
+  courseDiv.appendChild(buttonsDiv);
 
   coursesContainer.appendChild(hr);
   coursesContainer.appendChild(courseDiv);
