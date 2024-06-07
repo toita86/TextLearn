@@ -435,11 +435,18 @@ aside {
     flex-direction: column;
 }
 
-#usr-image {
-    width: 30%;
-    margin: 0;
-    /* Centra orizzontalmente */
+#img-container {
+    width: 40%;
+    height: 40%;
+    aspect-ratio: 1 / 1; /*assiucura che il contenitore sia sempre quadrato*/
+    overflow: hidden;
     align-self: center;
+}
+
+#usr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -566,6 +573,10 @@ aside .courses-buttons {
     padding: 0;
     margin-bottom: 12%;
     justify-content: center;
+}
+
+#separator {
+    display: none;
 }
 
 
@@ -776,10 +787,7 @@ aside .courses-buttons {
 
 .card-description {
     font-family: 'Arbutus Slab', sans-serif;
-    height: 20vh;
     font-size: 1rem;
-    text-overflow: ellipsis;
-    overflow-y: auto;
     margin: 0;
     margin-bottom: 5%;
 }
@@ -896,8 +904,29 @@ una transizione piu fluida*/
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#box-description {
+    padding: 2%;
+    width: 100%;
+    height: 30%;
+    overflow-y: auto;
+    font-family: 'Arbutus Slab', sans-serif;
+    background-color: #FFC61A;
+    overflow-y: auto;
+}
+
+#box-description h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#description {
+    text-align: justify;
+    font-size: 1.2rem;
 }
 
 #reader-header {
@@ -1050,10 +1079,6 @@ pre { /*tag facente parte del rendering del corso testuale*/
         font-size: 3rem;
     }
 
-    #usr-image {
-        width: 30%;
-    }
-
     .container {
         display: flex;
         flex-direction: column;
@@ -1062,6 +1087,22 @@ pre { /*tag facente parte del rendering del corso testuale*/
     aside {
         width: 100%;
         height: 40%;
+    }
+
+    #img-container {
+        width: 25%;
+        height: 25%;
+    }
+
+    #separator {
+        display: block;
+        width: 100%;
+        height: 3%;
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bolder;
     }
 
     #username {
@@ -1074,8 +1115,7 @@ pre { /*tag facente parte del rendering del corso testuale*/
 
     section {
         width: 100%;
-        height: 60%;
-        border-top: 10px solid black;
+        height: 57%;
     }
 
     #upload {
@@ -1185,11 +1225,20 @@ pre { /*tag facente parte del rendering del corso testuale*/
         height: 40%;
     }
 
+    #separator {
+        display: block;
+        width: 100%;
+        height: 3%;
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bolder;
+    }
     
     section {
         width: 100%;
-        height: 60%;
-        border-top: 10px solid black;
+        height: 57%;
     }
 
     .switcher {
