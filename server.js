@@ -703,7 +703,12 @@ app.get("/course-reader/:id", async (req, res) => {
       [req.session.user.id, courseId]
     );
 
-    if (!isSubscribed.rows.length > 0) {
+    const isAuthor = await pool.query(
+      `SELECT * FROM courses WHERE id=$1 AND author_id=$2`,
+      [courseId, req.session.user.id]
+    );
+
+    if (!isAuthor.rows.length > 0 && !isSubscribed.rows.length > 0) {
       req.session.msgToUser = "You are not subscribed to this course";
       return res.json({ content: "Nothing here to see..." });
     }
