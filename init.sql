@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS courses (
     id SERIAL PRIMARY KEY,
     author_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
-    descr TEXT,
+    descr VARCHAR(50),
     thumbnail_path TEXT,
     file_path TEXT    
 );

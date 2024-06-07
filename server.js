@@ -322,6 +322,12 @@ app.post("/upload", function (req, res) {
           }
         }
 
+        if (course_descr.length > 50) {
+          req.session.msgToUser =
+            "Course description must be 50 characters or less";
+          return res.redirect("upload");
+        }
+
         // Otherwise, upload the course to the database
         await pool.query(
           "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
@@ -697,7 +703,12 @@ app.get("/course-reader/:id", async (req, res) => {
       [req.session.user.id, courseId]
     );
 
-    if (!isSubscribed.rows.length > 0) {
+    const isAuthor = await pool.query(
+      `SELECT * FROM courses WHERE id=$1 AND author_id=$2`,
+      [courseId, req.session.user.id]
+    );
+
+    if (!isAuthor.rows.length > 0 && !isSubscribed.rows.length > 0) {
       req.session.msgToUser = "You are not subscribed to this course";
       return res.json({ content: "Nothing here to see..." });
     }
