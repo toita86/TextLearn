@@ -333,7 +333,7 @@ app.post("/upload", function (req, res) {
           }
         }
 
-        if (course_descr.length > 50) {
+        if (course_descr.length > 255) {
           req.session.msgToUser =
             "Course description must be 50 characters or less";
           return res.redirect("upload");
