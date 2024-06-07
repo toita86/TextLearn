@@ -514,12 +514,19 @@ aside #bio {
 
 .course {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     margin: 0;
     margin-bottom: 2%;
     padding-bottom: 2%;
     border-bottom: 1px solid black;
+    align-items: center;
+}
+
+#course-btns {
+    justify-content: center;
+    display: flex;
+    width: 100%;
 }
 
 .slideLeft {
@@ -545,6 +552,7 @@ aside .courses-buttons {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
     height: 30%;
+    margin: 2%;
     /* Per evitare che il pulsante abbia un'altezza troppo alta con curse titles lunghi*/
 
     /*
