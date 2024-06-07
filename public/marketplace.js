@@ -4,11 +4,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       const response = await fetch("/marketplace-courses");
       const data = await response.json();
 
+      /*if (response.status === 500){
+        document.getElementById("msgToUser").textContent = "No courses uploaded";
+      }*/
+
       const cardbox = document.getElementById("cardbox");
 
       data.courses.forEach((course) => {
         const card = document.createElement("div");
         card.className = "cards";
+
+        const imgCardContainer = document.createElement("div");
+        imgCardContainer.id = "img-card-container";
 
         const img = document.createElement("img");
         img.src = course.thumbnail_path;
@@ -54,7 +61,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         div_button.appendChild(button_subscribe);
 
-        card.appendChild(img);
+        card.appendChild(imgCardContainer);
+        imgCardContainer.appendChild(img);
         card.appendChild(p);
         card.appendChild(author);
         card.appendChild(div_button);
