@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (creatorData.imageUrl != null) {
     document.getElementById("creator-image").src = `/${creatorData.imageUrl}`;
-  } else {
-    document.getElementById("creator-image").style.display = "none";
   }
   document.getElementById("creator").textContent = creatorData.name;
 });

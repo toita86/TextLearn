@@ -469,7 +469,7 @@ app.get("/pro-pic", async (req, res) => {
       if (path.rows[0].picture_path == null) {
         res.status(200).json({
           isAuth: true,
-          imageUrl: "/images/user.png",
+          imageUrl: "/images/USER.jpeg",
         });
       } else {
         res.status(200).json({
