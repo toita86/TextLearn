@@ -788,6 +788,7 @@ app.post("/marketplace-search", async (req, res) => {
 app.get("/reader/:id", (req, res) => {
   try {
     if (req.session.isAuth == true) {
+      req.session.msgToUser = "";
       res.sendFile(path.join(__dirname, "views", "reader.html"));
     } else {
       return res.redirect("/login");
@@ -843,7 +844,7 @@ app.get("/course-reader/:id", async (req, res) => {
       const sanitizedContent = DOMPurify.sanitize(htmlContent);
 
       // Send HTML content as JSON response
-      res.json({
+      res.status(200).json({
         courseTitle: courseTitle.rows[0].title,
         content: sanitizedContent,
       });
