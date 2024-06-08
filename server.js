@@ -15,6 +15,8 @@ const port = 8080;
 
 const app = express();
 
+/* ====================== MIDDLEWARES ====================== */
+
 // Set the views directory
 app.set("views", path.join(__dirname, "views"));
 // Serve static files from the uploads directory
@@ -27,6 +29,7 @@ app.use(express.urlencoded({ extended: "false" }));
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 
+// Middleware to parse request body as JSON
 app.use(express.json());
 
 // Middleware to use sessions
@@ -46,43 +49,10 @@ app.use(
   })
 );
 
-app.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send("Failed to log out.");
-    }
-    res.clearCookie("connect.sid", {
-      path: "/",
-      sameSite: "None",
-      secure: true,
-    }); // This line ensures the cookie is cleared
-    res.sendStatus(200);
-  });
-});
-
-app.delete("/remove-account", async (req, res) => {
-  if (!req.session.isAuth) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-  try {
-    await pool.query("DELETE FROM users WHERE id = $1", [req.session.user.id]);
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(500).send("Failed to log out.");
-      }
-      res.clearCookie("connect.sid", {
-        path: "/",
-        sameSite: "None",
-        secure: true,
-      }); // This line ensures the cookie is cleared
-      res.sendStatus(200);
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
+/*
+  Gets the user's data from the session. 
+  If there is no user logged in then it will return null.
+*/
 app.get("/session-data", (req, res) => {
   if (!req.session.isAuth) {
     res.json({
@@ -99,6 +69,7 @@ app.get("/session-data", (req, res) => {
   });
 });
 
+/* ====================== MUTLER ====================== */
 // Set storage engine
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -112,7 +83,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// Init upload
+// Init upload for the courses upload page
 const upload = multer({
   storage: storage,
   limits: { fileSize: 1000000000 }, // Set file size limit (optional)
@@ -149,6 +120,7 @@ function checkFileType(file, cb) {
   }
 }
 
+// Set storage for the ppics
 const profilePicStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/profile_pics/");
@@ -158,6 +130,7 @@ const profilePicStorage = multer.diskStorage({
   },
 });
 
+// Init upload for the pp upload page
 const uploadProPic = multer({
   storage: profilePicStorage,
   limits: { fileSize: 100000000 }, // Set file size limit (optional)
@@ -182,6 +155,7 @@ function checkPPicType(file, cb) {
   }
 }
 
+// Init upload for the updating the courses .md
 const updateCourse = multer({
   storage: storage,
   limits: { fileSize: 100000000 },
@@ -193,15 +167,23 @@ const updateCourse = multer({
   },
 }).single("course_upd");
 
-// ROUTES
+/* ====================== ROUTES ====================== */
+
+/* ================ HOME page Routes ================ */
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
+/* ================ LOGIN page Routes ================ */
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
 });
 
+/* 
+This route is triggered when the user submits their email and password on the login page. 
+The server then checks if there is a user with that email address in the database, and if the password matches the one stored in the database. 
+If both conditions are met, the user is logged in and redirected to the "settings" page.
+*/
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -238,10 +220,16 @@ app.post("/login", async (req, res) => {
   }
 });
 
+/* ================ SIGNUP page Routes ================ */
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "signup.html"));
 });
 
+/*
+This endpoint, which handles user signup functionality. 
+It validates user input, checks if the email already exists in the database, and creates a new user with a hashed password. 
+If any errors occur during processing, it logs an error message to the console and redirects the user back to the signup page.
+*/
 app.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -260,9 +248,8 @@ app.post("/signup", async (req, res) => {
     if (name === "" || email === "" || password === "") {
       req.session.msgToUser = "Please fill in all fields";
       return res.redirect("signup");
-    } else if (password.length < 1) {
-      //CHANGE ME BEFORE RELEASE
-      req.session.msgToUser = "Password must be at least 6 characters long";
+    } else if (password.length < 8) {
+      req.session.msgToUser = "Password must be at least 8 characters long";
       return res.redirect("signup");
     } else if (emailCheck(email) === null) {
       req.session.msgToUser = "Invalid email";
@@ -287,7 +274,6 @@ app.post("/signup", async (req, res) => {
 });
 
 function emailCheck(email) {
-  return true;
   return String(email)
     .toLowerCase()
     .match(
@@ -295,6 +281,7 @@ function emailCheck(email) {
     );
 }
 
+/* ================ UPLOAD page Routes ================ */
 app.get("/upload", (req, res) => {
   if (req.session.isAuth == true) {
     res.sendFile(path.join(__dirname, "views", "upload.html"));
@@ -304,6 +291,11 @@ app.get("/upload", (req, res) => {
   }
 });
 
+/*
+In this post request we will upload the file to the server.
+We will use the multer middleware `upload` for uploading files.
+There are various checks that we need to do before actually uploading a file.
+*/
 app.post("/upload", function (req, res) {
   if (req.session.isAuth == true) {
     upload(req, res, async function (err) {
@@ -459,6 +451,10 @@ function deleteFile(filePath) {
   });
 }
 
+/*
+This route is used to get the user's profile picture.
+If the has not uploaded a profile picture yet then it will return the default image.
+*/
 app.get("/pro-pic", async (req, res) => {
   try {
     if (req.session.isAuth == true) {
@@ -469,7 +465,7 @@ app.get("/pro-pic", async (req, res) => {
       if (path.rows[0].picture_path == null) {
         res.status(200).json({
           isAuth: true,
-          imageUrl: "/images/user.png",
+          imageUrl: "/images/USER.jpeg",
         });
       } else {
         res.status(200).json({
@@ -500,6 +496,7 @@ app.post("/update-pro-pic", (req, res) => {
         return res.status(403).send("Wrong image format");
       }
 
+      // returns errors if no file was uploaded
       if (!req.file) {
         req.session.msgToUser = "No file selected";
         return res.status(400).send("No file selected");
@@ -530,6 +527,9 @@ app.post("/update-pro-pic", (req, res) => {
   }
 });
 
+/*
+This route gets the user's courses.
+*/
 app.get("/user-courses", async (req, res) => {
   if (!req.session.isAuth) {
     return res.json({ isAuth: false, courses: [] });
@@ -550,6 +550,9 @@ app.get("/user-courses", async (req, res) => {
   }
 });
 
+/*
+Manages the user's subscription to a course.
+*/
 app.post("/subscribe/:id", async (req, res) => {
   const courseId = req.params.id;
   if (!req.session.isAuth) {
@@ -593,6 +596,9 @@ app.post("/subscribe/:id", async (req, res) => {
   }
 });
 
+/*
+Manages the user's unsubscription to a course.
+*/
 app.delete("/unsub-course/:id", async (req, res) => {
   const courseId = req.params.id;
   if (!req.session.isAuth) {
@@ -619,6 +625,9 @@ app.delete("/unsub-course/:id", async (req, res) => {
   }
 });
 
+/*
+Gets the user's subscriptions.
+*/
 app.get("/user-sub-courses", async (req, res) => {
   if (!req.session.isAuth) {
     return res.json({ isAuth: false, courses: [] });
@@ -632,6 +641,16 @@ app.get("/user-sub-courses", async (req, res) => {
     );
 
     // Collect course details
+    /*the collection of course details is created using the map() method on the subedCourses.rows array. 
+    The map() method takes a function that returns a new value for each element in the array, and applies it to every element in the array, 
+    returning a new array with the mapped values.
+    In this case, the function is an arrow function that takes a single argument, which is the course ID, 
+    and returns a promise for the result of fetching the course details for that particular course. 
+    The resulting promises are then collected in an array using Promise.all(), 
+    which allows us to wait for all of them to resolve before proceeding with the rest of the code.
+
+    Once all of the promises have resolved, the coursesInfo variable will contain an array of objects, 
+    where each object represents a course and contains the ID, title, and other relevant details for that course. */
     const coursesInfoPromises = subedCourses.rows.map(async (course) => {
       const result = await pool.query(
         "SELECT id, title FROM courses WHERE id = $1",
@@ -677,6 +696,8 @@ app.delete("/delete-course/:id", async (req, res) => {
       .json({ message: "An error occurred while deleting the course" });
   }
 });
+
+/* ================ SETTINGS page Routes ================ */
 
 app.get("/settings", (req, res) => {
   if (req.session.isAuth == true) {
@@ -737,10 +758,50 @@ app.post("/settings", async (req, res) => {
   }
 });
 
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Failed to log out.");
+    }
+    res.clearCookie("connect.sid", {
+      path: "/",
+      sameSite: "None",
+      secure: true,
+    }); // This line ensures the cookie is cleared
+    res.sendStatus(200);
+  });
+});
+
+app.delete("/remove-account", async (req, res) => {
+  if (!req.session.isAuth) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  try {
+    await pool.query("DELETE FROM users WHERE id = $1", [req.session.user.id]);
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send("Failed to log out.");
+      }
+      res.clearCookie("connect.sid", {
+        path: "/",
+        sameSite: "None",
+        secure: true,
+      }); // This line ensures the cookie is cleared
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/* ================ ABOUT page Routes ================ */
+
 app.get("/about", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "about.html"));
 });
 
+/* ================ MARKETPLACE page Routes ================ */
 app.get("/marketplace", async (req, res) => {
   req.session.msgToUser = "";
   res.sendFile(path.join(__dirname, "views", "marketplace.html"));
@@ -785,6 +846,8 @@ app.post("/marketplace-search", async (req, res) => {
   }
 });
 
+/* ================ READER page Routes ================ */
+
 app.get("/reader/:id", (req, res) => {
   try {
     if (req.session.isAuth == true) {
@@ -821,17 +884,12 @@ app.get("/course-reader/:id", async (req, res) => {
     }
 
     const filePath = await pool.query(
-      `SELECT file_path FROM courses WHERE id=$1`,
+      `SELECT title, descr, file_path FROM courses WHERE id=$1`,
       [courseId]
     );
     if (filePath == null) {
       return res.status(404).send("Course not found");
     }
-
-    const courseTitle = await pool.query(
-      `SELECT title FROM courses WHERE id=$1`,
-      [courseId]
-    );
 
     fs.readFile(filePath.rows[0].file_path, "utf8", (err, data) => {
       if (err) {
@@ -845,7 +903,8 @@ app.get("/course-reader/:id", async (req, res) => {
 
       // Send HTML content as JSON response
       res.status(200).json({
-        courseTitle: courseTitle.rows[0].title,
+        courseTitle: filePath.rows[0].title,
+        description: filePath.rows[0].descr,
         content: sanitizedContent,
       });
     });
@@ -854,6 +913,9 @@ app.get("/course-reader/:id", async (req, res) => {
   }
 });
 
+/*
+Simple endpoint to get course Author's Data
+*/
 app.get("/creator-data/:id", async (req, res) => {
   try {
     if (req.session.isAuth == true) {
@@ -879,5 +941,7 @@ app.get("/creator-data/:id", async (req, res) => {
     return res.status(404).send("Creator data not found");
   }
 });
+
+/* ================ START server ================ */
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

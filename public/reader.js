@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .then((response) => response.json())
     .then((data) => {
       document.getElementById("course-name").textContent = data.courseTitle;
+      document.getElementById("description").textContent = data.description;
       courseContainer.innerHTML = data.content;
     })
     .catch((error) => {
@@ -35,8 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (creatorData.imageUrl != null) {
     document.getElementById("creator-image").src = `/${creatorData.imageUrl}`;
-  } else {
-    document.getElementById("creator-image").style.display = "none";
   }
   document.getElementById("creator").textContent = creatorData.name;
 });
