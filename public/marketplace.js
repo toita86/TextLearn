@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const response = await fetch("/marketplace-courses");
       const data = await response.json();
 
-      /*if (response.status === 500){
-        document.getElementById("msgToUser").textContent = "No courses uploaded";
-      }*/
-
       const cardbox = document.getElementById("cardbox");
+      console.log(data);
+      if (data.courses.length === 0) {
+        document.getElementById("msgToUser").textContent =
+          "No courses on sight";
+      }
 
       data.courses.forEach((course) => {
         const card = document.createElement("div");
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const author = document.createElement("p");
         author.className = "card-description";
-        author.textContent = data.author_name;
+        author.textContent = course.author_name;
 
         div_button.appendChild(button_subscribe);
 
@@ -139,15 +140,16 @@ function updateCourseCards(courses) {
       }
     });
 
-    const description = document.createElement("p");
-    description.className = "card-description";
-    description.textContent = course.descr;
+    const author = document.createElement("p");
+    author.className = "card-description";
+    author.textContent = data.author_name;
 
     div_button.appendChild(button_subscribe);
 
-    card.appendChild(img);
+    card.appendChild(imgCardContainer);
+    imgCardContainer.appendChild(img);
     card.appendChild(p);
-    card.appendChild(description);
+    card.appendChild(author);
     card.appendChild(div_button);
 
     cardbox.append(card);

@@ -749,17 +749,13 @@ app.get("/marketplace", async (req, res) => {
 app.get("/marketplace-courses", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT id, title, descr, thumbnail_path, file_path FROM courses"
-    );
-
-    const author_name = await pool.query(
-      "SELECT name FROM users WHERE id = $1",
-      [req.session.user.id]
+      `SELECT courses.id, courses.title, courses.descr, courses.thumbnail_path, users.name as author_name 
+       FROM courses 
+       JOIN users ON courses.author_id = users.id`
     );
     return res.status(200).json({
       isAuth: req.session.isAuth,
       courses: result.rows,
-      author_name: author_name.rows[0].name,
     });
   } catch (error) {
     console.error(error);
