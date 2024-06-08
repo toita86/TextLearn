@@ -283,11 +283,8 @@ section {
 #upload {
     background-color: #C6A064;
     padding: 2%;
-    width: 80%;
-    max-width: 100%;
-    /* Modifica la larghezza massima per adattarsi a schermi più piccoli */
-    max-height: 100vh;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     overflow-y: auto;
     /* Aggiunge la barra di scorrimento verticale */
 }
@@ -350,6 +347,7 @@ section {
     border: none;
     margin-top: 2%;
     cursor: pointer;
+    width: 40%;
 }
 
 #btn-signup:hover {
@@ -361,7 +359,7 @@ section {
 
 .forms2 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 90%;
     padding: 0;
@@ -374,18 +372,17 @@ section {
     font-size: 1.2rem;
     padding: 0;
     padding-bottom: 1%;
-    align-self: flex-start;
-    padding-left: 5%;
+    align-self: center;
 }
 
 #user-change {
-    width: 75%;
+    width: 90%;
     border: none;
 }
 
 #bio-input {
     height: 70%;
-    width: 69%;
+    width: 90%;
     resize: none;
     border: none;
 }
@@ -399,6 +396,8 @@ section {
     color: #EDDBCC;
     border: none;
     cursor: pointer;
+    align-self: center;
+    width: 40%;
 }
 
 .btn-upload2:hover {
@@ -415,6 +414,7 @@ section {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 
 /*COMMON CONFIGURATIONS*/
@@ -482,7 +482,6 @@ aside {
 #username {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.8rem;
-    padding: 2%;
     text-align: center;
 }
 
@@ -490,8 +489,9 @@ aside {
 #user h1 {
     font-family: 'Arbutus Slab', cursive;
     font-size: 1.5rem;
-    padding: 2.2%;
-    margin-bottom: 0;
+    padding: 0;
+    margin: 0;
+    margin-top: 5%;
 }
 
 aside #bio {
@@ -500,12 +500,13 @@ aside #bio {
     padding: 0;
     padding-bottom: 3%;
     text-align: left;
+    margin-bottom: 5%;
 }
 
 #courses,
 #sub-courses {
     padding: 2%;
-    width: 80%;
+    width: 100%;
     border: 2px solid black;
     background-color: #FFF4EA;
     align-self: center;
@@ -582,8 +583,41 @@ aside .courses-buttons {
     display: flex;
     flex-direction: row;
     padding: 0;
-    margin-bottom: 12%;
+    margin-bottom: 5%;
     justify-content: center;
+    width: 100%;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.btn-switcher {
+    margin: 2%;
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 2.5%;
+    background-color: #372A28;
+    color: #EDDBCC;
+    border: none;
+    cursor: pointer;
+    /* width: 50%; */
+    align-self: center;
+    width: 40%;
+    align-items: center; /*centra il testo dei bottoni*/
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    overflow: hidden; /* Nasconde il testo che eccede */
+    text-overflow: ellipsis; /* Aggiunge i puntini di sospensione se il testo è troppo lungo */
+}
+
+.btn-switcher:hover {
+    background-color: #8f7f7c;
+    color: #372A28;
+}
+
+#remove-account {
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    overflow: hidden; /* Nasconde il testo che eccede */
+    text-overflow: ellipsis; /* Aggiunge i puntini di sospensione se il testo è troppo lungo */
 }
 
 #separator {
@@ -801,13 +835,13 @@ aside .courses-buttons {
     text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;
+    margin: 2%;
 }
 
-.card-description {
+.card-description { /*si riferisce ora allo user*/
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1rem;
     margin: 0;
-    margin-bottom: 5%;
     text-align: center;
 }
 
@@ -1058,6 +1092,11 @@ pre { /*tag facente parte del rendering del corso testuale*/
     white-space: nowrap;
     }
 
+    .btn-switcher {
+        display: flex;
+        flex-direction: column;
+    }
+
  }
  
  @media screen and (min-width: 376px) and (max-width: 768px) {
@@ -1135,7 +1174,15 @@ pre { /*tag facente parte del rendering del corso testuale*/
     }
 
     .switcher {
-        flex-direction: column;
+        flex-direction: row;
+    }
+
+    #btn-switcher {
+        width: 100%;
+    }
+
+    #log-out-btn #remove-account {
+        width: 100%;
     }
 
     .login-subscribe p {
@@ -1252,6 +1299,10 @@ pre { /*tag facente parte del rendering del corso testuale*/
         flex-direction: column;
     }
 
+    #manage-account {
+        flex-direction: column;
+    }
+
     #upload {
         width: 100%;
         height: 100%;
@@ -1319,4 +1370,23 @@ pre { /*tag facente parte del rendering del corso testuale*/
     html {
         font-size: 2em;
     }
+ }
+
+ @media  screen and (max-width: 390px) {
+    .switcher {
+        flex-direction: column;
+    }
+
+    .btn-switcher   {
+        width: 100%;
+    }
+
+    #manage-account {
+        flex-direction: column;
+    }
+
+    #remove-account, #log-out-btn {
+        width: 100%;
+    }
+    
  }

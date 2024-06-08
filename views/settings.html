@@ -80,22 +80,22 @@
         <div id="upload">
           <div class="switcher">
             <button
-              class="btn-upload2"
+              class="btn-switcher"
               value="settings"
               onclick="window.location.href='/settings'"
             >
               Settings
             </button>
             <button
-              class="btn-upload2"
+              class="btn-switcher"
               value="upload a new course"
               onclick="window.location.href='/upload'"
             >
-              Upload a new course
+              Upload course
             </button>
           </div>
           <form action="/settings" method="POST" id="form">
-            <label for="updtname" class="labels2">Username</label>
+            <label for="updtname" class="labels2">Change Username</label>
             <div class="forms2">
               <input
                 type="text"
@@ -103,14 +103,12 @@
                 id="user-change"
                 class="inputs"
               />
-              <button type="submit" class="btn-upload2">
-                Change<br />Username
-              </button>
+              <button type="submit" class="btn-upload2">Change</button>
             </div>
-            <label for="updtbio" class="labels2">Bio</label>
+            <label for="updtbio" class="labels2">Change Bio</label>
             <div class="forms2">
               <textarea name="updtbio" id="bio-input" class="inputs"></textarea>
-              <button type="submit" class="btn-upload2">Change<br />Bio</button>
+              <button type="submit" class="btn-upload2">Change</button>
             </div>
           </form>
           <div id="manage-account">
