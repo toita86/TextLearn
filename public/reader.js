@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .then((response) => response.json())
     .then((data) => {
       document.getElementById("course-name").textContent = data.courseTitle;
+      document.getElementById("description").textContent = data.description;
       courseContainer.innerHTML = data.content;
     })
     .catch((error) => {
