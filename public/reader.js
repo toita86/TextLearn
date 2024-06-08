@@ -38,4 +38,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("creator-image").src = `/${creatorData.imageUrl}`;
   }
   document.getElementById("creator").textContent = creatorData.name;
+  document.getElementById("creator-bio").textContent = creatorData.bio;
 });
