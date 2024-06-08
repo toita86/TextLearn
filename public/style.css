@@ -1,4 +1,4 @@
-/*-------------------- COMMON CONFIGURATIONS -------------------*/
+/*---------------------------------------- COMMON CONFIGURATIONS ---------------------------------------*/
 
 @import url('https://fonts.cdnfonts.com/css/arbutus-slab');
 @import url('https://fonts.cdnfonts.com/css/barlow');
@@ -107,8 +107,6 @@ header {
     margin-top: 2%;
 }
 
-
-
 @keyframes slideRight {
     from {
         opacity: 0;
@@ -132,7 +130,6 @@ header {
         transform: translateX(20%);
     }
 }
-
 
 /* Footer configurazioni */
 footer {
@@ -179,8 +176,34 @@ a:hover {
     font-family: 'Arbutus Slab', sans-serif;
 }
 
+#btn-signup {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    padding: 2.5%;
+    background-color: #372A28;
+    color: #EDDBCC;
+    border: none;
+    margin-top: 2%;
+    cursor: pointer;
+    width: 40%;
+}
 
-/*-------------------- INDEX.HTML -------------------*/
+#btn-signup:hover {
+    background-color: #8f7f7c;
+    color: #372A28;
+}
+
+.inputs {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.2rem;
+    padding: 2%;
+    background-color: #EDDBCC;
+    width: 80%;
+    text-align: center;
+    border: none;
+}
+
+/*---------------------------------------- INDEX.HTML ---------------------------------------*/
 
 main {
     flex: 1;
@@ -257,8 +280,7 @@ main {
     background-color: #dbc47f;
 }
 
-
-/*-------------------- UPLOAD.HTML - SETTINGS.HTML + COMMON CONFIGURATIONS -------------------*/
+/*---------------------------------------- UPLOAD.HTML - SETTINGS.HTML + COMMON CONFIGURATIONS ---------------------------------------*/
 
 /* UPLOAD.HTML */
 
@@ -324,35 +346,8 @@ section {
     margin-right: 3%
 }
 
-.inputs {
-    font-family: 'Barlow', sans-serif;
-    font-size: 1.2rem;
-    padding: 2%;
-    background-color: #EDDBCC;
-    width: 80%;
-    text-align: center;
-    border: none;
-}
-
 .course-inputs {
     border: none;
-}
-
-#btn-signup {
-    font-family: 'Arbutus Slab', sans-serif;
-    font-size: 1.2rem;
-    padding: 2.5%;
-    background-color: #372A28;
-    color: #EDDBCC;
-    border: none;
-    margin-top: 2%;
-    cursor: pointer;
-    width: 40%;
-}
-
-#btn-signup:hover {
-    background-color: #8f7f7c;
-    color: #372A28;
 }
 
 /*SETTINGS.HTML*/
@@ -460,7 +455,6 @@ aside {
 </div>
 */
 
-
 #usr-image:hover {
     transform: scale(1.1);
     transition: 0.2s ease-in;
@@ -478,13 +472,11 @@ aside {
     margin-top: 2%;
 }
 
-
 #username {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.8rem;
     text-align: center;
 }
-
 
 #user h1 {
     font-family: 'Arbutus Slab', cursive;
@@ -513,7 +505,6 @@ aside #bio {
     margin-bottom: 3%;
     box-sizing: border-box;
 }
-
 
 #courses h3,
 #sub-courses h3 {
@@ -624,8 +615,7 @@ aside .courses-buttons {
     display: none;
 }
 
-
-/*-------------------- LOGIN.HTML / SIGNUP.HTML -------------------*/
+/*---------------------------------------- LOGIN.HTML / SIGNUP.HTML ---------------------------------------*/
 
 .login-subscribe {
     display: flex;
@@ -688,8 +678,7 @@ aside .courses-buttons {
     color: #FFF4EA;
 }
 
-
-/*-------------------- ABOUT.HTML -------------------*/
+/*---------------------------------------- ABOUT.HTML ---------------------------------------*/
 
 #review-box {
     display: flex;
@@ -702,7 +691,6 @@ aside .courses-buttons {
     margin-left: 50%;
     transform: translateX(-50%);
 }
-
 
 #review-box p {
     font-family: 'Arbutus Slab', sans-serif;
@@ -763,8 +751,7 @@ aside .courses-buttons {
     font-weight: bolder;
 }
 
-
-/*-------------------- MARKETPLACE.HTML -------------------*/
+/*---------------------------------------- MARKETPLACE.HTML ---------------------------------------*/
 
 #marketplace-title {
     font-family: 'Arbutus Slab', sans-serif;
@@ -873,84 +860,6 @@ aside .courses-buttons {
     color: #372A28;
 }
 
-#popup {
-    position: fixed;
-    /* Posizione fissa rispetto alla finestra del browser */
-    top: 62%;
-    /* Posiziona al centro verticale della finestra */
-    left: 50%;
-    /* Posiziona al centro orizzontale della finestra */
-    transform: translate(-50%, -50%);
-    /* Centra orizzontalmente e verticalmente */
-    background-color: #EDDBCC;
-    /* Colore di sfondo */
-    padding: 20px;
-    /* Spazio interno */
-    z-index: 9999;
-    /* Livello dello z-index per essere sopra altri contenuti */
-    display: none;
-    /* Inizialmente nascosto */
-
-    font-family: 'arbutus slab', sans-serif;
-    font-size: 1.2rem;
-    text-align: center;
-    height: 50%;
-    overflow-y: auto;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translate(-50%, 100%);
-    }
-
-    to {
-        transform: translate(-50%, -50%);
-    }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translate(-50%, -50%);
-    }
-
-    to {
-        transform: translate(-50%, 100%);
-    }
-}
-
-.open {
-    display: block;
-    animation: slideUp 0.5s ease-out forwards;
-}
-
-.close {
-    animation: slideDown 0.5s ease-out forwards;
-}
-
-/*Senza forward il popup dalla posizione iniziale 
-ritornera in posizione iniziale e viceversa. Con forward
-il popup dalla posizione finale passa all'ultimo stato 
-della transizione e ci rimane e viceversa per garantire
-una transizione piu fluida*/
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-
-@media screen and (max-width: 400px) {
-    .button-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-}
-
 /*-------------------- READER.HTML -------------------*/
 
 #box-reader {
@@ -990,7 +899,6 @@ una transizione piu fluida*/
     padding: 0;
 }
 
-
 #creator-image {
     width: 10%;
     padding: 0;
@@ -1021,7 +929,6 @@ pre { /*tag facente parte del rendering del corso testuale*/
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/
-
 
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
     
