@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await response.json();
 
       const cardbox = document.getElementById("cardbox");
-      console.log(data);
+
       if (data.courses.length === 0) {
         document.getElementById("msgToUser").textContent =
           "No courses on sight";
