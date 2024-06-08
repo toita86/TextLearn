@@ -57,24 +57,6 @@ function openDescription() {
   popup.classList.add("open");
 }
 
-// Funzione per chiudere il popup
-function closeDescription() {
-  var popup = document.getElementById("popup");
-  popup.classList.remove("open");
-  popup.classList.add("close");
-  setTimeout(function () {
-    popup.style.display = "none";
-  }, 500); // Durata dell'animazione
-}
-
-function deleteCourse(id) {
-  course = document.getElementById(id);
-  course.classList.add("slideLeft");
-  setTimeout(() => {
-    course.style.display = "none";
-  }, 300); // Durata dell'animazione
-}
-
 const results = document.getElementsByClassName("course");
 if (results.length > 0) {
   /*mostra il titiolo del corso a cui sono iscritto o creato al passaggio del mouse come alert*/
