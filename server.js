@@ -124,21 +124,28 @@ const upload = multer({
   { name: "course_file", maxCount: 1 },
 ]);
 
-// Check file type
+// File filter function
 function checkFileType(file, cb) {
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|md/;
-  const mimetypes =
-    /image\/jpeg|image\/jpg|image\/png|text\/markdown|text\/plain/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = mimetypes.test(file.mimetype);
+  const allowedImageTypes = ["image/png", "image/jpg", "image/jpeg"];
+  const allowedFileTypes = ["text/markdown"];
 
-  if (mimetype && extname) {
-    return cb(null, true);
+  if (file.fieldname === "course_image") {
+    if (allowedImageTypes.includes(file.mimetype)) {
+      return cb(null, true);
+    } else {
+      return cb(
+        new Error("Invalid image type. Only PNG, JPG, and JPEG are allowed."),
+        false
+      );
+    }
+  } else if (file.fieldname === "course_file") {
+    if (allowedFileTypes.includes(file.mimetype)) {
+      return cb(null, true);
+    } else {
+      return cb(new Error("Invalid file type. Only MD is allowed."), false);
+    }
   } else {
-    return cb(new Error("Error: Images and Markdown documents only!"));
+    return cb(new Error("Invalid file field."), false);
   }
 }
 
@@ -333,9 +340,15 @@ app.post("/upload", function (req, res) {
           }
         }
 
+        if (course_name.length < 5 || course_name.length > 15) {
+          req.session.msgToUser =
+            "Course title must be between 10 and 30 characters long";
+          return res.redirect("upload");
+        }
+
         if (course_descr.length > 255) {
           req.session.msgToUser =
-            "Course description must be 50 characters or less";
+            "Course description must be 255 characters or less";
           return res.redirect("upload");
         }
 
