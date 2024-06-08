@@ -131,6 +131,7 @@ header {
     }
 }
 
+
 /* Footer configurazioni */
 footer {
     display: flex;
@@ -881,33 +882,46 @@ aside .courses-buttons {
     font-size: 1.2rem;
 }
 
-#reader-header {
+#course-name {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.5rem;
+    padding: 0;
+    text-transform: uppercase;
+    padding-top: 2%;
+    text-align: center;
+}
+
+#author {
     display: flex;
-    justify-content: space-between;
-    align-self: center; /*allinea il reader-header*/
-    align-items: center; /*allinea gli elrementi al centro*/
-    width: 50%;
-    height: 10%;
-    background-color:#FFC61A;
+    flex-direction: row;
+    width: 100%;
+    font-size: 1.2rem;
+    justify-content: center;
     gap: 5%;
 }
 
-#course-name, #creator {
+#creator {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
-    margin-left: 5%;
-    padding: 0;
+    padding-top: 3%;
+}
+
+#creator-bio {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1.2rem;
+    text-align: justify;
 }
 
 #creator-image {
-    width: 10%;
-    padding: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 #box-description {
     padding: 2%;
     width: 100%;
-    height: 70%;
+    height: 150%;
     overflow-y: auto;
     font-family: 'Arbutus Slab', sans-serif;
     background-color:#FFC61A;
@@ -1108,10 +1122,6 @@ pre { /*tag facente parte del rendering del corso testuale*/
         font-size: 0.8rem;
     }
 
-    #creator-image {
-        width: 20%;
-    }
-
     .cards {
         width: 30%;
     }
@@ -1138,6 +1148,10 @@ pre { /*tag facente parte del rendering del corso testuale*/
 
     #img-popup {
         font-size: 1.2rem;
+    }
+
+    #reader, #creator, #description, #creator-bio, div{
+        font-size: 1rem;
     }
 
  }
@@ -1246,6 +1260,12 @@ pre { /*tag facente parte del rendering del corso testuale*/
         width: 100%;
         font-size: 1rem;
     }
+
+    #reader, #creator, #description, #creator-bio, div{
+        font-size: 1rem;
+    }
+
+
  }
  
  @media screen and (max-width: 1081px) {

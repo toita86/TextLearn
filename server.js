@@ -925,13 +925,14 @@ app.get("/creator-data/:id", async (req, res) => {
         [courseId]
       );
       const creatorData = await pool.query(
-        `SELECT name, picture_path FROM users WHERE id=$1`,
+        `SELECT name, picture_path, bio FROM users WHERE id=$1`,
         [creatorId.rows[0].author_id]
       );
 
       res.status(200).json({
         name: creatorData.rows[0].name,
         imageUrl: creatorData.rows[0].picture_path,
+        bio: creatorData.rows[0].bio,
       });
     } else {
       return res.status(403).send("Unauthorized");
