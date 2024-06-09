@@ -733,10 +733,12 @@ app.post("/settings", async (req, res) => {
           ]);
         }
       } else {
-        await pool.query("UPDATE users SET bio = $1 WHERE name = $2", [
-          updtbio,
-          currentName,
-        ]);
+        if (!updtbio == "") {
+          await pool.query("UPDATE users SET bio = $1 WHERE name = $2", [
+            updtbio,
+            currentName,
+          ]);
+        }
       }
     }
 
