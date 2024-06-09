@@ -334,7 +334,7 @@ app.post("/upload", function (req, res) {
 
         if (course_name.length < 5 || course_name.length > 15) {
           req.session.msgToUser =
-            "Course title must be between 10 and 30 characters long";
+            "Course title must be between 5 and 15 characters long";
           return res.redirect("upload");
         }
 
