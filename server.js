@@ -338,12 +338,6 @@ app.post("/upload", function (req, res) {
           return res.redirect("upload");
         }
 
-        if (course_descr.length > 255) {
-          req.session.msgToUser =
-            "Course description must be 255 characters or less";
-          return res.redirect("upload");
-        }
-
         // Otherwise, upload the course to the database
         await pool.query(
           "INSERT INTO courses (author_id, title, descr, thumbnail_path, file_path) VALUES ($1, $2, $3, $4, $5)",
