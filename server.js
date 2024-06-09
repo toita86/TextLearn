@@ -733,10 +733,12 @@ app.post("/settings", async (req, res) => {
           ]);
         }
       } else {
-        await pool.query("UPDATE users SET bio = $1 WHERE name = $2", [
-          updtbio,
-          currentName,
-        ]);
+        if (!updtbio == "") {
+          await pool.query("UPDATE users SET bio = $1 WHERE name = $2", [
+            updtbio,
+            currentName,
+          ]);
+        }
       }
     }
 
@@ -833,9 +835,10 @@ app.post("/marketplace-search", async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT id, author_id, title, descr, thumbnail_path, file_path 
-             FROM courses 
-             WHERE title ILIKE $1 OR descr ILIKE $1`,
+      `SELECT courses.id, courses.title, courses.descr, courses.thumbnail_path, users.name as author_name 
+       FROM courses 
+       JOIN users ON courses.author_id = users.id
+       WHERE title ILIKE $1 OR descr ILIKE $1`,
       [`%${searchQuery}%`]
     );
 

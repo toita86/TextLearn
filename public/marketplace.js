@@ -102,6 +102,9 @@ function updateCourseCards(courses) {
     const card = document.createElement("div");
     card.className = "cards";
 
+    const imgCardContainer = document.createElement("div");
+    imgCardContainer.id = "img-card-container";
+
     const img = document.createElement("img");
     img.src = course.thumbnail_path;
     img.alt = "lesson image";
@@ -142,7 +145,7 @@ function updateCourseCards(courses) {
 
     const author = document.createElement("p");
     author.className = "card-description";
-    author.textContent = data.author_name;
+    author.textContent = course.author_name;
 
     div_button.appendChild(button_subscribe);
 
