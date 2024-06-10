@@ -84,10 +84,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             body: JSON.stringify({ query: query }),
           });
 
-          const courses = await response.json();
+          const results = await response.json();
+          if (results.message !== null){
+            document.getElementById("msgToUser").textContent = results.message;
+          } else {
+            document.getElementById("msgToUser").textContent = "";
+          }
 
           // Update the UI with the search results
-          updateCourseCards(courses);
+          updateCourseCards(results.courses);
+
         });
     }
   } catch (error) {

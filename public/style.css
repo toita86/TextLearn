@@ -186,7 +186,7 @@ a:hover {
     border: none;
     margin-top: 2%;
     cursor: pointer;
-    width: 40%;
+    width: 45%;
 }
 
 #btn-signup:hover {
@@ -496,6 +496,8 @@ aside #bio {
     text-align: left;
     margin-bottom: 5%;
     overflow-wrap: break-word; /*manda a capo parole molto lunghe per evitare overflow*/
+    max-height: 40vh;
+    overflow-y: auto;
 }
 
 #courses,
@@ -616,6 +618,12 @@ aside .courses-buttons {
 
 #separator {
     display: none;
+}
+
+#info {
+    font-family: 'Arbutus Slab', sans-serif;
+    font-size: 1rem;
+    text-align: left;
 }
 
 /*---------------------------------------- LOGIN.HTML / SIGNUP.HTML ---------------------------------------*/
@@ -981,6 +989,10 @@ pre { /*tag facente parte del rendering del corso testuale*/
     #review-box p {
         font-size: 2.5rem;
     }
+
+    #go-up-button {
+        font-size: 1.2rem;
+    }
 }
  
  @media screen and (min-width: 769px) and (max-width: 1366px) {
@@ -1038,7 +1050,15 @@ pre { /*tag facente parte del rendering del corso testuale*/
         flex-direction: column;
     }
 
- }
+    #go-up-button {
+        font-size: 1.2rem;
+    }
+
+    #info {
+        font-size: 1rem;
+    }
+}
+
  
  @media screen and (min-width: 376px) and (max-width: 768px) {
  
@@ -1174,7 +1194,14 @@ pre { /*tag facente parte del rendering del corso testuale*/
         font-size: 1rem;
     }
 
- }
+    #go-up-button {
+        font-size: 1rem;
+    }
+
+    #info {
+        font-size: 0.8rem;
+    }
+}
  
  @media screen and (max-width: 375px) {
  
@@ -1285,8 +1312,14 @@ pre { /*tag facente parte del rendering del corso testuale*/
         font-size: 1rem;
     }
 
+    #go-up-button {
+        font-size: 1rem;
+    }
 
- }
+    #info {
+        font-size: 0.8rem;
+    }
+}
  
  @media screen and (max-width: 1081px) {
  
