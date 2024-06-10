@@ -281,7 +281,8 @@ function emailCheck(email) {
 
 /* ================ UPLOAD page Routes ================ */
 app.get("/upload", (req, res) => {
-  if (req.session.isAuth == true) { //authentication is required
+  if (req.session.isAuth == true) {
+    //authentication is required
     res.sendFile(path.join(__dirname, "views", "upload.html"));
   } else {
     req.session.msgToUser = "Log in first!";
@@ -294,10 +295,11 @@ In this post request we will upload the file to the server.
 We will use the multer middleware `upload` for uploading files.
 There are various checks that we need to do before actually uploading a file.
 */
-app.post("/upload", function (req, res) { //upload courses by user
+app.post("/upload", function (req, res) {
+  //upload courses by user
   if (req.session.isAuth == true) {
     upload(req, res, async function (err) {
-      //async because we have to wait the queries elaborations 
+      //async because we have to wait the queries elaborations
       if (err) {
         // Handle file type errors
         if (err.message === "Error: Images and Markdown documents only!") {
