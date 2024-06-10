@@ -518,6 +518,7 @@ aside #bio {
     font-size: 1.2rem;
     padding: 0;
     margin: 0;
+    border-bottom: 1px solid black;
 }
 
 .course {
@@ -968,6 +969,10 @@ aside .courses-buttons {
 
 pre { /*tag facente parte del rendering del corso testuale*/
     text-wrap: wrap;
+}
+
+#reader a {
+    color: green;
 }
 
 /*-------------------- RESPONSIVE CONFIGURATIONS -------------------*/

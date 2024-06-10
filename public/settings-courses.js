@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 /*"same-origin" means that the request will include cookies and HTTP authentication information only if the URL is on the same origin as the calling script. */
 
 function coursesListing(course, coursesContainer) {
-  const hr = document.createElement("hr");
   const courseDiv = document.createElement("div");
   courseDiv.className = "course";
   courseDiv.id = course.id;
@@ -226,6 +225,5 @@ function coursesListing(course, coursesContainer) {
   buttonsDiv.appendChild(delbutton);
   courseDiv.appendChild(buttonsDiv);
 
-  coursesContainer.appendChild(hr);
   coursesContainer.appendChild(courseDiv);
 }
