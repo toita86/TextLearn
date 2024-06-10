@@ -837,7 +837,11 @@ app.post("/marketplace-search", async (req, res) => {
       [`%${searchQuery}%`]
     );
 
-    return res.status(200).json(result.rows);
+    if (result.rows.length === 0) {
+      return res.status(200).json({message: "No courses found", courses: []}); //return an empty element
+    }
+
+    return res.status(200).json({message: null, courses: result.rows});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
