@@ -146,7 +146,7 @@ function checkPPicType(file, cb) {
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check mime
-  const mimetype = mimetypes.test(file.mimetype);
+  const mimetype = mimetypes.test(file.mimetype); //control if this is a mime type
 
   if (mimetype && extname) {
     return cb(null, true);
@@ -187,8 +187,6 @@ If both conditions are met, the user is logged in and redirected to the "setting
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, 8);
-
   try {
     // Check if user with that email is in the database
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -209,8 +207,8 @@ app.post("/login", async (req, res) => {
     }
 
     req.session.msgToUser = "";
-    req.session.user = user;
-    req.session.isAuth = true;
+    req.session.user = user; //update the user sessione. Takes all user data from the db
+    req.session.isAuth = true; //user is authenticated
 
     // If the password matches, log user in and redirect to settings page
     return res.redirect("settings");
@@ -283,7 +281,7 @@ function emailCheck(email) {
 
 /* ================ UPLOAD page Routes ================ */
 app.get("/upload", (req, res) => {
-  if (req.session.isAuth == true) {
+  if (req.session.isAuth == true) { //authentication is required
     res.sendFile(path.join(__dirname, "views", "upload.html"));
   } else {
     req.session.msgToUser = "Log in first!";
@@ -296,9 +294,10 @@ In this post request we will upload the file to the server.
 We will use the multer middleware `upload` for uploading files.
 There are various checks that we need to do before actually uploading a file.
 */
-app.post("/upload", function (req, res) {
+app.post("/upload", function (req, res) { //upload courses by user
   if (req.session.isAuth == true) {
     upload(req, res, async function (err) {
+      //async because we have to wait the queries elaborations 
       if (err) {
         // Handle file type errors
         if (err.message === "Error: Images and Markdown documents only!") {
@@ -459,7 +458,7 @@ app.get("/pro-pic", async (req, res) => {
       if (path.rows[0].picture_path == null) {
         res.status(200).json({
           isAuth: true,
-          imageUrl: "/images/USER.jpeg",
+          imageUrl: "/images/USER.jpeg", //if image isn't uploaded we have the default image
         });
       } else {
         res.status(200).json({
@@ -829,14 +828,14 @@ app.post("/marketplace-search", async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT courses.id, courses.title, courses.descr, courses.thumbnail_path, users.name as author_name 
+      `SELECT courses.id, courses.title, courses.thumbnail_path, users.name as author_name 
        FROM courses 
        JOIN users ON courses.author_id = users.id
-       WHERE title ILIKE $1 OR descr ILIKE $1`,
+       WHERE title ILIKE $1`,
       [`%${searchQuery}%`]
     );
 
-    return res.json(result.rows);
+    return res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
