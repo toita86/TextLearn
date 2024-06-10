@@ -1183,7 +1183,7 @@ pre { /*tag facente parte del rendering del corso testuale*/
     }
 
     #nav-link-mini {
-        display: relative;
+        display: block;
     }
 
     .login-subscribe {
