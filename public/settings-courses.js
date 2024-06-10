@@ -150,7 +150,7 @@ function coursesListing(course, coursesContainer) {
         }
       }
     });
-    button = unSubButton;
+    delbutton = unSubButton;
   } else {
     const deleteButton = document.createElement("button");
     deleteButton.className = "courses-buttons";
@@ -219,11 +219,11 @@ function coursesListing(course, coursesContainer) {
       }
     });
     delbutton = deleteButton;
+    buttonsDiv.appendChild(fileInput);
+    buttonsDiv.appendChild(updateButton);
   }
   courseDiv.appendChild(courseTitle);
-  buttonsDiv.appendChild(fileInput);
   buttonsDiv.appendChild(delbutton);
-  buttonsDiv.appendChild(updateButton);
   courseDiv.appendChild(buttonsDiv);
 
   coursesContainer.appendChild(hr);
