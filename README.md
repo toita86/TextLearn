@@ -10,6 +10,15 @@
 ## What is TextLearn?
 
 TextLearn è una piattaforma di apprendimento per chiunque voglia apprendere senza dover vedere ora e ore di video.
+È ideale per studenti, professionisti e chiunque desideri apprendere nuovi argomenti in modo rapido ed efficiente, con la possibilità di accedere ai contenuti in qualsiasi momento e luogo. Grazie alla sua architettura moderna e alle tecnologie avanzate utilizzate, la piattaforma offre un'esperienza di apprendimento sicura, flessibile e di alta qualità.
+
+### Caratteristiche Tecniche di TextLearn
+
+Tecnologia di Base: TextLearn è sviluppata utilizzando Node.js per il backend, garantendo una gestione robusta e scalabile delle richieste. Il database è gestito tramite PostgreSQL, offrendo una soluzione affidabile e performante per la gestione dei dati.
+
+File Uploading: La piattaforma supporta il caricamento di file grazie all'integrazione con Multer, un middleware di Node.js. Questo permette agli utenti di caricare facilmente documenti e materiali di apprendimento, rendendo la condivisione di contenuti più agevole.
+
+Containerizzazione con Docker: L'intera applicazione è dockerizzata, il che significa che può essere facilmente distribuita e scalata su diverse piattaforme. L'uso di Docker assicura un ambiente di sviluppo e produzione coerente, riducendo le differenze tra i vari ambienti di deployment.
 
 ## Node e NPM
 
