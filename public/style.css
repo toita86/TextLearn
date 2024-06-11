@@ -835,8 +835,9 @@ aside .courses-buttons {
     font-family: 'Arbutus Slab', sans-serif;
     font-size: 1.2rem;
     text-align: center;
-    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
     margin: 2%;
 }
 

@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const p = document.createElement("p");
         p.textContent = course.title;
         p.className = "card-title";
+        p.title = course.title;
 
         const div_button = document.createElement("div");
         div_button.className = "button-container";
@@ -119,6 +120,7 @@ function updateCourseCards(courses) {
     const p = document.createElement("p");
     p.textContent = course.title;
     p.className = "card-title";
+    p.title = course.title;
 
     const div_button = document.createElement("div");
     div_button.className = "button-container";
