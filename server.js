@@ -22,7 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Middleware to parse request body
+// Middleware to parse request body with URL codification
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: "false" }));
 
@@ -43,7 +43,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 30 * 24 * 60 * 60 * 1000,
+      maxAge: 30 * 24 * 60 * 60 * 1000, //cookies last 30 days
       sameSite: "Strict", // Allows the cookie to be sent in all contexts
     }, // 30 days
   })
@@ -205,7 +205,7 @@ app.post("/login", async (req, res) => {
       req.session.msgToUser = "Wrong Password";
       return res.redirect("login");
     }
-
+   
     req.session.msgToUser = "";
     req.session.user = user; //update the user sessione. Takes all user data from the db
     req.session.isAuth = true; //user is authenticated
