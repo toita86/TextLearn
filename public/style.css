@@ -45,6 +45,9 @@ header {
 }
 
 #logo {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
     font-size: 2rem;
     font-family: 'barlow', sans-serif;
     font-weight: bolder;
@@ -793,7 +796,7 @@ aside .courses-buttons {
     /* Per consentire alle carte di andare a capo */
     align-self: center;
     justify-content: center;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 
     background-color:#C6A064;
 
@@ -801,7 +804,7 @@ aside .courses-buttons {
 }
 
 .cards {
-    width: 30%;
+    width: 27%;
     margin: 1%;
     margin-bottom: 3%;
     padding: 2%;

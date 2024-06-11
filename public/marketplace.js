@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const author = document.createElement("p");
         author.className = "card-description";
-        author.textContent = course.author_name;
+        author.textContent = `By ${course.author_name}`; 
 
         div_button.appendChild(button_subscribe);
 
