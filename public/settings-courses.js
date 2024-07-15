@@ -134,7 +134,7 @@ function coursesListing(course, coursesContainer) {
             },
           });
           const unsubResult = await unsubResponse.json();
-          if (unsubResponse.ok) {
+          if (unsubResult.message === "Unsubscribed successfully") {
             course = coursesContainer.querySelector(`[id="${course.id}"]`);
             course.classList.add("slideLeft");
             setTimeout(() => {

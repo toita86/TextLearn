@@ -611,7 +611,7 @@ app.delete("/unsub-course/:id", async (req, res) => {
           "Subscription not found or not authorized to unsubscribe this course",
       });
     }
-    return res.json({ message: "Unsubscribed successfully" });
+    return res.status(200).json({ message: "Unsubscribed successfully" });
   } catch (error) {
     console.error(error);
     return res
